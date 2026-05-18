@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAboutUs"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/about_us"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/textLarge"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrWhatsApp"
+        android:gravity="center"
+        android:padding="@dimen/_3sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="visible"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_back"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="پیام در واتس اپ"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/textLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWhatsapp"
+                tools:text="+989123456789"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/textNormal"/>
+
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_whatsapp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrTelegram"
+        android:layout_marginTop="@dimen/marginMedium"
+        android:gravity="center"
+        android:padding="@dimen/_3sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="visible"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_back"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="پیام در تلگرام"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/textLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTelegram"
+                tools:text="Morad"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/textNormal"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_telegram"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrCall"
+        android:layout_marginTop="@dimen/marginMedium"
+        android:gravity="center"
+        android:padding="@dimen/_3sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="visible"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_back"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تماس با ما"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/textLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCall"
+                tools:text="09123456789"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/textNormal"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_call"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrEmail"
+        android:layout_marginTop="@dimen/marginMedium"
+        android:padding="@dimen/_3sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="visible"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_back"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ارسال ایمیل"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/textLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEmail"
+                tools:text="morad@gmail.com"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/textNormal"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/marginNormal"
+            android:layout_marginEnd="@dimen/marginNormal"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ic_gmail"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="activity_back">#F6F6F6</color>
+    <color name="background">#EBEBEB</color>
+
+    <color name="iconPrimary">#080808</color>
+    <color name="textPrimary">#080808</color>
+    <color name="textSecondary">#3e3e3e</color>
+    <color name="textPrimaryOnDark">#F7F7F7</color>
+    <color name="textHint">#8e8e8e</color>
+    <color name="gray">#D0D0D0</color>
+    <color name="divider">#3e3e3e</color>
+    <color name="textDisable">#7F7F7F</color>
+    <color name="iconColor">#231f20</color>
+    <color name="gray_dark">#DCDCDC</color>
+    <color name="toast_bg_color">#FEFEFE</color>
+
+    <color name="error_text">#D9192C</color>
+    <color name="warning_text">#FF9909</color>
+    <color name="success_text">#99CC00</color>
+    <color name="red">#FF2020</color>
+    <color name="heart_color">#A92E2C</color>
+    <color name="energy_color">#F9E398</color>
+    <color name="coin_color">#EA9F2D</color>
+
+    <color name="gray_2">#aaa</color>
+
+</resources>

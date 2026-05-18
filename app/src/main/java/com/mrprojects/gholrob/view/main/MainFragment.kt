@@ -1,0 +1,169 @@
+package com.mrprojects.gholrob.view.main
+
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.mrprojects.gholrob.databinding.MainFragmentBinding
+import com.mrprojects.gholrob.helper.log
+import com.mrprojects.gholrob.helper.noInternetDialog
+import com.mrprojects.gholrob.helper.openFragment
+import com.mrprojects.gholrob.helper.openMarketRatePage
+import com.mrprojects.gholrob.helper.openNextLevel
+import com.mrprojects.gholrob.helper.showBuyHeartDialog
+import com.mrprojects.gholrob.helper.showCloseGameDialog
+import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
+import com.mrprojects.gholrob.helper.showSettingsDialog
+import com.mrprojects.gholrob.helper.showSuccessDialog
+import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
+import com.mrprojects.gholrob.helper.updateHearts
+import com.mrprojects.gholrob.helper.warningDialog
+import com.mrprojects.gholrob.model.ErrorTypes
+import com.mrprojects.gholrob.repository.Provider
+import com.mrprojects.gholrob.model.User
+import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
+import com.mrprojects.gholrob.view.play.history.HistoryFragment
+import com.mrprojects.gholrob.view.rating.RatingFragment
+import com.mrprojects.gholrob.viewmodel.UserViewModel
+import ir.radesh.basemodule.baseViews.BaseFragment
+import ir.radesh.basemodule.commons.showLoading
+import ir.radesh.basemodule.commons.showToast
+import kotlinx.coroutines.launch
+
+class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
+    private lateinit var userViewModel: UserViewModel
+
+    lateinit var adsHelper: TapSellHelper
+
+
+    companion object {
+        fun newInstance(): MainFragment {
+            return MainFragment()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        userConfig()
+        clicks()
+        login()
+        configAdHelper()
+
+    }
+
+    fun userConfig() {
+        userViewModel = Provider.provideUserViewModel(this)
+        userViewModel.loadUser()
+        userViewModel.user.observe(viewLifecycleOwner) { user ->
+            onUserDataUpdated(user)
+        }
+        userViewModel.nextHeartTimer.observe(viewLifecycleOwner) { millis ->
+            if (millis <= 0) {
+                binding.HeartsLayout.tvHeartTimer.text = ""
+            } else {
+                val minutes = (millis / 1000) / 60
+                val seconds = (millis / 1000) % 60
+                binding.HeartsLayout.tvHeartTimer.text = String.format("%02d:%02d", minutes, seconds)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userViewModel.errorEvent.collect { error ->
+                    when (error) {
+                        ErrorTypes.COIN_NOT_ENOUGH -> showCoinNotEnoughDialog()
+                        else -> showToast(error.key, Toast.LENGTH_SHORT)
+                    }
+
+                }
+            }
+        }
+    }
+
+    fun onUserDataUpdated(user: User) {
+        binding.tvLifeCount.text = user.lives.toString()
+        binding.tvCoins.text = user.coins.toString()
+        binding.HeartsLayout.updateHearts(user, showAdd = true, showTimer = true)
+        binding.tvStart.text = if (user.haveUnfinishedAttempt()) "ادامه" else "شروع"
+    }
+
+    private fun login() {
+        Provider.provideApiHelper(this).login(
+            {
+                userViewModel.storeUser(it.data)
+            }, {
+                noInternetDialog{
+                    login()
+                }
+            })
+    }
+
+    private fun configAdHelper() {
+        adsHelper = TapSellHelper(
+            requireActivity(),
+            onAddHeartRewarded = {
+                userViewModel.addHeart()
+                showSuccessDialog("یکی از قلب هات پر شد")
+            }
+        )
+    }
+
+
+    private fun clicks() {
+        binding.brnPlay.setOnClickListener {
+            val user = userViewModel.user.value!!
+            if (user.haveUnfinishedAttempt()) {
+                openNextLevel(user.unfinishedAttemptId!!, true)
+            } else {
+                Provider.provideApiHelper(this).createNewGame({
+                    openNextLevel(it.id, true)
+                }, {
+                    showBuyHeartDialog(userViewModel, adsHelper)
+                })
+            }
+
+
+        }
+        binding.brnRating.setOnClickListener {
+            openFragment(RatingFragment.newInstance())
+        }
+        binding.HeartsLayout.ivHeartAdd.setOnClickListener {
+            showBuyHeartDialog(userViewModel, adsHelper)
+        }
+
+        binding.lnrLife.setOnClickListener {
+            postEvent(OnShowLifeShopCalled())
+        }
+        binding.lnrHistory.setOnClickListener {
+            openFragment(HistoryFragment.newInstance())
+        }
+
+        binding.ivBox1.setOnClickListener {
+            requireContext().openMarketRatePage()
+        }
+        binding.ivBox2.setOnClickListener {
+            showSettingsDialog()
+        }
+        registerBackCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showCloseGameDialog {
+                    isEnabled = false
+                    onBackPressed()
+                }
+            }
+        })
+
+
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adsHelper.destroyAd()
+    }
+
+
+}

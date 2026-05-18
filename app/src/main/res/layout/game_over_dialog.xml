@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_15sdp"
+    android:paddingEnd="@dimen/_10sdp"
+    android:paddingStart="@dimen/_10sdp"
+    android:background="@drawable/bg_bottom_sheet"
+    android:layout_gravity="bottom"
+    android:clipToPadding="false">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ivEnemy"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitXY"
+            android:src="@drawable/ig_enemy_arzhang_troll"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvEnemyDamage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:text="-6"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_40sdp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ضحاک ماردوش شما را کشت"
+        android:textSize="@dimen/textVeryLarge"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="با بازیابی قلب میتوانید بدون از دادن انرژی به بازی ادامه دهید"
+        android:textSize="@dimen/textNormal"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp" />
+
+    <include layout="@layout/end_of_round_boxes"
+        android:id="@+id/lnrBoxes"/>
+
+    <LinearLayout
+        android:id="@+id/btnBuyLife"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hint_button_size"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/box_btn_red"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="خرید نوش دارو"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textVeryLarge"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="@dimen/heart_size"
+            android:layout_height="@dimen/heart_size"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_play_btn"
+            android:visibility="gone" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:alpha="0.4"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:background="@drawable/box_btn_play"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ادامه بازی"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:textSize="@dimen/textSemiLarge"
+                android:visibility="visible" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_heart"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="-1"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/textLarge"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="@dimen/heart_size"
+            android:layout_height="@dimen/heart_size"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_play_btn"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnExit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hint_button_size"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/box_btn_end"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="قبول شکست"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textVeryLarge"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="@dimen/heart_size"
+            android:layout_height="@dimen/heart_size"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_play_btn"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

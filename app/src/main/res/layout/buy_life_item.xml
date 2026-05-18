@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/btn_big_h"
+    android:paddingEnd="@dimen/btn_x_paddings_small"
+    android:paddingStart="@dimen/btn_x_paddings_small"
+    android:background="@drawable/ig_btn"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:id="@+id/crdPrice"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/ig_btn_green"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="100,000" />
+
+            <TextView
+                android:id="@+id/tvSuffix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/_minus10sdp"
+                android:layout_marginEnd="@dimen/marginSmall"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:text="@string/toman"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSemiSmall" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrCoin"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:gravity="center_vertical|end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="کمک های اولیه"
+            app:layout_constraintEnd_toStartOf="@+id/lnrCoin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/textNormal"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvValue"
+            android:layout_marginTop="@dimen/_minus6sdp"
+            android:text="1 نوش دارو"
+            android:textColor="@color/life_color"
+            android:textSize="@dimen/textLarge"
+            android:visibility="visible" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:id="@+id/ivIcon"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ig_heart"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"/>
+
+
+</LinearLayout>
+
+

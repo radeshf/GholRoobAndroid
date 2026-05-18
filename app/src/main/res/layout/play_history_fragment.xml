@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingVertical="@dimen/_3sdp"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:id="@+id/lnrVictory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="+0"
+            android:id="@+id/tvScore"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSemiLarge" />
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_xp"
+            android:scaleType="fitCenter"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/victory"
+            android:textColor="@color/green"
+            android:textSize="@dimen/textVeryLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnrFail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="شکست خوردید"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textSize="@dimen/textMedium" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEnemyName"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_2sdp"
+            tools:text="دشمن"
+            android:textColor="@color/red"
+            android:textSize="@dimen/textLarge" />
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:id="@+id/ivEnemyImage"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_enemy_zahak"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:text="توسط"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textMedium" />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOptions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginTop="@dimen/play_top_gap"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:layout_marginBottom="@dimen/play_top_gap"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/lnrVictory"
+        app:layout_constraintBottom_toTopOf="@+id/lnrBottomViews"
+        app:spanCount="7"
+        tools:itemCount="77"
+        tools:listitem="@layout/option_item" />
+
+    <LinearLayout
+        android:id="@+id/lnrBottomViews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/btnHeart"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/play_btn_size"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/play_x_gap"
+            android:layout_marginStart="@dimen/play_x_gap"
+            android:paddingEnd="@dimen/btn_x_paddings_small"
+            android:paddingStart="@dimen/btn_x_paddings_small"
+            android:background="@drawable/box_btn"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTotalHearts"
+                android:gravity="center"
+                tools:text="6"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/textExtraLarge" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="از"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSemiLarge" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvHearts"
+                android:gravity="center"
+                tools:text="6"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/textExtraLarge" />
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ig_heart"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/play_btn_size"
+            android:layout_marginEnd="@dimen/play_x_gap"
+            android:layout_marginStart="@dimen/play_x_gap"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_3sdp"
+            android:background="@drawable/box_btn"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ig_kill"
+                android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvKills"
+                android:gravity="center"
+                tools:text="120"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/textNormal" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/play_btn_size"
+            android:layout_marginEnd="@dimen/play_x_gap"
+            android:layout_marginStart="@dimen/play_x_gap"
+            android:paddingHorizontal="@dimen/_3sdp"
+            android:gravity="center"
+            android:background="@drawable/box_btn"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ig_time"
+                android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvSpeed"
+                android:gravity="center"
+                tools:text="22:22:22"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/textNormal" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/btn_dismiss_layout"
+        android:id="@+id/lnrDismiss"/>
+
+
+</LinearLayout>
+

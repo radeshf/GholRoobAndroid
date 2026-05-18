@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lnrCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_btn"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
+    android:padding="@dimen/_4sdp">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ig_enemy_arzhang_troll"
+        tools:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintEnd_toEndOf="parent"
+        tools:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+
+</LinearLayout>

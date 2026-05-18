@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/btnCloseGame"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/hint_button_size"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:background="@drawable/ig_btn_red"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:text="خروج"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textVeryLarge"
+        android:visibility="visible" />
+
+
+</LinearLayout>

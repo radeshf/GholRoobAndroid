@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blackTransparent"
+    android:gravity="center">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnrDialog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_default_h"
+        android:layout_marginStart="@dimen/dialog_x_margin"
+        android:layout_marginEnd="@dimen/dialog_x_margin"
+        android:background="@drawable/ig_panel"
+        android:paddingStart="@dimen/dialog_x_padding"
+        android:paddingTop="@dimen/dialog_y_padding"
+        android:paddingEnd="@dimen/dialog_x_padding"
+        android:paddingBottom="@dimen/dialog_y_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/tvMessageDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/dialog_text_x_margin"
+            android:layout_marginStart="@dimen/dialog_text_x_margin"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/textSemiLarge"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="" />
+
+        <LinearLayout
+            android:id="@+id/lnrSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMessageDialog"
+            android:gravity="center">
+            <LinearLayout
+                android:id="@+id/btnSoundSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/btn_big_h"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/dialog_x_padding"
+                android:paddingEnd="@dimen/btn_x_paddings_small"
+                android:background="@drawable/ig_btn"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:layout_width="@dimen/settings_icon_size"
+                    android:layout_height="@dimen/settings_icon_size"
+                    android:id="@+id/ivSoundSetting"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_sound_on"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="@dimen/heart_size"
+                    android:layout_height="@dimen/heart_size"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ic_vibrate"
+                    android:visibility="gone" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:text="صدای بازی"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/textVeryLarge"
+                        android:visibility="visible" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSound"
+                        android:layout_marginTop="@dimen/_minus7sdp"
+                        android:text="(فعال)"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/textNormal"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrBackButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+
+
+            <include
+                android:id="@+id/lnrDismiss"
+                layout="@layout/btn_dismiss_layout" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_header_w"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/ig_panel_header"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
+        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
+        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
+        app:layout_constraintTop_toTopOf="@+id/lnrDialog">
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_settings"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvTitleDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="تنظیمات"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/textExtraLarge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_settings"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

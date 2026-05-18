@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/poster2"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingVertical="@dimen/_10sdp"
+    android:paddingHorizontal="@dimen/_10sdp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/HeartsLayout"
+            layout="@layout/hearts_layout" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lnrCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_primary2"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/touch_effect"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_coin"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/tvCoins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtraLarge"
+            tools:text="0" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lnrLife"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_primary2"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnrCoin">
+
+        <ImageView
+            android:id="@+id/ivLife"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/touch_effect"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_heart"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLifeCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textExtraLarge"
+            app:layout_constraintStart_toEndOf="@id/ivCoin"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ivBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/bg_primary2"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/lnrLife"
+        app:layout_constraintTop_toBottomOf="@+id/lnrLife">
+
+        <ImageView
+            android:layout_width="@dimen/main_box_size"
+            android:layout_height="@dimen/main_box_size"
+            android:background="@drawable/touch_effect"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_star"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ivBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/bg_primary2"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/ivBox1"
+        app:layout_constraintTop_toBottomOf="@+id/ivBox1">
+
+        <ImageView
+            android:layout_width="@dimen/main_box_size"
+            android:layout_height="@dimen/main_box_size"
+            android:background="@drawable/touch_effect"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_settings"
+            android:visibility="visible" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lnrFooterViews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_logo_type"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@id/ivBox1"
+            app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/brnPlay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_big_h"
+                android:background="@drawable/ig_btn_green"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/btn_x_paddings_small"
+                    android:paddingEnd="@dimen/btn_x_paddings_small"
+                    android:text="شروع"
+                    android:textColor="#EDD4A0"
+                    android:textSize="@dimen/textExtraLarge" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_play_btn"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="@id/ivBox1"
+                    app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/brnRating"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_big_h"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@drawable/ig_btn_yellow"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="رده بندی"
+                    android:textColor="#15939D"
+                    android:textSize="@dimen/textExtraLarge" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_ranking"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="@id/ivBox1"
+                    app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_2sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/lnrHint"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_big_h"
+                android:layout_weight="1"
+                android:background="@drawable/ig_btn_blue"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="آموزش بازی"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_hint"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnrHistory"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_big_h"
+                android:layout_weight="1"
+                android:background="@drawable/ig_btn_purple"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="تاریخچه بازی ها"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge" />
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_history"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/videoBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#28344A</color>
+    <color name="colorPrimary2">#1C5B53</color>
+    <color name="colorPrimaryDark">#192131</color>
+    <color name="box_cleared_color">#20293A</color>
+    <color name="box_btn_color">#333D4F</color>
+    <color name="colorAccent">#FEC34E</color>
+    <color name="colorAccentDark">#C28C0E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textColorOnDark">#B7B9BB</color>
+    <color name="textColorOnLight">#595752</color>
+    <color name="black">#000000</color>
+    <color name="green">#0AA06E</color>
+    <color name="red">#E53935</color>
+    <color name="inactiveAddButtonColor">#B3B3B3</color>
+    <color name="infoPageBackgroundColor">#EBEBEB</color>
+    <color name="actionBarArrowColor">@color/colorPrimary</color>
+    <color name="animatedStickerIndicator">#66000000</color>
+    <color name="saveColor">#292D32</color>
+    <color name="donateColor">#FF6D00</color>
+    <color name="newColor">#17a2b8</color>
+    <color name="whatsapp">#075e54</color>
+    <color name="likeColor">#BF003A</color>
+    <color name="blackTransparent">#aa000000</color>
+    <color name="ads_color">#1C450E</color>
+    <color name="close_color">#771D0D</color>
+    <color name="xp_color">#7BC7EE</color>
+    <color name="enemy_color">#9786FF</color>
+    <color name="speed_color">#D24632</color>
+    <color name="life_color">#B23B15</color>
+    <color name="life_green_color">#97F997</color>
+    <color name="rank_1">#FACC15</color>
+    <color name="rank_2">#D1D5DB</color>
+    <color name="rank_3">#B87333</color>
+    <color name="rank">#6B7280</color>
+    <color name="darkInputBackground">#1AFFFFFF</color>
+    <color name="stats_label">#B7D3FF</color>     <!-- آبی روشن ملایم -->
+    <color name="stats_value">#FFFFFF</color>     <!-- سفید برای عدد -->
+    <color name="stats_divider">#33FFFFFF</color> <!-- خط جداکننده خیلی ملایم -->
+    <color name="dialog_text_color">#FFFFFF</color>     <!-- سفید برای عدد -->
+
+</resources>

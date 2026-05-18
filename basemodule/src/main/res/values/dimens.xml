@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="textVerySmall">@dimen/_6sdp</dimen>
+    <dimen name="textSemiSmall">@dimen/_8sdp</dimen>
+    <dimen name="textSmall">@dimen/_9sdp</dimen>
+    <dimen name="textMedium">@dimen/_10sdp</dimen>
+    <dimen name="textNormal">@dimen/_12sdp</dimen>
+    <dimen name="textLarge">@dimen/_14sdp</dimen>
+    <dimen name="textSemiLarge">@dimen/_16sdp</dimen>
+    <dimen name="textVeryLarge">@dimen/_18sdp</dimen>
+    <dimen name="textExtraLarge">@dimen/_20sdp</dimen>
+
+    <dimen name="marginSmall">@dimen/_2sdp</dimen>
+    <dimen name="marginMedium">@dimen/_4sdp</dimen>
+    <dimen name="marginNormal">@dimen/_5sdp</dimen>
+    <dimen name="marginBig">@dimen/_10sdp</dimen>
+    <dimen name="marginHuge">@dimen/_15sdp</dimen>
+
+    <dimen name="icon_size">@dimen/_30sdp</dimen>
+
+    <dimen name="back_icon_size">@dimen/_25sdp</dimen>
+    <dimen name="back_icon_padding">@dimen/_5sdp</dimen>
+
+    <dimen name="appBarSize">@dimen/_40sdp</dimen>
+    <dimen name="dialog_icon_size">@dimen/_20sdp</dimen>
+    <dimen name="dialog_size">@dimen/_270sdp</dimen>
+    <dimen name="dialog_height">@dimen/_370sdp</dimen>
+
+
+</resources>

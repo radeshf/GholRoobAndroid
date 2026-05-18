@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/layout"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/hint_button_size"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:background="@drawable/ig_btn_red"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnText"
+        android:text="@string/ok"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textVeryLarge"
+        android:visibility="visible" />
+
+    <ImageView
+        android:layout_width="@dimen/heart_size"
+        android:layout_height="@dimen/heart_size"
+        android:contentDescription="@string/contentDescription"
+        android:src="@drawable/ic_home"
+        android:visibility="gone" />
+</LinearLayout>

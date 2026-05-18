@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_normal">@dimen/_12sdp</dimen>
+    <dimen name="text_large">@dimen/_15sdp</dimen>
+
+    <dimen name="play_btn_size">@dimen/_40sdp</dimen>
+
+    <dimen name="heart_size">@dimen/_24sdp</dimen>
+    <dimen name="heart_size_small">@dimen/_16sdp</dimen>
+    <dimen name="coin_size">@dimen/_44sdp</dimen>
+    <dimen name="main_box_size">@dimen/_35sdp</dimen>
+    <dimen name="main_views_margins_from_sides">@dimen/_10sdp</dimen>
+    <dimen name="play_button_size">@dimen/_180sdp</dimen>
+    <dimen name="hint_button_size">@dimen/_55sdp</dimen>
+    <dimen name="buy_heart_button_size">@dimen/_50sdp</dimen>
+    <dimen name="play_image_size">@dimen/_230sdp</dimen>
+    <dimen name="play_image_size_big">@dimen/_330sdp</dimen>
+
+    <dimen name="btn_x_paddings_small">@dimen/_10sdp</dimen>
+
+    <dimen name="play_top_gap">@dimen/_3sdp</dimen>
+    <dimen name="play_x_gap">@dimen/_5sdp</dimen>
+    <dimen name="play_x_margin">@dimen/_15sdp</dimen>
+    <dimen name="dialog_x_margin">@dimen/_2sdp</dimen>
+    <dimen name="dialog_text_x_margin">@dimen/_5sdp</dimen>
+    <dimen name="dialog_header_w">@dimen/_250sdp</dimen>
+    <dimen name="x_padding">@dimen/_30sdp</dimen>
+    <dimen name="dialog_x_padding">@dimen/_22sdp</dimen>
+    <dimen name="dialog_y_padding">@dimen/_35sdp</dimen>
+    <dimen name="dialog_default_h">@dimen/_270sdp</dimen>
+    <dimen name="dialog_big_h">@dimen/_370sdp</dimen>
+
+    <dimen name="panel_padding">@dimen/_5sdp</dimen>
+    <dimen name="btn_big_h">@dimen/_60sdp</dimen>
+    <dimen name="btn_big_w">@dimen/_150sdp</dimen>
+    <dimen name="btn_button_padding">@dimen/_8sdp</dimen>
+
+    <dimen name="win_panel_h">@dimen/_380sdp</dimen>
+    <dimen name="win_hint_size">@dimen/_90sdp</dimen>
+
+    <dimen name="settings_icon_size">@dimen/_40sdp</dimen>
+    <dimen name="padding_x_header">@dimen/_15sdp</dimen>
+    <dimen name="box_radius">@dimen/_10sdp</dimen>
+    <dimen name="inner_stats_paddings">@dimen/_15sdp</dimen>
+
+</resources>

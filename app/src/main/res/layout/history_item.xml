@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrCell"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_btn"
+    android:padding="@dimen/_4sdp"
+    android:layout_marginTop="@dimen/_6sdp"
+    android:layout_marginBottom="@dimen/_6sdp">
+    <LinearLayout
+        android:id="@+id/lnrResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="پیروزی"
+            android:textColor="@color/green"
+            android:textSize="@dimen/textLarge"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:id="@+id/lnrEnemy"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/_6sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvResult"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/tvEnemy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="دیو سفید"
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/textNormal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvResult"/>
+
+            <ImageView
+                android:id="@+id/ivEnemy"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ig_enemy_arzhang_troll"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnrGameDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end"
+        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintTop_toTopOf="@id/lnrResult"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/tvGameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="نبرد #1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textNormal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvResult"/>
+
+        <TextView
+            android:id="@+id/tvGameDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1405/02/21 - 18:45"
+            android:textColor="@color/textColorOnDark"
+            android:textSize="@dimen/textSmall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvResult"/>
+
+    </LinearLayout>
+    <!-- Date -->
+
+    <!-- Stats Box -->
+    <LinearLayout
+        android:id="@+id/lnrStats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:background="@drawable/bg_stats_box"
+        android:paddingVertical="@dimen/_8sdp"
+        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@id/lnrResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Score -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvScoreLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="امتیاز"
+                android:textColor="@color/stats_label"
+                android:textSize="@dimen/textSmall"/>
+
+            <TextView
+                android:id="@+id/tvScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="250"
+                android:textColor="@color/stats_value"
+                android:textSize="@dimen/textLarge"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:background="@color/stats_divider"/>
+
+        <!-- Time -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="سرعت"
+                android:textColor="@color/stats_label"
+                android:textSize="@dimen/textSmall"/>
+
+            <TextView
+                android:id="@+id/tvSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="00:35"
+                android:textColor="@color/stats_value"
+                android:textSize="@dimen/textLarge"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:background="@color/stats_divider"/>
+
+        <!-- Kills -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvKillsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="دشمنان"
+                android:textColor="@color/stats_label"
+                android:textSize="@dimen/textSmall"/>
+
+            <TextView
+                android:id="@+id/tvKills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12"
+                android:textColor="@color/stats_value"
+                android:textSize="@dimen/textLarge"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Watch Battle Button -->
+    <TextView
+        android:id="@+id/btnWatchBattle"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:gravity="center"
+        android:background="@drawable/ig_btn_green"
+        android:text="نمایش نبرد"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textNormal"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnrStats"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tv"
+        android:textColor="#000000"
+        tools:text="نمونه"
+        android:layout_gravity="center"
+        android:textSize="@dimen/textNormal"
+        android:layout_width="match_parent"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:paddingEnd="@dimen/_2sdp"
+        android:paddingStart="@dimen/_2sdp"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lnrDialog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_default_h"
+        android:paddingTop="@dimen/dialog_y_padding"
+        android:paddingBottom="@dimen/dialog_y_padding"
+        android:paddingEnd="@dimen/dialog_x_padding"
+        android:paddingStart="@dimen/dialog_x_padding"
+        android:layout_marginStart="@dimen/dialog_x_margin"
+        android:layout_marginEnd="@dimen/dialog_x_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/ig_panel">
+
+
+        <TextView
+            android:id="@+id/tvMessageDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/dialog_text_x_margin"
+            android:layout_marginStart="@dimen/dialog_text_x_margin"
+            android:text="متاسفانه سکه هات کافی نیست!"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/textSemiLarge"
+            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/lnrBackButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <include layout="@layout/btn_dismiss_layout"
+                android:id="@+id/lnrDismiss"/>
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_header_w"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/ig_panel_header"
+        app:layout_constraintTop_toTopOf="@+id/lnrDialog"
+        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
+        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
+        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
+        android:paddingStart="@dimen/padding_x_header"
+        android:paddingEnd="@dimen/padding_x_header"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:contentDescription="@string/contentDescription"
+            android:id="@+id/ivIcon1"
+            android:src="@drawable/ig_error"
+            android:rotationY="180"
+            android:visibility="visible" />
+        <TextView
+            android:id="@+id/tvTitleDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="توجه"
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/textExtraLarge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/ivIcon2"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_error"
+            android:visibility="visible" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
