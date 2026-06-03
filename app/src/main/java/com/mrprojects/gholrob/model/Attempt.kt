@@ -1,6 +1,7 @@
 package com.mrprojects.gholrob.model
 
 import com.google.gson.annotations.SerializedName
+import com.mrprojects.gholrob.model.play.GameKill
 
 
 class Attempt {
@@ -17,6 +18,7 @@ class Attempt {
     @SerializedName("profile") var profile: User = User()
     @SerializedName("killed_by") var killedBy: GameCell? = null
     @SerializedName("cells") var cells: ArrayList<GameCell> = arrayListOf()
+    @SerializedName("kills") var kills: ArrayList<GameKill> = arrayListOf()
 
 }
 

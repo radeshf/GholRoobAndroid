@@ -48,7 +48,9 @@ abstract class BaseAppActivity<B : ViewBinding>(bindingFactory: (LayoutInflater)
         warningDialog(s)
     }
 
-
+    fun onBackClicked(){
+        onBackPressedDispatcher.onBackPressed()
+    }
 
     fun postEvent(obj : Any){
         EventBus.getDefault().post(obj)

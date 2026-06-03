@@ -13,7 +13,7 @@ class BuyLifeAdapter(data: List<LifePacks>, listener: OnItemClickListener<LifePa
     override fun onBindView(view: BuyLifeItemBinding, item: LifePacks, position: Int, listener: OnItemClickListener<LifePacks>?) {
         view.tvPrice.text = item.price.toMoneyString()
         view.tvName.text = item.title
-        view.tvValue.text = "${item.lifeCount.toMoneyString()} نوش دارو"
+        view.tvValue.text = "${item.amount.toMoneyString()} نوش دارو"
         view.ivIcon.setImageResource(item.iconRes)
         view.root.setOnClickListener {
             listener?.onItemClick(item)

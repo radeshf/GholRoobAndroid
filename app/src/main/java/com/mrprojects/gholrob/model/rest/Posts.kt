@@ -14,6 +14,7 @@ class LoginPost(
 
 class EditProfilePost(
     @SerializedName("nick_name") private val nickName: String,
+    @SerializedName("last_name") private val bio: String, //used as bio
     @SerializedName("profile_image") private val profileImage: String,
 )
 
@@ -40,9 +41,17 @@ class AddHintPost(
 
 )
 
-class BuyLifePost(
+class BuyItemPost(
+    @SerializedName("type") private val type: String,
+)
+
+class BuyCoinPost(
     @SerializedName("price") private val price: Int,
-    @SerializedName("life_count") private val lifeCount: Int,
+    @SerializedName("coins") private val coins: Int,
+)
+
+class BuyEnergyPost(
+    @SerializedName("buy_type") private val buyType: String
 
 )
 

@@ -40,9 +40,9 @@
     </style>
     <style name="DarkTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <!-- Box color (default & focused) -->
-        <item name="boxStrokeColor">@color/white</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
+        <item name="boxStrokeColor">@color/textColorOnDark</item>
+        <item name="hintTextColor">@color/textColorOnDark</item>
+        <item name="android:textColorHint">@color/textColorOnDark</item>
         <item name="android:textSize">@dimen/textLarge</item>
         <!-- Hint collapsed color -->
         <item name="hintTextAppearance">@style/DarkHintAppearance</item>

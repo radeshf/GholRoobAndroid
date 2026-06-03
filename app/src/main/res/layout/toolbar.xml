@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    android:minHeight="?attr/actionBarSize"
     android:layoutDirection="rtl"
+    android:paddingTop="@dimen/_2sdp"
+    android:paddingBottom="@dimen/_2sdp"
     android:background="@color/colorPrimary"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -16,42 +17,43 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btn_action"
+            android:layout_toRightOf="@+id/btnAction"
             android:text="عنوان"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/textExtraLarge"
             android:layout_marginRight="@dimen/_8sdp"
             android:layout_marginLeft="@dimen/_8sdp"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btnBack"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginStart="@dimen/_4sdp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:visibility="visible"
             android:background="@drawable/touch_effect"
             android:src="@drawable/ig_back"/>
 
         <Button
-            android:id="@+id/btn_action"
+            android:id="@+id/btnAction"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
-            android:layout_toRightOf="@+id/btn_back"
+            android:layout_toRightOf="@+id/btnBack"
             android:layout_centerVertical="true"
             android:text="ذخیره"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:textColor="@color/white"
             app:strokeColor="@color/white"
             app:cornerRadius="@dimen/_20sdp"
             app:iconPadding="0dp"
+            android:textSize="@dimen/textNormal"
             app:strokeWidth="1.2dp" />
 
     </RelativeLayout>

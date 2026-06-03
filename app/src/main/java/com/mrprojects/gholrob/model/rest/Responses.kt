@@ -47,6 +47,15 @@ class RatingResponse: RadBaseResponse() {
     class Data(){
         @SerializedName("me") val me: Rating = Rating()
         @SerializedName("ratings") val ratings: List<Rating> = listOf()
+        @SerializedName("season_reward") val seasonReward: SeasonReward = SeasonReward()
+
+        class SeasonReward(){
+            @SerializedName("is_active") val isActive: Boolean = false
+            @SerializedName("price_pool") val pricePool: String? = ""
+            @SerializedName("season_end") val seasonEnd: String? = ""
+            @SerializedName("description") val description: String? = ""
+
+        }
 
     }
 }

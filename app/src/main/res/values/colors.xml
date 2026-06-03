@@ -5,14 +5,20 @@
     <color name="colorPrimaryDark">#192131</color>
     <color name="box_cleared_color">#20293A</color>
     <color name="box_btn_color">#333D4F</color>
+    <color name="box_btn_color_green">#4CAF50</color>
     <color name="colorAccent">#FEC34E</color>
+    <color name="damage_color">#EAA0A6</color>
     <color name="colorAccentDark">#C28C0E</color>
+    <color name="golden_border_color">#D4AF37</color>
+    <color name="text_color_on_yellow">#7C4500</color>
     <color name="white">#FFFFFF</color>
     <color name="textColorOnDark">#B7B9BB</color>
     <color name="textColorOnLight">#595752</color>
     <color name="black">#000000</color>
     <color name="green">#0AA06E</color>
+    <color name="money_color">#C4F1BC</color>
     <color name="red">#E53935</color>
+    <color name="redPrimary">#E74C3C     </color>
     <color name="inactiveAddButtonColor">#B3B3B3</color>
     <color name="infoPageBackgroundColor">#EBEBEB</color>
     <color name="actionBarArrowColor">@color/colorPrimary</color>
@@ -27,8 +33,9 @@
     <color name="close_color">#771D0D</color>
     <color name="xp_color">#7BC7EE</color>
     <color name="enemy_color">#9786FF</color>
-    <color name="speed_color">#D24632</color>
+    <color name="speed_color">#F4DFBD</color>
     <color name="life_color">#B23B15</color>
+    <color name="coin_color">#FFD700</color>
     <color name="life_green_color">#97F997</color>
     <color name="rank_1">#FACC15</color>
     <color name="rank_2">#D1D5DB</color>
@@ -39,5 +46,6 @@
     <color name="stats_value">#FFFFFF</color>     <!-- سفید برای عدد -->
     <color name="stats_divider">#33FFFFFF</color> <!-- خط جداکننده خیلی ملایم -->
     <color name="dialog_text_color">#FFFFFF</color>     <!-- سفید برای عدد -->
+    <color name="dialog_text_subtitle_color">#B2DFDB</color>     <!-- سفید برای عدد -->
 
 </resources>

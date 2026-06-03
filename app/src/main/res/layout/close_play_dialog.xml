@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/dialog_x_margin"
     android:gravity="center">
 
 
@@ -11,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lnrDialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_default_h"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/dialog_y_padding"
         android:paddingBottom="@dimen/dialog_y_padding"
         android:paddingEnd="@dimen/dialog_x_padding"
@@ -31,13 +32,27 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/dialog_text_x_margin"
             android:layout_marginStart="@dimen/dialog_text_x_margin"
             android:text="برای خروج از بازی مطمئن هستید؟"
             android:textColor="@color/dialog_text_color"
             android:textSize="@dimen/textSemiLarge"
-            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMessageDialog2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/dialog_text_x_margin"
+            android:layout_marginStart="@dimen/dialog_text_x_margin"
+            android:text="با خروج از بازی، زمان از دست می‌رود و امتیاز نهایی شما کاهش می‌یابد."
+            android:textColor="@color/dialog_text_color"
+            android:textSize="@dimen/textNormal"
+            app:layout_constraintTop_toBottomOf="@id/tvMessageDialog"
+            />
 
 
         <LinearLayout
@@ -49,6 +64,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvMessageDialog2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

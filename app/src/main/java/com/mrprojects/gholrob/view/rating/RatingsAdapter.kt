@@ -19,8 +19,15 @@ class RatingsAdapter(listener: OnItemClickListener<Rating>?) : RvAdapter<Rating,
         view.tvUserName.text = item.user.name
         view.ivUserProfile.setImageResource(item.user.getProfileResource())
         view.lnrRank.visibleByBoolean(item.haveRank())
-        view.tvRank.text = item.getRankToDisplay()
-        view.lnrRank.setBackgroundResource(item.getRankBg())
+        view.lnrReward.visibleByBoolean(item.haveReward())
+        if (item.haveRank()){
+            view.tvRank.text = item.getRankToDisplay()
+            view.lnrRank.setBackgroundResource(item.getRankBg())
+        }
+        if (item.haveReward()){
+            view.tvReward.text = item.reward
+        }
+
         view.root.setOnClickListener {
             listener?.onItemClick(item)
         }

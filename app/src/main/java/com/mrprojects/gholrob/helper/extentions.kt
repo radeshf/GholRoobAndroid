@@ -256,9 +256,9 @@ fun <B : ViewBinding> BaseFragment<B>.initToolbar(
     onActionClicked: (() -> Unit)? = null
 ) {
     val toolbar = binding.root.findViewById<Toolbar>(R.id.toolbar)
-    val toolbarTitle = binding.root.findViewById<AppCompatTextView>(R.id.toolbar_title)
-    val backButton = binding.root.findViewById<AppCompatImageButton>(R.id.btn_back)
-    val actionButton = binding.root.findViewById<Button>(R.id.btn_action)
+    val toolbarTitle = binding.root.findViewById<AppCompatTextView>(R.id.tvTitle)
+    val backButton = binding.root.findViewById<AppCompatImageButton>(R.id.btnBack)
+    val actionButton = binding.root.findViewById<Button>(R.id.btnAction)
 
     toolbar.visibleByBoolean(showToolbar)
     actionButton.visibleByBoolean(showAction)
@@ -325,15 +325,6 @@ fun HeartsLayoutBinding.updateHearts(user: User, showAdd: Boolean = false, showT
 
 }
 
-fun Activity.showCustomDialog(title: String, msg: String, doOnConfirm: (dialog: Dialog) -> Unit) {
-    DialogHelper(
-        this,
-        layoutInflater,
-        title = title,
-        msg = msg,
-        doOnConfirm = doOnConfirm
-    ).show()
-}
 
 fun <B : ViewBinding> BaseFragment<B>.submitHint(puzzleId: Int?, hintType: String, coin: Int=0, isCoinSpend: Boolean? = null) {
     val spendStatus = isCoinSpend?.toString() ?: "null"

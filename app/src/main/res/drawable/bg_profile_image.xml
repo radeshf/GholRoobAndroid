@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ۱. سایه زیر قاب (برای ایجاد عمق) -->
+    <item android:top="2dp" android:left="2dp">
+        <shape android:shape="oval">
+            <solid android:color="#40000000" /> <!-- سایه مشکی شفاف -->
+        </shape>
+    </item>
+
+    <!-- ۲. رنگ اصلی و گرادیان فلزی قاب -->
+    <item>
+        <shape android:shape="oval">
+
+            <stroke android:width="2dp" android:color="@color/golden_border_color" />
+        </shape>
+    </item>
+
+    <!-- ۳. یک لایه برای درخشش داخلی (Inner Glow) -->
+    <item android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp">
+        <shape android:shape="oval">
+            <stroke android:width="1dp" android:color="#FFFACD" /> <!-- لبه روشن -->
+        </shape>
+    </item>
+
+</layer-list>

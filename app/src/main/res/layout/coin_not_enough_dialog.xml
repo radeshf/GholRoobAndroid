@@ -4,75 +4,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/dialog_x_margin"
     android:gravity="center">
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lnrDialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_default_h"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/dialog_y_padding"
         android:paddingBottom="@dimen/dialog_y_padding"
         android:paddingEnd="@dimen/dialog_x_padding"
         android:paddingStart="@dimen/dialog_x_padding"
-        android:layout_marginStart="@dimen/dialog_x_margin"
-        android:layout_marginEnd="@dimen/dialog_x_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/ig_panel">
 
-
-        <TextView
-            android:id="@+id/tvMessageDialog"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="center"
             android:layout_marginEnd="@dimen/dialog_text_x_margin"
             android:layout_marginStart="@dimen/dialog_text_x_margin"
-            android:text="متاسفانه سکه هات کافی نیست!"
-            android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/textSemiLarge"
-            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <LinearLayout
-            android:id="@+id/lnrBackButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvMessageDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="متاسفانه سکه هات کافی نیست!"
+                android:textColor="@color/dialog_text_color"
+                android:textSize="@dimen/textSemiLarge"
+                app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/btnShop"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/hint_button_size"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/ig_btn_green"
                 android:paddingBottom="@dimen/_3sdp"
                 android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:text="خرید سکه"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textLarge"
-                    android:visibility="visible" />
 
                 <ImageView
                     android:layout_width="@dimen/heart_size"
@@ -81,12 +63,114 @@
                     android:src="@drawable/ig_coin"
                     android:visibility="visible" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_3sdp"
+                    tools:text="1000"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge"
+                    android:visibility="visible" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:text="سکه مورد نیاز: "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge"
+                    android:visibility="visible" />
+
             </LinearLayout>
 
-            <include layout="@layout/btn_dismiss_layout"
-                android:id="@+id/lnrDismiss"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="@dimen/heart_size"
+                    android:layout_height="@dimen/heart_size"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_coin"
+                    android:visibility="visible" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_3sdp"
+                    tools:text="1000"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge"
+                    android:visibility="visible" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:text="سکه های شما: "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textLarge"
+                    android:visibility="visible" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnrBackButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/btnShop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/hint_button_size"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/ig_btn_green"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:text="خرید سکه"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textLarge"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:layout_width="@dimen/heart_size"
+                        android:layout_height="@dimen/heart_size"
+                        android:contentDescription="@string/contentDescription"
+                        android:src="@drawable/ig_coin"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <include layout="@layout/btn_dismiss_layout"
+                    android:id="@+id/lnrDismiss"/>
+
+            </LinearLayout>
         </LinearLayout>
+
+
+
 
 
 

@@ -10,7 +10,7 @@ import ir.radesh.basemodule.helper.RadResponseHelper
 
 class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubscriber, private val apiRepo: ApiRepo, private val db: AppDatabase) {
 
-    fun login(doOnDone: (response: UserResponse)->Unit, onNoInternet: ()->Unit){
+    fun login(doOnDone: (response: UserResponse)->Unit, onNoInternet: (msg: String)->Unit){
         val config = ConfigPost.newInstance(context)
         val data = LoginPost(config)
         apiSubscriber.subscribe(apiRepo.login(data).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
@@ -19,16 +19,15 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
             }
 
             override fun onError(msg: String, code: Int) {
-                super.onError(msg, code)
-                if (code == this.NO_INTERNET_ERROR_CODE){
-                    onNoInternet()
-                }
+                onNoInternet(msg)
+//                super.onError(msg, code)
+
             }
         }))
     }
 
-    fun editProfile(nickName: String, profileImage: String, doOnDone: (response: UserResponse)->Unit){
-        val data = EditProfilePost(nickName, profileImage)
+    fun editProfile(nickName: String, bio: String, profileImage: String, doOnDone: (response: UserResponse)->Unit){
+        val data = EditProfilePost(nickName, bio, profileImage)
         apiSubscriber.subscribe(apiRepo.editProfile(data).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
             override fun onSuccessful(response: UserResponse) {
                 doOnDone(response)
@@ -48,9 +47,28 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
     }
 
 
-    fun buyLife(body: BuyLifePost, doOnDone: (response: EmptyResponse)->Unit){
-        apiSubscriber.subscribe(apiRepo.buyLife( body).subscribeWith(object : RadResponseHelper<EmptyResponse>(apiSubscriber){
-            override fun onSuccessful(response: EmptyResponse) {
+    fun buyItem(body: BuyItemPost, doOnDone: (response: UserResponse)->Unit){
+        apiSubscriber.subscribe(apiRepo.buyItem(body).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
+                doOnDone(response)
+            }
+
+        }))
+
+    }
+    fun buyCoin(body: BuyCoinPost, doOnDone: (response: UserResponse)->Unit){
+        apiSubscriber.subscribe(apiRepo.buyCoin( body).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
+                doOnDone(response)
+            }
+
+        }))
+
+    }
+
+    fun buyEnergy(body: BuyEnergyPost, doOnDone: (response: UserResponse)->Unit){
+        apiSubscriber.subscribe(apiRepo.buyEnergy(body).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
                 doOnDone(response)
             }
 

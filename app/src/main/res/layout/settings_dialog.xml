@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blackTransparent"
+    android:layout_marginHorizontal="@dimen/dialog_x_margin"
     android:gravity="center">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lnrDialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_default_h"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dialog_x_margin"
         android:layout_marginEnd="@dimen/dialog_x_margin"
         android:background="@drawable/ig_panel"
@@ -41,70 +41,204 @@
         <LinearLayout
             android:id="@+id/lnrSettings"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMessageDialog"
             android:gravity="center">
+
+
             <LinearLayout
                 android:id="@+id/btnSoundSettings"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_big_h"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:paddingStart="@dimen/dialog_x_padding"
-                android:paddingEnd="@dimen/btn_x_paddings_small"
-                android:background="@drawable/ig_btn"
+                android:paddingEnd="@dimen/dialog_x_padding"
+                android:background="@drawable/ig_btn_normal"
+                android:orientation="vertical"
                 android:gravity="center">
-
-
-                <ImageView
-                    android:layout_width="@dimen/settings_icon_size"
-                    android:layout_height="@dimen/settings_icon_size"
-                    android:id="@+id/ivSoundSetting"
-                    android:contentDescription="@string/contentDescription"
-                    android:src="@drawable/ig_sound_on"
-                    android:visibility="visible" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:layout_width="@dimen/heart_size"
-                    android:layout_height="@dimen/heart_size"
-                    android:contentDescription="@string/contentDescription"
-                    android:src="@drawable/ic_vibrate"
-                    android:visibility="gone" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:id="@+id/ivBg"
+                        android:contentDescription="@string/contentDescription"
+                        android:src="@drawable/ig_sound_on"
+                        android:visibility="visible" />
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:text="صدای بازی"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/textVeryLarge"
-                        android:visibility="visible" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tvSound"
-                        android:layout_marginTop="@dimen/_minus7sdp"
-                        android:text="(فعال)"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/textNormal"
-                        android:visibility="visible" />
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="صدای موسیقی"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textVeryLarge"
+                            android:visibility="visible" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvBg"
+                            android:layout_marginTop="@dimen/_minus7sdp"
+                            android:text="(فعال)"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textNormal"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/sbBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="1dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/bg_volume"
+                    android:thumb="@color/colorAccent"
+                    android:visibility="visible"/>
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btnSfxSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/dialog_x_padding"
+                android:paddingEnd="@dimen/dialog_x_padding"
+                android:background="@drawable/ig_btn_normal"
+                android:orientation="vertical"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:id="@+id/ivSfx"
+                        android:contentDescription="@string/contentDescription"
+                        android:src="@drawable/ig_sound_on"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="صدای بازی"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textVeryLarge"
+                            android:visibility="visible" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvSfx"
+                            android:layout_marginTop="@dimen/_minus7sdp"
+                            android:text="(فعال)"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textNormal"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/sbSfx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="1dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/bg_volume"
+                    android:thumb="@color/colorAccent"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btnVibrateSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/dialog_x_padding"
+                android:paddingEnd="@dimen/dialog_x_padding"
+                android:background="@drawable/ig_btn_normal"
+                android:orientation="vertical"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:id="@+id/ivVibrate"
+                        android:contentDescription="@string/contentDescription"
+                        android:src="@drawable/ig_vibrate_on"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="ویبره"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textVeryLarge"
+                            android:visibility="visible" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvVibrate"
+                            android:layout_marginTop="@dimen/_minus7sdp"
+                            android:text="(فعال)"
+                            android:textColor="@color/textPrimary"
+                            android:textSize="@dimen/textNormal"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -117,11 +251,11 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/lnrSettings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             >
-
 
 
             <include

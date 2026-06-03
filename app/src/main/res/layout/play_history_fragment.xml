@@ -10,7 +10,8 @@
     android:focusable="true"
     android:paddingVertical="@dimen/_3sdp"
     android:background="@color/colorPrimary">
-
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
     <LinearLayout
         android:id="@+id/lnrVictory"
         android:layout_width="match_parent"
@@ -113,11 +114,23 @@
         android:layout_marginEnd="@dimen/play_x_margin"
         android:layout_marginBottom="@dimen/play_top_gap"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/lnrVictory"
-        app:layout_constraintBottom_toTopOf="@+id/lnrBottomViews"
         app:spanCount="7"
         tools:itemCount="77"
         tools:listitem="@layout/option_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginTop="@dimen/play_top_gap"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:layout_marginBottom="@dimen/play_top_gap"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="7"
+        tools:itemCount="12"
+        tools:listitem="@layout/play_kills_item" />
 
     <LinearLayout
         android:id="@+id/lnrBottomViews"
@@ -128,7 +141,6 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         >
 
 
@@ -254,9 +266,6 @@
 
 
     </LinearLayout>
-
-    <include layout="@layout/btn_dismiss_layout"
-        android:id="@+id/lnrDismiss"/>
 
 
 </LinearLayout>

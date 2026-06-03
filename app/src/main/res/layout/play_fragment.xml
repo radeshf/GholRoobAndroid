@@ -108,14 +108,34 @@
         tools:itemCount="77"
         tools:listitem="@layout/option_item" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginTop="@dimen/play_top_gap"
+        app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:layout_marginBottom="@dimen/play_top_gap"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/rvOptions"
+        app:spanCount="7"
+        tools:itemCount="12"
+        tools:listitem="@layout/play_kills_item" />
+
+
     <LinearLayout
         android:id="@+id/lnrBottomViews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/standardBanner">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
         <LinearLayout
@@ -178,7 +198,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
-            android:id="@+id/btnHelp"
+            android:id="@+id/btnTutorial"
             android:layout_width="@dimen/play_btn_size"
             android:layout_height="@dimen/play_btn_size"
             android:layout_marginEnd="@dimen/play_x_gap"
@@ -263,19 +283,8 @@
             android:textSize="@dimen/_60sdp" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/videoBanner"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center" />
 
-    <RelativeLayout
-        android:id="@+id/standardBanner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

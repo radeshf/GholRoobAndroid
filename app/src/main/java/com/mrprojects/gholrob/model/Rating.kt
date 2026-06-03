@@ -6,11 +6,17 @@ import com.mrprojects.gholrob.R
 class Rating {
     @SerializedName("user") val user: User = User()
     @SerializedName("rank") val rank: String = ""
+    @SerializedName("reward") val reward: String = ""
+    @SerializedName("currency") val currency: String = ""
     @SerializedName("total_attempts") val totalAttempts: String = ""
     @SerializedName("total_score") val totalScore: String = ""
 
     fun haveRank(): Boolean{
         return rank != "0" && rank != ""
+    }
+
+    fun haveReward(): Boolean{
+        return reward != "0" && reward != ""
     }
 
     fun isInHighRank() = rank in listOf("1", "2", "3")

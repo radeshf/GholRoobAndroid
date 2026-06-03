@@ -132,6 +132,7 @@ dependencies {
     implementation("com.facebook.fresco:webpsupport:$fresco_version")
     implementation("com.facebook.fresco:animated-webp:$fresco_version")
     implementation("com.facebook.fresco:animated-base:$fresco_version")
+//    implementation("com.google.android.flexbox:flexbox:3.0.0")
 
     add("bazaarImplementation", "com.github.cafebazaar.Poolakey:poolakey:2.2.0")
     add("bazaarImplementation", "com.github.cafebazaar.Poolakey:poolakey-rx:2.2.0")
@@ -149,8 +150,8 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     // Hilt
-//    implementation("com.google.dagger:hilt-android:2.47")
-//    kapt("com.google.dagger:hilt-android-compiler:2.47")
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-android-compiler:2.47")
     implementation("com.airbnb.android:lottie:6.1.0")
     implementation(project(mapOf("path" to ":basemodule")))
 }

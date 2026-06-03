@@ -9,7 +9,6 @@ abstract class RadResponseHelper<T: RadBaseResponse>(private val apiSubscriber: 
     : ResponseHelper<T>() {
 
     override fun onResponseOk(response: T) {
-        apiSubscriber.hideRefresher()
         if (response.isOk()){
             onSuccessful(response)
         }else{

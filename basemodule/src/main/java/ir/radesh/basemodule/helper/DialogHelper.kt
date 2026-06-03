@@ -3,9 +3,6 @@ package ir.radesh.basemodule.helper
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.MenuInflater
-import android.view.View
-import androidx.fragment.app.Fragment
 import com.radesh.basemodule.R
 import com.radesh.basemodule.databinding.DialogBinding
 import ir.radesh.basemodule.commons.basicConfig
@@ -33,8 +30,7 @@ class DialogHelper(
     fun show(){
         dialog = Dialog(context)
         val binding = DialogBinding.inflate(inflater)
-        dialog.basicConfig( cancellable)
-        dialog.setContentView(binding.root)
+        dialog.basicConfig( binding.root, cancellable)
         binding.btnDismissDialog.visibleByBoolean(showCancel)
         binding.tvWarningDialog.visibleByBoolean(warningText != null)
         binding.tvWarningDialog.text = warningText

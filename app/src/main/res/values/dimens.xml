@@ -23,9 +23,10 @@
     <dimen name="play_x_margin">@dimen/_15sdp</dimen>
     <dimen name="dialog_x_margin">@dimen/_2sdp</dimen>
     <dimen name="dialog_text_x_margin">@dimen/_5sdp</dimen>
-    <dimen name="dialog_header_w">@dimen/_250sdp</dimen>
+    <dimen name="dialog_header_w">@dimen/_230sdp</dimen>
     <dimen name="x_padding">@dimen/_30sdp</dimen>
-    <dimen name="dialog_x_padding">@dimen/_22sdp</dimen>
+    <dimen name="dialog_x_padding">@dimen/_23sdp</dimen>
+    <dimen name="dialog_start_padding">@dimen/_19sdp</dimen>
     <dimen name="dialog_y_padding">@dimen/_35sdp</dimen>
     <dimen name="dialog_default_h">@dimen/_270sdp</dimen>
     <dimen name="dialog_big_h">@dimen/_370sdp</dimen>

@@ -3,15 +3,12 @@ package com.mrprojects.gholrob.helper.tapsell
 import android.app.Activity
 import android.app.Application
 import android.widget.RelativeLayout
-import android.widget.Toast
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.helper.tapsell.HeartAdsKey
 import com.mrprojects.helper.tapsell.HintAdsKey
 import com.mrprojects.helper.tapsell.TapSellKey
 import com.mrprojects.helper.tapsell.bannerKey
 import com.mrprojects.helper.tapsell.doubleCoinAdsKey
-import ir.radesh.basemodule.commons.showCustomDialog
-import ir.radesh.basemodule.commons.showToast
 import ir.tapsell.plus.*
 
 import ir.tapsell.plus.model.*

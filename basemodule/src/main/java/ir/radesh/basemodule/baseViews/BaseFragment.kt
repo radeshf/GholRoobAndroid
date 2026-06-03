@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
@@ -17,7 +16,6 @@ import org.greenrobot.eventbus.EventBus
 open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (LayoutInflater, ViewGroup, Boolean) -> B) : Fragment(), ApiSubscriber {
 
     private val disposables = CompositeDisposable()
-    var backCallback: OnBackPressedCallback? =null
 
     private var _binding: B? = null
     val binding get() = _binding!!
@@ -56,10 +54,6 @@ open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (La
     override fun logout() {
 
     }
-    fun registerBackCallback(callback: OnBackPressedCallback) {
-        backCallback = callback
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
-    }
 
 
     fun subscribeWithLoading(disposable: Disposable) : Disposable{
@@ -71,10 +65,6 @@ open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (La
     override fun onDestroyView() {
         super.onDestroyView()
         disposables.clear()
-    }
-
-    fun toolbar(toolbar: TextView, text: String){
-        toolbar.text = text
     }
 
 

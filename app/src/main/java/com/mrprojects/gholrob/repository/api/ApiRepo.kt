@@ -21,8 +21,17 @@ class ApiRepo(private val api: Api) {
         return api.createPayment(body).networkSchedulers()
     }
 
-    fun buyLife(body: BuyLifePost) : Observable<Response<EmptyResponse>> {
-        return api.buyLife(body).networkSchedulers()
+    fun buyItem(body: BuyItemPost) : Observable<Response<UserResponse>> {
+        return api.buyItem(body).networkSchedulers()
+    }
+
+    fun buyCoin(body: BuyCoinPost) : Observable<Response<UserResponse>> {
+        return api.buyCoin(body).networkSchedulers()
+    }
+
+
+    fun buyEnergy(body: BuyEnergyPost) : Observable<Response<UserResponse>> {
+        return api.buyEnergy(body).networkSchedulers()
     }
 
 

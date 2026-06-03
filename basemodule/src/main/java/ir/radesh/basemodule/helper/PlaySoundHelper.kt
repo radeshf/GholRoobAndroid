@@ -7,7 +7,7 @@ import android.widget.SeekBar
 import ir.radesh.basemodule.commons.doOnTry
 import timber.log.Timber
 
-class PlaySoundHelper(var seekBar: SeekBar?, val listener: Listener) {
+class PlaySoundHelper(var seekBar: SeekBar?, val volume: Float,  val listener: Listener, ) {
     private var mediaPlayer: MediaPlayer? = null
     private val delay = 200
     private var isInPlay = false
@@ -49,6 +49,7 @@ class PlaySoundHelper(var seekBar: SeekBar?, val listener: Listener) {
             mediaPlayer?.setDataSource(path)
 
             mediaPlayer?.setOnPreparedListener { mediaPlayer ->
+                mediaPlayer.setVolume(volume, volume)
                 mediaPlayer.start()
                 finalTime = mediaPlayer.duration.toDouble()
                 startTime = mediaPlayer.currentPosition.toDouble()
@@ -99,7 +100,6 @@ class PlaySoundHelper(var seekBar: SeekBar?, val listener: Listener) {
     }
 
     fun toggle(){
-        Timber.e( "isInPlay $isInPlay $mediaPlayer")
         isInPlay = if (isInPlay){
             mediaPlayer?.pause()
             false
@@ -118,6 +118,21 @@ class PlaySoundHelper(var seekBar: SeekBar?, val listener: Listener) {
 
     fun isPlaying(): Boolean {
         return isInPlay
+    }
+
+    fun attachVolumeSeekBar(volumeSeekBar: SeekBar) {
+        volumeSeekBar.max = 100
+        volumeSeekBar.progress = 100
+
+        volumeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                val volume = progress / 100f
+                val safeVolume = volume.coerceIn(0.0f, 1.0f)
+                mediaPlayer?.setVolume(safeVolume, safeVolume)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
     }
 
     private fun seekBarConfig(){

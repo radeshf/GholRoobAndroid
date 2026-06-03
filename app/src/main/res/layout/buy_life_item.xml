@@ -7,7 +7,7 @@
     android:layout_height="@dimen/btn_big_h"
     android:paddingEnd="@dimen/btn_x_paddings_small"
     android:paddingStart="@dimen/btn_x_paddings_small"
-    android:background="@drawable/ig_btn"
+    android:background="@drawable/ig_btn_normal"
     android:layout_marginTop="@dimen/_5sdp"
     android:gravity="center"
     android:orientation="horizontal">

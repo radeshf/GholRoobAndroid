@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/dialog_x_margin"
     android:gravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,8 +89,12 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 layout="@layout/btn_red_layout" />
 
-            <include layout="@layout/btn_dismiss_layout"
-                android:id="@+id/lnrDismiss"/>
+            <include
+                android:id="@+id/lnrDismiss"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hint_button_size"
+                android:layout_marginTop="@dimen/_10sdp"
+                layout="@layout/btn_dismiss_layout" />
 
         </LinearLayout>
 

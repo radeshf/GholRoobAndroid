@@ -1,10 +1,10 @@
 package com.mrprojects.gholrob.view.play
 
-import CellTypes
 import android.annotation.SuppressLint
 import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.OptionItemBinding
+import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.GameCell
 import ir.radesh.basemodule.commons.getCollor
 import ir.radesh.basemodule.commons.visibleByBoolean
@@ -22,6 +22,7 @@ class CellsAdapter(listener: OnItemClickListener<GameCell>?) :
         view.lnrRevealed.visibleByBoolean(true)
         view.ivCell.setImageResource(R.drawable.ig_flag)
         view.tvCell.visibleByBoolean(false)
+        view.ivCellDefeated.visibleByBoolean(false)
     }
 
     fun handleHeart(view: OptionItemBinding, item: GameCell) {
@@ -51,6 +52,8 @@ class CellsAdapter(listener: OnItemClickListener<GameCell>?) :
         }
         view.tvCell.visibleByBoolean(false)
         view.tvCellDefeated.visibleByBoolean(false)
+        view.ivCellDefeated.visibleByBoolean(false)
+
     }
 
     fun handleRevealed(view: OptionItemBinding, item: GameCell) {
@@ -60,9 +63,10 @@ class CellsAdapter(listener: OnItemClickListener<GameCell>?) :
             view.lnrDefeated.visibleByBoolean(false)
             view.lnrRevealed.visibleByBoolean(true)
             view.ivCell.setImageResource(item.image())
-            view.tvCell.setTextColor(view.root.context.getCollor(R.color.colorAccent))
+            view.tvCell.setTextColor(view.root.context.getCollor(R.color.damage_color))
             view.tvCell.text = item.damage.toString()
             view.tvCell.visibleByBoolean(true)
+            view.ivCellDamage.visibleByBoolean(true)
         }
     }
 

@@ -80,7 +80,8 @@
                 android:layout_height="@dimen/_20sdp"
                 android:contentDescription="@string/contentDescription"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ig_kill"
+                android:rotation="-30"
+                android:src="@drawable/ig_damage"
                 android:visibility="visible" />
 
             <TextView
@@ -90,7 +91,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="10"
-                android:textColor="@color/enemy_color"
+                android:textColor="@color/damage_color"
                 android:textSize="@dimen/textLarge"
                 android:visibility="visible" />
 

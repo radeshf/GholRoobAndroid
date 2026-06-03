@@ -3,12 +3,14 @@ package com.mrprojects.gholrob.view.play.history
 import android.os.Bundle
 import android.view.View
 import com.mrprojects.gholrob.databinding.HistoryFragmentBinding
+import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.model.AttemptHistory
 import com.mrprojects.gholrob.repository.Provider
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.getAdp
 import ir.radesh.basemodule.commons.init
+import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.interfaces.OnItemClickListener
 
 class HistoryFragment : BaseFragment<HistoryFragmentBinding>(HistoryFragmentBinding::inflate), OnItemClickListener<AttemptHistory> {
@@ -26,10 +28,13 @@ class HistoryFragment : BaseFragment<HistoryFragmentBinding>(HistoryFragmentBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(title = "تاریخچه نبرد ها")
+
         binding.rvData.init()
         binding.rvData.adapter = HistoryAdapter(this)
         getData()
         clicks()
+
     }
 
 
@@ -41,6 +46,7 @@ class HistoryFragment : BaseFragment<HistoryFragmentBinding>(HistoryFragmentBind
 
     private fun getData() {
         Provider.provideApiHelper(this).getGameHistory {
+            binding.lnrEmpty.visibleByBoolean(it.data.isEmpty())
             binding.rvData.getAdp<HistoryAdapter>().setData(it.data)
 
         }

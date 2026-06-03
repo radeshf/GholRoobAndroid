@@ -30,7 +30,9 @@ class UserViewModel(
     fun loadUser() {
         viewModelScope.launch {
             val u = dao.getUser()
-            user.postValue(u)
+            u?.let {
+                user.postValue(it)
+            }
         }
     }
 
@@ -46,20 +48,6 @@ class UserViewModel(
         }
     }
 
-
-    fun spendHeart() {
-        val u = user.value ?: return
-        if (u.currentHearts > 0) {
-            u.currentHearts -= 1
-            if (u.currentHearts < u.maxHearts && (u.nextHeartTimeMillis() == 0L || u.nextHeartTimeMillis() <= System.currentTimeMillis())) {
-                u.nextHeartTime = System.currentTimeMillis() + HEART_REGEN_TIME
-                startHeartRegenTimer()
-            }
-            viewModelScope.launch { dao.update(u) }
-            user.postValue(u)
-        }
-    }
-
     private fun startHeartRegenIfNeeded(u: User) {
         if (u.currentHearts < u.maxHearts && u.nextHeartTimeMillis() > System.currentTimeMillis()) {
             startHeartRegenTimer()
@@ -70,32 +58,34 @@ class UserViewModel(
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
             var u = dao.getUser()
+            u?.let {
+                while (u.currentHearts < u.maxHearts) {
+                    val now = System.currentTimeMillis()
+                    val remaining = (u.nextHeartTimeMillis() - now).coerceAtLeast(0L)
+                    nextHeartTimer.postValue(remaining)
+                    var isUserChanged = false
+                    if (remaining <= 0) {
+                        isUserChanged = true
+                        u.currentHearts += 1
+                        if (u.currentHearts < u.maxHearts) {
+                            u.nextHeartTime = System.currentTimeMillis() + u.energyRefillInterval
+                        } else {
+                            u.nextHeartTime = 0L
+                            stopTimer()
+                        }
+                    }
+                    if (isUserChanged) {
+                        user.postValue(u!!)
+                        dao.update(u)
+                    }
 
-            while (u.currentHearts < u.maxHearts) {
-                val now = System.currentTimeMillis()
-                val remaining = (u.nextHeartTimeMillis() - now).coerceAtLeast(0L)
-                nextHeartTimer.postValue(remaining)
-                var isUserChanged = false
-                if (remaining <= 0) {
-                    isUserChanged = true
-                    u.currentHearts += 1
-                    if (u.currentHearts < u.maxHearts) {
-                        u.nextHeartTime = System.currentTimeMillis() + HEART_REGEN_TIME
-                    } else {
-                        u.nextHeartTime = 0L
+                    delay(1000)
+                    if (u.currentHearts >= u.maxHearts) {
                         stopTimer()
+                        break // exit loop
                     }
                 }
-                if (isUserChanged) {
-                    user.postValue(u)
-                    dao.update(u)
-                }
 
-                delay(1000)
-                if (u.currentHearts >= u.maxHearts) {
-                    stopTimer()
-                    break // exit loop
-                }
             }
         }
     }
@@ -225,7 +215,4 @@ class UserViewModel(
         timerJob = null
     }
 
-    companion object {
-        private const val HEART_REGEN_TIME = 15 * 60 * 1000L
-    }
 }

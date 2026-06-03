@@ -29,6 +29,7 @@ abstract class ResponseHelper<T>() : DisposableObserver<retrofit2.Response<T>>()
     }
 
     override fun onNext(response: retrofit2.Response<T>) {
+        onHideLoading()
         if (response.isSuccessful && response.body()!= null){
             Timber.e("response isSuccessful")
             onResponseOk(response.body()!!)
@@ -37,7 +38,7 @@ abstract class ResponseHelper<T>() : DisposableObserver<retrofit2.Response<T>>()
             if (errorCode == 401){
                 onAuthFail()
             }else{
-                onError("خطای سرور : ${errorCode}", errorCode)
+                onError("خطای ${errorCode} سرور، لطفا دقایقی صبر نمایید و مجدد تلاش کنید", errorCode)
             }
         }
     }
@@ -97,7 +98,7 @@ abstract class ResponseHelper<T>() : DisposableObserver<retrofit2.Response<T>>()
 
     private fun onNoInternetError() {
         Timber.e("onNoInternetError code: ${NO_INTERNET_ERROR_CODE}")
-        onError("عدم دسترسی به اینترنت، لطفا از دسترسی به اینترنت اطمینان حاصل نمایید", NO_INTERNET_ERROR_CODE)
+        onError("لطفاً اتصال اینترنت خود را بررسی کنید و مجدداً تلاش نمایید.", NO_INTERNET_ERROR_CODE)
 
     }
 

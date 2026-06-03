@@ -1,36 +1,34 @@
 package com.mrprojects.gholrob.view.play
 
-import CellTypes
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.GameOverDialogBinding
 import com.mrprojects.gholrob.databinding.GamePassedDialogBinding
 import com.mrprojects.gholrob.databinding.PlayFragmentBinding
 import com.mrprojects.gholrob.helper.doOnTry
+import com.mrprojects.gholrob.helper.haptics.OnVibrate
+import com.mrprojects.gholrob.helper.haptics.VibrateTypes
+import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.openNextLevel
-import com.mrprojects.gholrob.helper.showClosePlayDialog
-import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
+import com.mrprojects.gholrob.helper.showEnemyInfoDialog
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.showUseLifeDialog
-import com.mrprojects.gholrob.helper.submitHint
-import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
+import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.Attempt
-import com.mrprojects.gholrob.model.ErrorTypes
 import com.mrprojects.gholrob.model.GameCell
-import com.mrprojects.gholrob.model.HintType
 import com.mrprojects.gholrob.model.Puzzle
 import com.mrprojects.gholrob.model.User
+import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
+import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
+import com.mrprojects.gholrob.model.play.GameKill
 import com.mrprojects.gholrob.repository.Provider
+import com.mrprojects.gholrob.view.main.MainActivity
+import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.basicConfig
@@ -41,15 +39,12 @@ import ir.radesh.basemodule.commons.inVisibleByBoolean
 import ir.radesh.basemodule.commons.initGrid
 import ir.radesh.basemodule.commons.makeWordRed
 import ir.radesh.basemodule.commons.setTextCollor
-import ir.radesh.basemodule.commons.showToast
+import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.interfaces.OnItemClickListener
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::inflate), OnItemClickListener<GameCell> {
-    var puzzle: Puzzle = Puzzle()
     private lateinit var userViewModel: UserViewModel
-    lateinit var adsHelper: TapSellHelper
     private lateinit var user: User
 
 
@@ -72,12 +67,17 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         super.onViewCreated(view, savedInstanceState)
         gameId = arguments?.getInt("gameId")!!
         binding.rvOptions.initGrid(7, canScroll = false)
-
+        binding.rvKills.initGrid(7, canScroll = false)
         binding.rvOptions.adapter = CellsAdapter(this)
+        binding.rvKills.adapter = KillsAdapter(object : OnItemClickListener<GameKill> {
+            override fun onItemClick(item: GameKill) {
+                onKillItemClicked(item)
+            }
+        })
+
         getData()
         userConfig()
         clicks()
-        configAdHelper()
     }
 
     fun userConfig() {
@@ -85,43 +85,18 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             this.user = user
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                userViewModel.errorEvent.collect { error ->
-                    when(error){
-                        ErrorTypes.COIN_NOT_ENOUGH-> showCoinNotEnoughDialog()
-                        else -> showToast(error.key, Toast.LENGTH_SHORT)
-                    }
-
-                }
-            }
-        }
     }
 
-    private fun hintDoubleCoin() {
-        val coin = puzzle.reward * 2
-        userViewModel.addCoins(coin)
-        submitHint(puzzle.id, HintType.DOUBLE_COIN.key, coin, false)
-        showSuccessDialog("تعداد ${coin}{ سکه جایزه دریافت کردی! ")
-
-    }
-
-    private fun hintAddHeart() {
-        userViewModel.addHeart()
-        submitHint(puzzle.id, HintType.ADD_HEART_AFTER_FAIL.key)
-        showSuccessDialog("یکی از قلب هات پر شد")
-
-    }
 
     private fun clicks() {
         binding.btnFlag.setOnClickListener {
             isFlagSelected = !isFlagSelected
-            if (isFlagSelected){
+            if (isFlagSelected) {
                 binding.btnFlag.setBackgroundResource(R.drawable.box_btn_selected)
                 binding.lnrTarget.inVisibleByBoolean(false)
                 binding.lnrFlagOn.inVisibleByBoolean(true)
-            }else{
+
+            } else {
                 binding.btnFlag.setBackgroundResource(R.drawable.box_btn)
                 binding.lnrTarget.inVisibleByBoolean(true)
                 binding.lnrFlagOn.inVisibleByBoolean(false)
@@ -132,31 +107,12 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
                 useLifeApi(dialog)
             }
         }
-        registerBackCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                showClosePlayDialog {
-                    finishGame()
-                }
-            }
-        })
+        binding.btnTutorial.setOnClickListener {
+            openFragment(TutorialFragment.newInstance())
+        }
 
     }
 
-    private fun configAdHelper() {
-        adsHelper = TapSellHelper(
-            requireActivity(),
-            onAddHeartRewarded = {
-                hintAddHeart()
-            },
-            onDoubleCoinRewarded = {
-                hintDoubleCoin()
-            },
-            onHintRewarded = {
-//                hintAfterFailed()
-            }
-        )
-        adsHelper.requestBannerAds(binding.standardBanner)
-    }
 
     private fun getData(onEnded: (() -> Unit)? = null) {
         Provider.provideApiHelper(this).getGame(gameId) {
@@ -165,25 +121,34 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         }
     }
 
-    private fun loadGame(attempt: Attempt){
-        if (attempt.isShowPassedDialog){
+
+    private fun loadGame(attempt: Attempt) {
+        if (attempt.isShowPassedDialog) {
+            postEvent(OnPlaySfx(SfxTypes.Win))
+            postEvent(OnVibrate(VibrateTypes.Win))
             showPassedDialog(attempt)
         }
-        if (attempt.isShowFailDialog){
+        if (attempt.isShowFailDialog) {
+            postEvent(OnPlaySfx(SfxTypes.Lose))
+            postEvent(OnVibrate(VibrateTypes.Lose))
+
             showFailedDialog(attempt, attempt.killedBy!!)
         }
         binding.tvTotalHearts.text = attempt.totalHearts.toString()
         binding.tvHearts.text = attempt.hearts.toString()
         binding.rvOptions.getAdp<CellsAdapter>().setData(attempt.cells)
+        binding.rvKills.getAdp<KillsAdapter>().setData(attempt.kills)
         when (attempt.totalHearts) {
             6 -> {
                 binding.ivBossImage.setImageResource(CellTypes.SMALL_BOSS.image)
                 binding.tvBossName.setText(CellTypes.SMALL_BOSS.title)
             }
+
             10 -> {
                 binding.ivBossImage.setImageResource(CellTypes.BIG_BOSS.image)
                 binding.tvBossName.setText(CellTypes.BIG_BOSS.title)
             }
+
             15 -> {
                 binding.ivBossImage.setImageResource(CellTypes.FINAL_BOSS.image)
                 binding.tvBossName.setText(CellTypes.FINAL_BOSS.title)
@@ -193,11 +158,11 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
 
 
     override fun onItemClick(item: GameCell) {
-        if (item.isDefeated){
+        if (item.isDefeated) {
             Timber.e("item is Defeated")
             return
         }
-        if (binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading){
+        if (binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading) {
             Timber.e("puzzle is locked cause isGlobalLoading is true")
             return
         }
@@ -205,23 +170,28 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         isLoading = true
         binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading = true
 
-        if (isFlagSelected){
+        if (isFlagSelected) {
             Provider.provideApiHelper(this).flagCell(gameId, cellId = item.id) {
                 isLoading = false
                 binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading = false
+                val cell = it.data.cell!!
+                playSfxOnFlag(cell.isFlagged)
                 loadGame(it.data.game!!)
             }
-        }else{
+        } else {
             Provider.provideApiHelper(this).clickOnCell(gameId, cellId = item.id) {
                 isLoading = false
                 binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading = false
                 val cell = it.data.cell!!
                 val attempt = it.data.game!!
-                if (it.data.isGameOver){
+                if (it.data.isGameOver) {
                     loadGame(attempt)
-                }else{
+                } else {
                     loadGame(attempt)
-                    if (!cell.isEmpty() && cell.isDefeated){
+                    if (cell.isDefeated) {
+                        playSfxOnDefeat(cell)
+                    }
+                    if (!cell.isEmpty() && cell.isDefeated) {
                         showKilledEnemy(cell)
                     }
                 }
@@ -229,7 +199,11 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         }
     }
 
-    private fun useLifeApi(dialog: Dialog){
+    fun onKillItemClicked(item: GameKill) {
+        showEnemyInfoDialog(item, true)
+    }
+
+    private fun useLifeApi(dialog: Dialog) {
         Provider.provideApiHelper(this).useLife(gameId) { attempt ->
             showSuccessDialog("قلب هات پر شد و میتونی به ادامه مبارزه بپردازی")
             userViewModel.useLife()
@@ -238,18 +212,54 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         }
     }
 
-    private fun showKilledEnemy(cell: GameCell){
+    private fun showKilledEnemy(cell: GameCell) {
         binding.ivClickResult.setImageResource(cell.image())
         binding.tvClickResultName.text = cell.name
         binding.tvClickResultName.setTextCollor(if (cell.isHeart()) R.color.green else R.color.white)
         binding.tvClickResultDamage.text = if (cell.isHeart()) "" else "-${cell.damage}"
         binding.lnrClickResult.clickOnTileAnimation()
+
     }
+
+    private fun playSfxOnDefeat(cell: GameCell) {
+        if (cell.isHeart()) {
+            postEvent(OnPlaySfx(SfxTypes.ClickOnHeal))
+            postEvent(OnVibrate(VibrateTypes.ClickOnHeal))
+
+        } else if (cell.isEmpty()) {
+            postEvent(OnPlaySfx(SfxTypes.DefeatEmpty))
+            postEvent(OnVibrate(VibrateTypes.DefeatEmpty))
+        } else if (cell.isBossSmall()) {
+            postEvent(OnPlaySfx(SfxTypes.Boss1))
+            postEvent(OnVibrate(VibrateTypes.Boss1))
+        } else if (cell.isBossBig()) {
+            postEvent(OnPlaySfx(SfxTypes.Boss2))
+            postEvent(OnVibrate(VibrateTypes.Boss2))
+        } else if (cell.isBossFinal()) {
+            postEvent(OnPlaySfx(SfxTypes.Boss3))
+            postEvent(OnVibrate(VibrateTypes.Boss3))
+        } else {
+            postEvent(OnPlaySfx(SfxTypes.DefeatEnemy))
+            postEvent(OnVibrate(VibrateTypes.DefeatEnemy))
+
+        }
+    }
+
+    private fun playSfxOnFlag(isFlagged: Boolean) {
+        if (isFlagged) {
+            postEvent(OnPlaySfx(SfxTypes.FlagOn))
+            postEvent(OnVibrate(VibrateTypes.FlagOn))
+        } else {
+            postEvent(OnPlaySfx(SfxTypes.FlagOff))
+            postEvent(OnVibrate(VibrateTypes.FlagOff))
+        }
+
+    }
+
     private fun showPassedDialog(attempt: Attempt) {
         val binding = GamePassedDialogBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        dialog.basicConfig()
-        dialog.setContentView(binding.root)
+        dialog.basicConfig(binding.root)
 
         binding.lnrBoxes.tvXp.text = "+${attempt.score}"
         binding.lnrBoxes.tvTime.text = attempt.speed
@@ -273,12 +283,13 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             dialog.show()
         })
     }
-    fun View.updateContinueButton(dialog: Dialog, haveLife: Boolean){
+
+    fun View.updateContinueButton(dialog: Dialog, haveLife: Boolean) {
         this.disableAlphaByBoolean(haveLife)
         this.setOnClickListener {
-            if(haveLife) {
+            if (haveLife) {
                 useLifeApi(dialog)
-            }else{
+            } else {
                 warningDialog("شما هیچ نوش دارویی ندارید!")
             }
         }
@@ -287,8 +298,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
     private fun showFailedDialog(attempt: Attempt, cell: GameCell) {
         val binding = GameOverDialogBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        dialog.basicConfig()
-        dialog.setContentView(binding.root)
+        dialog.basicConfig(binding.root)
 
         binding.ivEnemy.setImageResource(cell.image())
         binding.tvTitle.text = "${cell.name} شما را کشت "
@@ -300,12 +310,16 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         binding.lnrBoxes.tvEnemies.text = "${attempt.defeatedMonsters}"
 
         binding.btnBuyLife.disableAlphaByBoolean(!cell.isBottomLessPit())
+        binding.btnContinue.visibleByBoolean(!cell.isBottomLessPit())
+        binding.tvDetails.visibleByBoolean(!cell.isBottomLessPit())
+
+        binding.tvFinalDead.visibleByBoolean(cell.isBottomLessPit())
+        binding.tvFinalDead.makeWordRed("پایان نبرد")
 
         binding.btnContinue.updateContinueButton(dialog, attempt.profile.lives > 0)
 
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             binding.btnContinue.updateContinueButton(dialog, user.lives > 0)
-
         }
 
 
@@ -316,8 +330,8 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             }
         }
         binding.btnBuyLife.setOnClickListener {
-            if (cell.isBottomLessPit()){
-                warningDialog("افتادن در چاه شغاد یعنی پایان کار! نوش دارو کمکی بهت نمیکنه")
+            if (cell.isBottomLessPit()) {
+                warningDialog(getString(R.string.shoghad_loss_msg))
                 return@setOnClickListener
             }
             postEvent(OnShowLifeShopCalled())
@@ -329,9 +343,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
     }
 
     fun finishGame() {
-        backCallback?.isEnabled = false
-        onBackPressed()
-
+        (requireActivity() as MainActivity).closeWithoutDialog()
     }
 
     override fun showMsg(s: String) {
@@ -342,6 +354,5 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
 
     override fun onDestroy() {
         super.onDestroy()
-        adsHelper.destroyAd()
     }
 }

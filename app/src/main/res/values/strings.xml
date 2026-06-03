@@ -40,7 +40,17 @@
     <string name="retry">تلاش مجدد</string>
     <string name="solved">حل شده</string>
     <string name="not_solved">حل نشده</string>
-    <string name="buy_life_hint">با استفاده از نوش دارو میتونید بعد از باخت به بازی برگردید</string>
+    <string name="buy_life_hint">با استفاده از نوش‌دارو میتونید بعد از باخت به بازی برگردید</string>
     <string name="victory">پیروزی</string>
+    <string name="edit_profile">ویرایش پروفایل</string>
+    <string name="shoghad_loss_msg">افتادن در چاه شغاد یعنی پایان نبرد! نوش‌دارو هم دیگه کمکی بهت نمی‌کنه.</string>
+    <string name="tutorial_text_1">این یک بازی کاملاً ایرانی و بر پایه منطق و ریاضی است که با الهام از بازی نوستالژیک مین‌روب (Minesweeper) ساخته شده است.</string>
+    <string name="tutorial_text_2">
+    اول ضحاک رو پیدا کن و شکستش بده تا جونت به 10 برسه؛\n
+    بعد ارژنگ دیو رو بزن تا جونت بشه 15.\n
+    حالا وقتشه که بری سراغ غول آخر یعنی دیو سپید!\n
+    فقط خیلی حواست به چاه‌های شغاد (همون مین‌های بازی) باشه\n
+    موفق باشی قهرمان!
+</string>
 
 </resources>

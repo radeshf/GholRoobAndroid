@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/dialog_x_margin"
     android:gravity="center">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lnrDialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_400sdp"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/dialog_y_padding"
         android:paddingBottom="@dimen/dialog_y_padding"
         android:paddingEnd="@dimen/dialog_x_padding"
@@ -32,9 +33,12 @@
             android:gravity="center"
             android:layout_marginEnd="@dimen/dialog_text_x_margin"
             android:layout_marginStart="@dimen/dialog_text_x_margin"
-            android:text="انرژی ای برات نمونده!"
+            android:layout_marginVertical="@dimen/_15sdp"
+            tools:text="انرژی ای برات نمونده!"
             android:textColor="@color/dialog_text_color"
             android:textSize="@dimen/textSemiLarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_big_h"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/ig_btn"
+                android:background="@drawable/ig_btn_normal"
+                android:paddingEnd="@dimen/btn_x_paddings_small"
+                android:paddingStart="@dimen/btn_x_paddings_small"
                 android:gravity="center"
                 >
                 <LinearLayout
@@ -88,24 +94,41 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:gravity="center_vertical|end"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="انرژی زا"
+                        app:layout_constraintEnd_toStartOf="@+id/lnrCoin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/textNormal"
+                        android:visibility="visible" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_minus3sdp"
+                        android:text="پر شدن 1 انرژی"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="@dimen/textSmall"
+                        android:visibility="visible" />
+                </LinearLayout>
+
                 <ImageView
                     android:layout_width="@dimen/heart_size"
                     android:layout_height="@dimen/heart_size"
                     android:contentDescription="@string/contentDescription"
                     android:src="@drawable/ig_energy"
                     android:visibility="visible" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="انرژی زا"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/textLarge"
-                    android:visibility="visible" />
-
 
             </LinearLayout>
             <LinearLayout
@@ -113,145 +136,233 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_big_h"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/ig_btn"
+                android:background="@drawable/ig_btn_normal"
+                android:paddingEnd="@dimen/btn_x_paddings_small"
+                android:paddingStart="@dimen/btn_x_paddings_small"
                 android:gravity="center"
                 >
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:minWidth="@dimen/_60sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/ig_btn_green"
+                    >
 
-                    <ImageView
-                        android:layout_width="@dimen/heart_size"
-                        android:layout_height="@dimen/heart_size"
-                        android:contentDescription="@string/contentDescription"
-                        
-                        android:src="@drawable/ig_coin"
-                        android:visibility="visible" />
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_minus4sdp"
-                        android:text="1000 سکه"
-                        android:textColor="@color/coin_color"
-                        android:textSize="@dimen/textLarge"
-                        android:visibility="visible" />
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvPriceRefill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:text="100,000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="@dimen/_minus10sdp"
+                            android:layout_marginEnd="@dimen/marginSmall"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:text="@string/toman"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSemiSmall" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
-                <ImageView
-                    android:layout_width="@dimen/heart_size_small"
-                    android:layout_height="@dimen/heart_size_small"
-                    android:contentDescription="@string/contentDescription"
-                    
-                    android:src="@drawable/ig_energy"
-                    android:visibility="visible" />
-                <ImageView
-                    android:layout_width="@dimen/heart_size_small"
-                    android:layout_height="@dimen/heart_size_small"
-                    android:contentDescription="@string/contentDescription"
-                    
-                    android:src="@drawable/ig_energy"
-                    android:visibility="visible" />
-                <ImageView
-                    android:layout_width="@dimen/heart_size_small"
-                    android:layout_height="@dimen/heart_size_small"
-                    android:contentDescription="@string/contentDescription"
-                    
-                    android:src="@drawable/ig_energy"
-                    android:visibility="visible" />
-                <TextView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="اسپرسو"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/textNormal"
-                    android:visibility="visible" />
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:gravity="center_vertical|end"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="اسپرسو"
+                        app:layout_constraintEnd_toStartOf="@+id/lnrCoin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/textNormal"
+                        android:visibility="visible" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_minus3sdp"
+                        android:text="پر شدن کامل انرژی"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="@dimen/textSmall"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/heart_size_small"
+                        android:layout_height="@dimen/heart_size_small"
+                        android:contentDescription="@string/contentDescription"
+                        android:src="@drawable/ig_energy"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="@dimen/heart_size_small"
+                            android:layout_height="@dimen/heart_size_small"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_energy"
+                            android:visibility="visible" />
+                        <ImageView
+                            android:layout_width="@dimen/heart_size_small"
+                            android:layout_height="@dimen/heart_size_small"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_energy"
+                            android:visibility="visible" />
+                    </LinearLayout>
+                </LinearLayout>
 
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/btnBuyHeart"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_big_h"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/ig_btn"
+                android:id="@+id/btnBuyNew"
+                android:paddingEnd="@dimen/btn_x_paddings_small"
+                android:paddingStart="@dimen/btn_x_paddings_small"
+                android:background="@drawable/ig_btn_normal"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/crdPriceNew"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/ig_btn_green"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvPriceNew"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:text="100,000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="@dimen/_minus10sdp"
+                            android:layout_marginEnd="@dimen/marginSmall"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:text="@string/toman"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSemiSmall" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:minWidth="@dimen/_60sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lnrCoin"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:gravity="center_vertical|end"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="@dimen/heart_size"
-                        android:layout_height="@dimen/heart_size"
-                        android:contentDescription="@string/contentDescription"
-                        
-                        android:src="@drawable/ig_coin"
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="قهوه ساز"
+                        app:layout_constraintEnd_toStartOf="@+id/lnrCoin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/textNormal"
                         android:visibility="visible" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_minus4sdp"
-                        android:text="3500 سکه"
-                        android:textColor="@color/coin_color"
-                        android:textSize="@dimen/textLarge"
+                        android:id="@+id/tvValue"
+                        android:layout_marginTop="@dimen/_minus3sdp"
+                        android:text="اضافه شدن یک انرژی ابدی"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="@dimen/textSmall"
                         android:visibility="visible" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+
 
                 <ImageView
                     android:layout_width="@dimen/_10sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:contentDescription="@string/contentDescription"
-                    
-                    android:layout_marginEnd="@dimen/_2sdp"
                     android:src="@drawable/ic_add"
                     android:visibility="visible"
                     app:tint="@color/energy_color" />
                 <ImageView
-                    android:layout_width="@dimen/heart_size"
-                    android:layout_height="@dimen/heart_size"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:contentDescription="@string/contentDescription"
-                    
                     android:src="@drawable/ig_energy"
                     android:visibility="visible" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="قهوه ساز"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/textNormal"
-                    android:visibility="visible" />
-
 
             </LinearLayout>
 
 
-        <include layout="@layout/btn_dismiss_layout"
-            android:id="@+id/lnrDismiss"/>
+
+
+            <include layout="@layout/btn_dismiss_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hint_button_size"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/lnrDismiss"/>
 
         </LinearLayout>
 

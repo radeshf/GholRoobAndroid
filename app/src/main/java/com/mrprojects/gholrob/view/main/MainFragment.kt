@@ -13,7 +13,9 @@ import com.mrprojects.gholrob.helper.noInternetDialog
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.openMarketRatePage
 import com.mrprojects.gholrob.helper.openNextLevel
-import com.mrprojects.gholrob.helper.showBuyHeartDialog
+import com.mrprojects.gholrob.helper.payment.LifePacks
+import com.mrprojects.gholrob.helper.showBuyEnergyDialog
+import com.mrprojects.gholrob.helper.showBuyLifeDoneDialog
 import com.mrprojects.gholrob.helper.showCloseGameDialog
 import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
 import com.mrprojects.gholrob.helper.showSettingsDialog
@@ -24,12 +26,16 @@ import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.ErrorTypes
 import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.model.User
+import com.mrprojects.gholrob.model.events.OnBuyNewLifeCalled
+import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
+import com.mrprojects.gholrob.model.events.OnShowCoinShopCalled
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
 import com.mrprojects.gholrob.view.play.history.HistoryFragment
+import com.mrprojects.gholrob.view.profile.showProfileInfoDialog
 import com.mrprojects.gholrob.view.rating.RatingFragment
+import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
-import ir.radesh.basemodule.commons.showLoading
 import ir.radesh.basemodule.commons.showToast
 import kotlinx.coroutines.launch
 
@@ -59,7 +65,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         userViewModel = Provider.provideUserViewModel(this)
         userViewModel.loadUser()
         userViewModel.user.observe(viewLifecycleOwner) { user ->
-            onUserDataUpdated(user)
+            if (user != null) {
+                onUserDataUpdated(user)
+            }
         }
         userViewModel.nextHeartTimer.observe(viewLifecycleOwner) { millis ->
             if (millis <= 0) {
@@ -75,7 +83,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 userViewModel.errorEvent.collect { error ->
                     when (error) {
                         ErrorTypes.COIN_NOT_ENOUGH -> showCoinNotEnoughDialog()
-                        else -> showToast(error.key, Toast.LENGTH_SHORT)
+                        else -> warningDialog(error.key)
                     }
 
                 }
@@ -88,14 +96,16 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.tvCoins.text = user.coins.toString()
         binding.HeartsLayout.updateHearts(user, showAdd = true, showTimer = true)
         binding.tvStart.text = if (user.haveUnfinishedAttempt()) "ادامه" else "شروع"
+        binding.profileLayout.tvUsername.text = user.name
+        binding.profileLayout.ivProfileImage.setImageResource(user.getProfileResource())
     }
 
     private fun login() {
         Provider.provideApiHelper(this).login(
             {
                 userViewModel.storeUser(it.data)
-            }, {
-                noInternetDialog{
+            }, { msg ->
+                noInternetDialog(msg = msg) {
                     login()
                 }
             })
@@ -105,12 +115,29 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         adsHelper = TapSellHelper(
             requireActivity(),
             onAddHeartRewarded = {
-                userViewModel.addHeart()
-                showSuccessDialog("یکی از قلب هات پر شد")
+                addEnergyByAds()
             }
         )
     }
 
+    private fun showBuyEnergy() {
+        showBuyEnergyDialog(userViewModel,
+            {
+                if (!userViewModel.checkUserHeartBeforeFill()) return@showBuyEnergyDialog
+                adsHelper.requestAddHeartAds()
+            },
+            {
+                if (!userViewModel.checkUserHeartBeforeFill()) return@showBuyEnergyDialog
+                postEvent(OnBuyRefillEnergyCalled())
+            }, {
+                if (!userViewModel.checkUserHeartBeforeBuy()) return@showBuyEnergyDialog
+                postEvent(OnBuyNewLifeCalled())
+
+            }
+        )
+
+
+    }
 
     private fun clicks() {
         binding.brnPlay.setOnClickListener {
@@ -121,7 +148,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 Provider.provideApiHelper(this).createNewGame({
                     openNextLevel(it.id, true)
                 }, {
-                    showBuyHeartDialog(userViewModel, adsHelper)
+                    showBuyEnergy()
                 })
             }
 
@@ -131,7 +158,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             openFragment(RatingFragment.newInstance())
         }
         binding.HeartsLayout.ivHeartAdd.setOnClickListener {
-            showBuyHeartDialog(userViewModel, adsHelper)
+            showBuyEnergy()
+        }
+
+        binding.lnrCoin.setOnClickListener {
+            postEvent(OnShowCoinShopCalled())
         }
 
         binding.lnrLife.setOnClickListener {
@@ -147,18 +178,30 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.ivBox2.setOnClickListener {
             showSettingsDialog()
         }
-        registerBackCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                showCloseGameDialog {
-                    isEnabled = false
-                    onBackPressed()
-                }
-            }
-        })
 
+        binding.profileLayout.root.setOnClickListener {
+            val user = userViewModel.user.value!!
+            showProfileInfoDialog(user, isSelf=true)
+        }
+
+        binding.lnrTutorial.setOnClickListener {
+            openFragment(TutorialFragment.newInstance())
+        }
 
     }
 
+    fun addEnergyByAds() {
+        val post = LifePacks.BUY_ONE_ENERGY.convertToItemPost()
+        Provider.provideApiHelper(this).buyItem(post) {
+            userViewModel.storeUser(it.data)
+            showSuccessDialog(it.getMessage())
+        }
+    }
+
+    override fun showMsg(s: String) {
+        super.showMsg(s)
+        warningDialog(s)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

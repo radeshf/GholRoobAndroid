@@ -13,14 +13,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -30,20 +28,28 @@ import android.text.Html
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
-import android.util.Log
 import android.util.TypedValue
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEachIndexed
@@ -66,9 +72,7 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import ir.radesh.basemodule.adapter.CustomSpinnerAdapter
-import ir.radesh.basemodule.helper.DialogHelper
 import ir.radesh.basemodule.helper.DialogLoadingHelper
-import ir.radesh.basemodule.helper.LoadingHelper
 import ir.radesh.basemodule.helper.LoadingHelperV2
 import ir.radesh.basemodule.helper.viewpager.adapter.BottomBarAdapter
 import okhttp3.MediaType
@@ -79,7 +83,9 @@ import timber.log.Timber
 import java.io.File
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
@@ -154,25 +160,7 @@ fun Fragment.showCustomToast(msg: String) {
 }
 
 
-fun Fragment.showDialog(msg: String, doOnConfirm: (dialog: Dialog) -> Unit) {
-    DialogHelper(
-        requireContext(),
-        layoutInflater,
-        msg = msg,
-        doOnConfirm = doOnConfirm
-    ).show()
-}
 
-
-fun Activity.showCustomDialog(title: String, msg: String, doOnConfirm: (dialog: Dialog) -> Unit) {
-    DialogHelper(
-        this,
-        layoutInflater,
-        title = title,
-        msg = msg,
-        doOnConfirm = doOnConfirm
-    ).show()
-}
 
 
 //
@@ -248,6 +236,15 @@ fun RecyclerView.initGrid(rowCount: Int = 4, reverseLayout: Boolean = false, can
             return canScroll
         }
     }
+}
+
+fun RecyclerView.initFlexGrid(rowCount: Int = 4, reverseLayout: Boolean = false, canScroll: Boolean = true) {
+//    val flexboxLayoutManager = FlexboxLayoutManager(context).apply {
+//        flexDirection = FlexDirection.ROW
+//        flexWrap = FlexWrap.WRAP
+//        justifyContent = JustifyContent.CENTER
+//    }
+//    layoutManager = flexboxLayoutManager
 }
 
 fun RecyclerView.vertical(isVertical: Boolean) {
@@ -548,11 +545,11 @@ fun Fragment.hideLoading() {
 }
 
 fun Activity.showLoading() {
-    LoadingHelper.baseShowLoading(this)
+    LoadingHelperV2.show(this)
 }
 
 fun Activity.hideLoading() {
-    LoadingHelper.baseHideLoading(this)
+    LoadingHelperV2.hide(this)
 }
 
 fun <T> Observable<T>.networkSchedulers(): Observable<T> {
@@ -578,11 +575,13 @@ fun Fragment.addExtra(
     return this
 }
 
-fun Dialog.basicConfig(cancellable: Boolean = false) {
+fun Dialog.basicConfig(contentView: View, cancellable: Boolean = false) {
     requestWindowFeature(Window.FEATURE_NO_TITLE)
     setCanceledOnTouchOutside(cancellable)
     setCancelable(cancellable)
+    setContentView(contentView)
     window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 }
 
 
@@ -828,6 +827,8 @@ fun Intent.printExtras() {
 }
 
 fun TextView.loadHtml(msg: String) {
+    setLinkTextColor(Color.parseColor("#FFDE59"))
+    movementMethod = LinkMovementMethod.getInstance()
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         text = Html.fromHtml(msg, Html.FROM_HTML_MODE_LEGACY)
     } else {

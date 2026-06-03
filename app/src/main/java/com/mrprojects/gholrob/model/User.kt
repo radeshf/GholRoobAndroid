@@ -13,7 +13,11 @@ class User {
     @SerializedName("unfinished_attempt_id") var unfinishedAttemptId: Int? = null
     @SerializedName("username") var username: String = ""
     @SerializedName("name") var name: String = ""
-    @SerializedName("profile_image") var profileImage: String = ""
+    @SerializedName("bio") var bio: String? = ""
+    @SerializedName("profile_image") var profileImage: String? = ""
+    @SerializedName("total_games") var totalGames: String? = ""
+    @SerializedName("total_wins") var totalWins: String? = ""
+    @SerializedName("total_kills") var totalKills: String? = ""
     @SerializedName("max_hearts") var maxHearts: Int = 3
     @SerializedName("current_hearts") var currentHearts: Int = 3
     @SerializedName("next_heart_time") var nextHeartTime: Long = 0
@@ -21,6 +25,9 @@ class User {
 
     @SerializedName("lives") var lives: Int = 0
     @SerializedName("coins") var coins: Int = 0
+    @SerializedName("fill_all_energy_price") var fillAllEnergyPrice: String? = ""
+    @SerializedName("energy_refill_interval") var energyRefillInterval: Int = 0
+    @SerializedName("buy_new_energy_price") var buyNewEnergyPrice: String? = ""
 
     @Ignore
     @SerializedName("-O8w9,_s6+^i-O8w9,_s6+^i") var userHash: String = ""

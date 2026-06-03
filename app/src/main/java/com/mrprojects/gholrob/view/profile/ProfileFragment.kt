@@ -3,6 +3,7 @@ package com.mrprojects.gholrob.view.profile
 import android.os.Bundle
 import android.view.View
 import com.mrprojects.gholrob.databinding.ProfileFragmentBinding
+import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.events.OnProfileChanged
@@ -16,7 +17,7 @@ import ir.radesh.basemodule.commons.showToast
 import ir.radesh.basemodule.interfaces.OnItemClickListener
 import timber.log.Timber
 
-class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate), OnItemClickListener<ProfileImage> {
+class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate) {
 
     private lateinit var userViewModel: UserViewModel
 
@@ -31,9 +32,20 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(title = "پروفایل")
+
         binding.rvProfiles.initGrid(3)
-        binding.rvProfiles.adapter = ProfileImageAdapter(this)
-        binding.rvProfiles.getAdp<ProfileImageAdapter>().setData(getProfileImages())
+        binding.rvProfiles.adapter = ProfileImageAdapter { position, item ->
+            if (item.isComingSoon){
+                warningDialog("این آیتم در آبدیت بعدی اضافه می شود")
+            }else{
+                showProfileImageInfoDialog(item) {
+                    binding.ivProfileImage.setImageResource(AvatarMapper.getResourceId(item.image))
+                    binding.rvProfiles.getAdp<ProfileImageAdapter>().selectItem(position)
+                }
+            }
+        }
+        binding.rvProfiles.getAdp<ProfileImageAdapter>().setData(Profiles.getAllAsProfileImages())
         userConfig()
         clicks()
     }
@@ -44,6 +56,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             Timber.e("user: ${user.profileImage}, ${user.getProfileResource()}")
             binding.etProfileName.setText(user.name)
+            binding.etProfileBio.setText(user.bio)
             binding.ivProfileImage.setImageResource(user.getProfileResource())
         }
 
@@ -57,39 +70,22 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     }
 
 
-    private fun getProfileImages(): List<ProfileImage> {
-        return listOf(
-            ProfileImage("profile_1"),
-            ProfileImage("profile_2"),
-            ProfileImage("profile_3"),
-            ProfileImage("profile_4"),
-            ProfileImage("profile_5"),
-            ProfileImage("profile_6"),
-            ProfileImage("profile_7"),
-            ProfileImage("profile_8"),
-            ProfileImage("profile_9"),
-        )
-    }
-
-
     private fun submitData() {
         val profileImage = binding.rvProfiles.getAdp<ProfileImageAdapter>().getSelectedItem()
         val nickName = binding.etProfileName.text.toString()
+        val bio = binding.etProfileBio.text.toString()
         if (nickName.isEmpty()){
             showToast("لطفا نام کاربری خود را وارد نمایید")
             return
         }
 
-        Provider.provideApiHelper(this).editProfile(nickName, profileImage?.image?: "") {
+        Provider.provideApiHelper(this).editProfile(nickName,bio, profileImage?.image?: "") {
             userViewModel.storeUser(it.data)
             showSuccessDialog("پروفایل شما آبدیت شد")
             postEvent(OnProfileChanged(it.data))
         }
     }
 
-    override fun onItemClick(item: ProfileImage) {
-        binding.ivProfileImage.setImageResource(AvatarMapper.getResourceId(item.image))
-    }
 
     override fun showMsg(s: String) {
         super.showMsg(s)

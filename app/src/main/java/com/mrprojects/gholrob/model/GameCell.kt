@@ -1,6 +1,5 @@
 package com.mrprojects.gholrob.model
 
-import CellTypes
 import com.google.gson.annotations.SerializedName
 import com.mrprojects.gholrob.AppConfig
 
@@ -38,6 +37,11 @@ class GameCell {
     fun isEmpty() = CellTypes.fromKey(this.type) == CellTypes.EMPTY
     fun isHeart() = CellTypes.fromKey(this.type) == CellTypes.HEART
     fun isBottomLessPit() = CellTypes.fromKey(this.type) == CellTypes.BOTTOMLESS_PIT
+
+    fun isBossSmall() = CellTypes.fromKey(this.type) == CellTypes.SMALL_BOSS
+    fun isBossBig() = CellTypes.fromKey(this.type) == CellTypes.BIG_BOSS
+    fun isBossFinal() = CellTypes.fromKey(this.type) == CellTypes.FINAL_BOSS
+
     fun image() = CellTypes.fromKey(this.type).image
 
     fun getTotalDamage(cells: List<GameCell>): Int{

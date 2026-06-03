@@ -2,24 +2,72 @@ package com.mrprojects.gholrob.helper.payment
 
 import androidx.annotation.DrawableRes
 import com.mrprojects.gholrob.R
+import com.mrprojects.gholrob.model.rest.BuyItemPost
 
 enum class LifePacks(
     val sku: String,
-    val lifeCount: Int,
+    val amount: Int,
     val title: String,
     val price: Int,
     @DrawableRes val iconRes: Int
 ) {
+    BUY_ONE_ENERGY(
+        sku = "oneEnergy",
+        amount = 1,
+        title = "انرژی زا",
+        price = 30,
+        iconRes = R.drawable.ig_energy
+    ),
+
+    BUY_FILL_ENERGY(
+        sku = "fillEnergy",
+        amount = 3,
+        title = "اسپرسو",
+        price = 1000,
+        iconRes = R.drawable.ig_energy
+    ),
+
+    BUY_NEW_ENERGY(
+        sku = "AddHeart",
+        amount = 1,
+        title = "قهوه ساز",
+        price = 9900,
+        iconRes = R.drawable.ig_energy
+    ),
+
+    COIN_PACK_1(
+        sku = "coinPack1",
+        amount = 1000,
+        title = "یه مشت سکه",
+        price = 9900,
+        iconRes = R.drawable.ig_coin
+    ),
+    COIN_PACK_2(
+        sku = "coinPack2",
+        amount = 3000,
+        title = "کیف پر سکه",
+        price = 29900,
+        iconRes = R.drawable.ig_coin
+    ),
+
+    COIN_PACK_3(
+        sku = "coinPack3",
+        amount = 7000,
+        title = "صندوق گنج",
+        price = 39900,
+        iconRes = R.drawable.ig_coin
+    ),
+
     LIFE_1(
         sku = "life1",
-        lifeCount = 1,
+        amount = 1,
         title = "چسب زخم",
         price = 9900,
         iconRes = R.drawable.ig_heart
     ),
     LIFE_5(
         sku = "life5",
-        lifeCount = 5,
+        amount = 5,
         title = "کمک های اولیه",
         price = 29900,
         iconRes = R.drawable.ig_heart
@@ -27,14 +75,23 @@ enum class LifePacks(
 
     LIFE_10(
         sku = "life10",
-        lifeCount = 10,
+        amount = 10,
         title = "آمبولانس",
         price = 39900,
         iconRes = R.drawable.ig_heart
     );
 
+    fun isLife(): Boolean = this.name.startsWith("LIFE_")
+    fun isCoin(): Boolean = this.name.startsWith("COIN_")
+    fun isBuyNewEnergy(): Boolean = this == BUY_NEW_ENERGY
+
+    fun convertToItemPost() : BuyItemPost{
+        return BuyItemPost(this.name.lowercase())
+    }
 
     companion object {
         fun fromSku(sku: String): LifePacks? = entries.firstOrNull { it.sku == sku }
+        fun lifeList(): List<LifePacks> = entries.filter { it.isLife() }.toTypedArray().toList()
+        fun coinList(): List<LifePacks> = entries.filter { it.isCoin() }.toTypedArray().toList()
     }
 }

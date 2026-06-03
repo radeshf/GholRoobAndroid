@@ -52,9 +52,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="با بازیابی قلب میتوانید بدون از دادن انرژی به بازی ادامه دهید"
+        android:id="@+id/tvDetails"
+        android:text="با استفاده از نوشدارو میتوانید بدون از دادن انرژی به بازی ادامه دهید"
         android:textSize="@dimen/textNormal"
         android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFinalDead"
+        android:text="@string/shoghad_loss_msg"
+        android:textSize="@dimen/textNormal"
+        android:textColor="@color/white"
+        android:visibility="gone"
         android:gravity="center"
         android:layout_marginBottom="@dimen/_20sdp" />
 
