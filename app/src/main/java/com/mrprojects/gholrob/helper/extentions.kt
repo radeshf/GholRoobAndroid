@@ -10,13 +10,20 @@ import android.content.Intent
 import android.graphics.drawable.Animatable
 import android.os.Build
 import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
+import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +45,7 @@ import com.mrprojects.gholrob.view.play.PlayFragment
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.changeTo
 import ir.radesh.basemodule.commons.disableAlphaByBoolean
+import ir.radesh.basemodule.commons.dpToPx
 import ir.radesh.basemodule.commons.showToast
 import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.helper.DialogHelper
@@ -343,3 +351,55 @@ fun <B : ViewBinding> BaseFragment<B>.openNextLevel(gameId: Int, isMain: Boolean
     return true
 }
 
+
+fun TextView.setTutorialText(bigImage: Boolean=false) {
+    val inputText = context.getString(R.string.tutorial_game_guide)
+    val spannable = SpannableStringBuilder(inputText)
+    data class StyleConfig(@ColorRes val colorRes: Int, val size: Float)
+
+    val styles = mapOf(
+        "ایرانی" to StyleConfig(R.color.green, 1.3f),
+        "ضحاک" to StyleConfig(R.color.enemy_color, 1.3f), // قرمز تیره
+        "ارژنگ دیو" to StyleConfig(R.color.enemy_color, 1.3f), // سبز
+        "دیو سپید" to StyleConfig(R.color.enemy_color, 1.3f), // آبی
+        "چاه‌های شغاد" to StyleConfig(R.color.redPrimary, 1.3f) // زرد
+    )
+
+    // اعمال رنگ و سایز
+    styles.forEach { (word, config) ->
+        var startIndex = inputText.indexOf(word)
+        while (startIndex != -1) {
+            val endIndex = startIndex + word.length
+            val color = ContextCompat.getColor(context, config.colorRes)
+            spannable.setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(RelativeSizeSpan(config.size), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            startIndex = inputText.indexOf(word, endIndex)
+        }
+    }
+
+    val imageMap = mapOf(
+        "[MINESWEEPER]" to R.drawable.ig_minesweeper,
+        "[ZAHAK]" to R.drawable.ig_enemy_zahak,
+        "[ARZHANG]" to R.drawable.ig_enemy_arzhang_troll,
+        "[DIV_SEPID]" to R.drawable.ig_enemy_white_troll,
+        "[MINE]" to R.drawable.ig_enemy_shoghad_trap
+    )
+
+    imageMap.forEach { (key, drawableRes) ->
+        var startIndex = inputText.indexOf(key)
+        while (startIndex != -1) {
+            val endIndex = startIndex + key.length
+            val drawable = ContextCompat.getDrawable(context, drawableRes)
+            val sizeInPx = dpToPx(if (bigImage) 35f else 25f)
+            drawable?.setBounds(0, 0, sizeInPx, sizeInPx)
+            val imageSpan = ImageSpan(drawable!!, ImageSpan.ALIGN_CENTER)
+
+            spannable.setSpan(imageSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            startIndex = inputText.indexOf(key, endIndex)
+        }
+    }
+
+    this.text = spannable
+}

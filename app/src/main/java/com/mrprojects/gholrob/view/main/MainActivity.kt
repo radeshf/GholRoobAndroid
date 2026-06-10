@@ -96,9 +96,6 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
 
                 } else {
                     warningDialog("پرداخت شما انجام نشد. اگر مبلغی کسر شده باشد، به\u200Cزودی به حسابتان بازگردانده می\u200Cشود", title="پرداخت ناموفق")
-                    if(AppConfig.IS_TEST){
-                        buyPack(testPackToBuy!!)
-                    }
                 }
             } else if (type == PaymentOperation.SETUP) {
                 if (!success) {
@@ -270,7 +267,7 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
     @Subscribe
     fun openBuyCoinDialog(event: OnShowCoinShopCalled) {
         showBuyCoinDialog {
-            testPackToBuy = LifePacks.COIN_PACK_1
+//            testPackToBuy = LifePacks.COIN_PACK_1
             paymentInterface.purchase(it.sku, it.name)
         }
     }
@@ -278,26 +275,25 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
     @Subscribe
     fun openBuyLifeDialog(event: OnShowLifeShopCalled) {
         showBuyLifeDialog(userViewModel.user.value?.lives.toString()) {
-            testPackToBuy = LifePacks.LIFE_1
+//            testPackToBuy = LifePacks.LIFE_1
             paymentInterface.purchase(it.sku, it.name)
         }
     }
 
     @Subscribe
-    fun onBuyNewEnergy(event: OnBuyNewLifeCalled) {
-        val pack = LifePacks.BUY_FILL_ENERGY
-        testPackToBuy = pack
-        paymentInterface.purchase(pack.sku, pack.title)
-
-    }
-    @Subscribe
     fun onBuyFillEnergy(event: OnBuyRefillEnergyCalled) {
         val pack = LifePacks.BUY_FILL_ENERGY
-        testPackToBuy = pack
+//        testPackToBuy = pack
         paymentInterface.purchase(pack.sku, pack.title)
 
     }
 
+    @Subscribe
+    fun onBuyNewEnergy(event: OnBuyNewLifeCalled) {
+        val pack = LifePacks.BUY_NEW_ENERGY
+//        testPackToBuy = pack
+        paymentInterface.purchase(pack.sku, pack.title)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

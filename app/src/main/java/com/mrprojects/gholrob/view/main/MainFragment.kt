@@ -28,6 +28,7 @@ import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.model.User
 import com.mrprojects.gholrob.model.events.OnBuyNewLifeCalled
 import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
+import com.mrprojects.gholrob.model.events.OnProfileChanged
 import com.mrprojects.gholrob.model.events.OnShowCoinShopCalled
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
 import com.mrprojects.gholrob.view.play.history.HistoryFragment
@@ -36,8 +37,10 @@ import com.mrprojects.gholrob.view.rating.RatingFragment
 import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
+import ir.radesh.basemodule.commons.setEventBus
 import ir.radesh.basemodule.commons.showToast
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.Subscribe
 
 class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
     private lateinit var userViewModel: UserViewModel
@@ -206,6 +209,21 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     override fun onDestroy() {
         super.onDestroy()
         adsHelper.destroyAd()
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        setEventBus(true)
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        setEventBus(false)
+    }
+
+    @Subscribe
+    fun onProfileChanged(event: OnProfileChanged) {
+        login()
     }
 
 

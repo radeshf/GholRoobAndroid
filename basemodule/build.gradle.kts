@@ -48,8 +48,8 @@ android {
 
 dependencies {
 
-    api ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.0")
-    api ("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
+//    api ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.0")
+//    api ("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
     api ("androidx.multidex:multidex:2.0.1")
     api ("androidx.core:core-ktx:1.13.1")
     api ("androidx.appcompat:appcompat:1.7.0")

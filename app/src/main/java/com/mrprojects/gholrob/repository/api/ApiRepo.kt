@@ -17,6 +17,18 @@ class ApiRepo(private val api: Api) {
         return api.editProfile(post).networkSchedulers()
     }
 
+    fun sendOtp(post: OtpPost) : Observable<Response<EmptyResponse>> {
+        return api.sendOtp(post).networkSchedulers()
+    }
+
+    fun createAccount(post: OtpPost) : Observable<Response<UserResponse>> {
+        return api.createAccount(post).networkSchedulers()
+    }
+
+    fun restoreAccount(post: OtpPost) : Observable<Response<UserResponse>> {
+        return api.restoreAccount(post).networkSchedulers()
+    }
+
     fun createPayment(body: PaymentPost) : Observable<Response<PaymentResponse>> {
         return api.createPayment(body).networkSchedulers()
     }

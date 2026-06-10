@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
 //    id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp") version "2.1.0-1.0.29"
 
@@ -18,8 +18,8 @@ android {
         applicationId = "com.mrprojects.gholrob"
         minSdk = 21
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
 
@@ -60,6 +60,11 @@ android {
         buildConfig = true
     }
 
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
+
     flavorDimensions += listOf("application", "market")
 
     productFlavors {
@@ -73,26 +78,14 @@ android {
             buildConfigField("String", "USERNAME_PREFIX", "\"gholroob\"")
         }
 
-//        create("witk2") {
-//            dimension = "application"
-//            applicationId = "com.mrprojects.witk2"
-//
-//            buildConfigField("String", "APP_ID", "\"com.mrprojects.wasticker\"")
-//            resValue("string", "app_name", "What Stickers")
-//            resValue("string", "app_name_farsi", "قاتل کیه؟")
-//            buildConfigField("String", "USERNAME_PREFIX", "\"witk\"")
-//        }
-
         create("bazaar") {
             dimension = "market"
             buildConfigField("String", "MARKET", "\"BAZAAR\"")
-            versionNameSuffix = ".0"
         }
 
         create("myket") {
             dimension = "market"
             buildConfigField("String", "MARKET", "\"MYKET\"")
-            versionNameSuffix = ".1"
 
             manifestPlaceholders["marketApplicationId"] = "ir.mservices.market"
             manifestPlaceholders["marketBindAddress"] = "ir.mservices.market.InAppBillingService.BIND"
@@ -106,10 +99,10 @@ android {
 
         when {
             appFlavor == "gholroob" && marketFlavor == "bazaar" -> {
-                buildConfigField("String", "PAYMENT_KEY", "\"MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCiuj0N3aazp8zHfPgy/Co4nMHS01apObFKMhbyvPRRd8ybydXkCTEk/V95c1vi7u7mgp8wfog2TENjJLm/bnSSUSAL0xLR1FuT5lFKdPYDBhyCkjgM9pzH8A9q63THhFpQQTwP27P5hWiNrGSCwfG0CPV0rvX+y8pcqhzEDTWX0NOGYhgSNVAJSmuUvCsHEoaFKDY/FmiowFfDnsBwUcmTPqPN7NaGSpXh/J6/F10CAwEAAQ==\"")
+                buildConfigField("String", "PAYMENT_KEY", "\"MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwD9tIZ4VMr76BMBFY4WQXRkAV1ZaRROjV9DRdiBT7kmHyTT2jMtLB2QaZUcXtk4+MaV0JfY2N5QQGrdn8ver5MJzu5+IqdcCIjDvDODKpE4aO4MUnOb6maqJEc6urooDT5wLfcC5oip+X9NdY0HzOfnzO5dgf/Avy0D16KbSIeMtspmJl5SDGetvQ4PmM9IZThA+mXqoDsewefAAQogvby26RrMHDjQn81WAMVPGi0CAwEAAQ==\"")
             }
             appFlavor == "gholroob" && marketFlavor == "myket" -> {
-                buildConfigField("String", "PAYMENT_KEY", "\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD5CP7I6cxxSL7OjsnZP7gm7yOnlnNgkVn+CGVde7TDuu3tk0c85aGAJjBeHRhy+ir0YJ33CjiLPwDi0rh8hczez8WYu2slHbWTyLXXkls7v3iTPvpJzKBuajcW51dCvTFIgBO1vGJKhRTRMc4lpySC1e/pQjZ5r7sO86CBaRDWhQIDAQAB\"")
+                buildConfigField("String", "PAYMENT_KEY", "\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCa2z94NAUZZju5667WK+lO3eGEH7EnBMETMbPYnMXLU9Rx4Vd66vkZa2V6Rm1m4ep/k5humdCDh6mu2ijFg4RxaB3+y+YWOwNilbFX2vgGsSMs+yVbTyZuB0/wvTWLROdDIlAVxVaoE4w/TumRwX1a8rRBWBmzvxupgs2ukiUPVwIDAQAB\"")
             }
             appFlavor == "witk2" && marketFlavor == "bazaar" -> {
                 buildConfigField("String", "PAYMENT_KEY", "\"YOUR_KEY_FOR_WITK2_BAZAAR\"")
@@ -149,9 +142,6 @@ dependencies {
 
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Hilt
-    implementation("com.google.dagger:hilt-android:2.47")
-    kapt("com.google.dagger:hilt-android-compiler:2.47")
     implementation("com.airbnb.android:lottie:6.1.0")
     implementation(project(mapOf("path" to ":basemodule")))
 }

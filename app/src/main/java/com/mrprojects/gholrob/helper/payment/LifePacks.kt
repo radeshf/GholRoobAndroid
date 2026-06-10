@@ -23,7 +23,7 @@ enum class LifePacks(
         sku = "fillEnergy",
         amount = 3,
         title = "اسپرسو",
-        price = 1000,
+        price = 19900,
         iconRes = R.drawable.ig_energy
     ),
 
@@ -31,7 +31,7 @@ enum class LifePacks(
         sku = "AddHeart",
         amount = 1,
         title = "قهوه ساز",
-        price = 9900,
+        price = 49900,
         iconRes = R.drawable.ig_energy
     ),
 
@@ -39,14 +39,14 @@ enum class LifePacks(
         sku = "coinPack1",
         amount = 1000,
         title = "یه مشت سکه",
-        price = 9900,
+        price = 19900,
         iconRes = R.drawable.ig_coin
     ),
     COIN_PACK_2(
         sku = "coinPack2",
         amount = 3000,
         title = "کیف پر سکه",
-        price = 29900,
+        price = 54900,
         iconRes = R.drawable.ig_coin
     ),
 
@@ -54,7 +54,7 @@ enum class LifePacks(
         sku = "coinPack3",
         amount = 7000,
         title = "صندوق گنج",
-        price = 39900,
+        price = 99900,
         iconRes = R.drawable.ig_coin
     ),
 
@@ -62,14 +62,14 @@ enum class LifePacks(
         sku = "life1",
         amount = 1,
         title = "چسب زخم",
-        price = 9900,
+        price = 50000,
         iconRes = R.drawable.ig_heart
     ),
     LIFE_5(
         sku = "life5",
         amount = 5,
         title = "کمک های اولیه",
-        price = 29900,
+        price = 240000,
         iconRes = R.drawable.ig_heart
     ),
 
@@ -77,13 +77,12 @@ enum class LifePacks(
         sku = "life10",
         amount = 10,
         title = "آمبولانس",
-        price = 39900,
+        price = 399000,
         iconRes = R.drawable.ig_heart
     );
 
     fun isLife(): Boolean = this.name.startsWith("LIFE_")
     fun isCoin(): Boolean = this.name.startsWith("COIN_")
-    fun isBuyNewEnergy(): Boolean = this == BUY_NEW_ENERGY
 
     fun convertToItemPost() : BuyItemPost{
         return BuyItemPost(this.name.lowercase())

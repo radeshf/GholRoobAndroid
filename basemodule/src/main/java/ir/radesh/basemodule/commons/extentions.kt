@@ -1037,7 +1037,7 @@ fun Context.getDeviceName(): String {
         val manufacturer = Build.MANUFACTURER
         val model = Build.MODEL
         val brand = Build.BRAND
-        if (model.toLowerCase().startsWith(manufacturer.toLowerCase())) {
+        if (model.lowercase().startsWith(manufacturer.lowercase())) {
             model.capitalize() + " " + brand
         } else {
             manufacturer.capitalize() + " " + model + " " + brand

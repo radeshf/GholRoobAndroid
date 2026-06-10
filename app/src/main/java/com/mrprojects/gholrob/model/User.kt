@@ -12,6 +12,7 @@ class User {
     @SerializedName("id") var id: Int = 0
     @SerializedName("unfinished_attempt_id") var unfinishedAttemptId: Int? = null
     @SerializedName("username") var username: String = ""
+    @SerializedName("mobile") var mobile: String? = ""
     @SerializedName("name") var name: String = ""
     @SerializedName("bio") var bio: String? = ""
     @SerializedName("profile_image") var profileImage: String? = ""

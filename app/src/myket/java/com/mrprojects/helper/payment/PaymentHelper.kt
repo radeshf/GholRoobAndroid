@@ -1,9 +1,9 @@
 package com.mrprojects.helper.payment
 
 import android.app.Activity
-import com.mrprojects.witk.AppConfig
-import com.mrprojects.witk.helper.payment.PaymentInterface
-import com.mrprojects.witk.helper.payment.PaymentOperation
+import com.mrprojects.gholrob.AppConfig
+import com.mrprojects.gholrob.helper.payment.PaymentInterface
+import com.mrprojects.gholrob.helper.payment.PaymentOperation
 
 import ir.myket.billingclient.IabHelper
 import ir.myket.billingclient.util.*

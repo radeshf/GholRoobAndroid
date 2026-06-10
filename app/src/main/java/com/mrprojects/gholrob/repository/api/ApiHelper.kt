@@ -36,6 +36,34 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
     }
 
 
+    fun sendOtp(mobile: String, type: String, doOnDone: (response: EmptyResponse)->Unit){
+        val data = OtpPost(mobile, type)
+        apiSubscriber.subscribe(apiRepo.sendOtp(data).subscribeWith(object : RadResponseHelper<EmptyResponse>(apiSubscriber){
+            override fun onSuccessful(response: EmptyResponse) {
+                doOnDone(response)
+            }
+        }))
+    }
+
+    fun createAccount(mobile: String, code: String, type: String, doOnDone: (response: UserResponse)->Unit){
+        val data = OtpPost(mobile, type, code)
+        apiSubscriber.subscribe(apiRepo.createAccount(data).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
+                doOnDone(response)
+            }
+        }))
+    }
+
+    fun restoreAccount(mobile: String, code: String, type: String, doOnDone: (response: UserResponse)->Unit){
+        val data = OtpPost(mobile, type, code)
+        apiSubscriber.subscribe(apiRepo.restoreAccount(data).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
+                doOnDone(response)
+            }
+        }))
+    }
+
+
     fun createPayment(body: PaymentPost, doOnDone: (response: PaymentResponse)->Unit){
         apiSubscriber.subscribe(apiRepo.createPayment( body).subscribeWith(object : RadResponseHelper<PaymentResponse>(apiSubscriber){
             override fun onSuccessful(response: PaymentResponse) {

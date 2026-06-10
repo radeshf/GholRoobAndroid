@@ -25,13 +25,6 @@ class PaymentMessagePost(
     @SerializedName("msg") private val msg: String,
 )
 
-class AddAnswerPost(
-    @SerializedName("puzzle_id") private val puzzleId: Int,
-    @SerializedName("answer") private val answer: String?,
-    @SerializedName("is_correct") private val isCorrect: Boolean,
-    @SerializedName("fail_type") private val failType: String?,
-
-)
 
 class AddHintPost(
     @SerializedName("puzzle_id") private val puzzleId: Int?,
@@ -48,6 +41,12 @@ class BuyItemPost(
 class BuyCoinPost(
     @SerializedName("price") private val price: Int,
     @SerializedName("coins") private val coins: Int,
+)
+
+class OtpPost(
+    @SerializedName("mobile") private val mobile: String,
+    @SerializedName("type") private val type: String,
+    @SerializedName("code") private val code: String?=null,
 )
 
 class BuyEnergyPost(

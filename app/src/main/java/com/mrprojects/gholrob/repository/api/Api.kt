@@ -18,6 +18,15 @@ interface Api {
     @POST("api/v1/users/edit")
     fun editProfile(@Body body: EditProfilePost): Observable<Response<UserResponse>>
 
+    @POST("api/v1/gholrob/account/otp")
+    fun sendOtp(@Body body: OtpPost): Observable<Response<EmptyResponse>>
+
+    @POST("api/v1/gholrob/account/create")
+    fun createAccount(@Body body: OtpPost): Observable<Response<UserResponse>>
+
+    @POST("api/v1/gholrob/account/restore")
+    fun restoreAccount(@Body body: OtpPost): Observable<Response<UserResponse>>
+
     @POST("api/v1/payments/create")
     fun createPayment(@Body body: PaymentPost): Observable<Response<PaymentResponse>>
 

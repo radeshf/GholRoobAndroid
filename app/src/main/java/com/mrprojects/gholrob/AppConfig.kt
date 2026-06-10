@@ -15,7 +15,7 @@ object AppConfig {
     const val TUTORIAL_URL = "$BASE_URL/api/v1/gholrob/games/tutorial"
 
     const val DATABASE_NAME = "app_db"
-    const val DATABASE_VERSION = 14
+    const val DATABASE_VERSION = 15
 
 
     const val BOLD_FONT = "YekanBakhFaNum-Bold"
@@ -23,7 +23,7 @@ object AppConfig {
 
     const val SHOW_ADS = true
 
-    const val IS_TEST = true
+    const val IS_TEST = false
     const val IS_ADMIN = false
     const val HIDDEN_KEY = -9999
     const val REWARD_COIN = 100

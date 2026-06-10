@@ -2,10 +2,21 @@ package com.mrprojects.gholrob.view.tutorial
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
+import android.text.style.RelativeSizeSpan
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.TutorialFragmentBinding
 import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.openFragment
+import com.mrprojects.gholrob.helper.setTutorialText
 import com.mrprojects.gholrob.helper.showEnemyInfoDialog
 import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.play.GameKill
@@ -33,14 +44,7 @@ class TutorialFragment : BaseFragment<TutorialFragmentBinding>(TutorialFragmentB
         binding.rvEnemies.adapter = TutorialEnemyAdapter(this)
         getData()
         clicks()
-        binding.tvHint1.makeWordRed("ایرانی", color = Color.RED)
-        binding.tvHint1.makeWordRed("مین\u200Cروب (Minesweeper)", color = Color.YELLOW)
-        binding.tvHint2.makeWordRed("ضحاک", color = Color.WHITE)
-        binding.tvHint2.makeWordRed("ارژنگ دیو", color = Color.WHITE)
-        binding.tvHint2.makeWordRed("دیو سپید", color = Color.WHITE)
-        binding.tvHint2.makeWordRed("10", color = Color.WHITE)
-        binding.tvHint2.makeWordRed("15", color = Color.WHITE)
-        binding.tvHint2.makeWordRed("چاه\u200Cهای شغاد", color = Color.RED)
+        binding.tvHint.setTutorialText()
 
         initToolbar(title = "راهنمای بازی")
 
@@ -50,6 +54,9 @@ class TutorialFragment : BaseFragment<TutorialFragmentBinding>(TutorialFragmentB
 
         binding.lnrTutorial.setOnClickListener {
             openFragment(TutorialWebFragment.newInstance())
+        }
+        binding.tvHint.setOnClickListener {
+            showTutorialDialog()
         }
     }
 

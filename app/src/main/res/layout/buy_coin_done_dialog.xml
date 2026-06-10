@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lnrDialog"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_default_h"
+        android:layout_height="wrap_content"
         android:paddingTop="@dimen/dialog_y_padding"
         android:paddingBottom="@dimen/dialog_y_padding"
         android:paddingEnd="@dimen/dialog_x_padding"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
 
             android:padding="@dimen/panel_padding"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

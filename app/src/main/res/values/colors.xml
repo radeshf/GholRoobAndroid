@@ -47,5 +47,5 @@
     <color name="stats_divider">#33FFFFFF</color> <!-- خط جداکننده خیلی ملایم -->
     <color name="dialog_text_color">#FFFFFF</color>     <!-- سفید برای عدد -->
     <color name="dialog_text_subtitle_color">#B2DFDB</color>     <!-- سفید برای عدد -->
-
+    <color name="green_iran">#2E7D32</color>
 </resources>

@@ -29,19 +29,11 @@
             android:paddingEnd="@dimen/_10sdp"
             >
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvHint1"
-                android:gravity="start"
-                android:text="@string/tutorial_text_1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSmall" />
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvHint2"
+                android:id="@+id/tvHint"
                 android:gravity="start"
-                android:text="@string/tutorial_text_2"
+                android:text="@string/tutorial_game_guide"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSmall" />
 

@@ -57,7 +57,7 @@ fun <B : ViewBinding> BaseFragment<B>.showBuyEnergyDialog(
     dialog.basicConfig(binding.root)
     binding.tvPriceRefill.text = userViewModel.user.value?.fillAllEnergyPrice.toString()
     binding.tvPriceNew.text = userViewModel.user.value?.buyNewEnergyPrice.toString()
-    binding.tvMessageDialog.text = "انرژی ای برات نمونده!"
+    binding.tvMessageDialog.text = "میتونی انرژی ات رو پر کنی با آیتم های زیر"
     binding.btnHeartByAds.setOnClickListener {
         onBuyOneClicked()
     }
