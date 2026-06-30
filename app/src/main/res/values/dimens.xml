@@ -43,5 +43,6 @@
     <dimen name="padding_x_header">@dimen/_15sdp</dimen>
     <dimen name="box_radius">@dimen/_10sdp</dimen>
     <dimen name="inner_stats_paddings">@dimen/_15sdp</dimen>
+    <dimen name="tile_size">@dimen/_43sdp</dimen>
 
 </resources>

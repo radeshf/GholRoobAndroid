@@ -6,6 +6,9 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowInsets
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.base.BaseAppActivity
@@ -24,6 +27,7 @@ import com.mrprojects.gholrob.helper.showBuyLifeDialog
 import com.mrprojects.gholrob.helper.showBuyLifeDoneDialog
 import com.mrprojects.gholrob.helper.showCloseGameDialog
 import com.mrprojects.gholrob.helper.showClosePlayDialog
+import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.helper.sound.bg.OnBgMusicSettingsChanged
@@ -44,7 +48,9 @@ import com.mrprojects.gholrob.helper.sound.sfx.SfxPlayer
 import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
 import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
 import com.mrprojects.gholrob.helper.sound.sfx.OnSfxMusicSettingsChanged
+import com.mrprojects.gholrob.model.ErrorTypes
 import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 
 class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::inflate){
@@ -135,7 +141,17 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
 
     fun userConfig(){
         userViewModel = Provider.provideUserViewModel(this)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userViewModel.errorEvent.collect { error ->
+                    when (error) {
+                        ErrorTypes.COIN_NOT_ENOUGH -> showCoinNotEnoughDialog()
+                        else -> warningDialog(error.key)
+                    }
 
+                }
+            }
+        }
     }
 
 

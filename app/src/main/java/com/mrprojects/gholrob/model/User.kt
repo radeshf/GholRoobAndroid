@@ -5,6 +5,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.mrprojects.gholrob.view.profile.AvatarMapper
+import com.mrprojects.gholrob.view.profile.ProfileImage
 
 @Entity(tableName = "user")
 class User {
@@ -30,6 +31,9 @@ class User {
     @SerializedName("energy_refill_interval") var energyRefillInterval: Int = 0
     @SerializedName("buy_new_energy_price") var buyNewEnergyPrice: String? = ""
 
+    @SerializedName("purchased_items")
+    var purchasedItems: List<String> = emptyList()
+
     @Ignore
     @SerializedName("-O8w9,_s6+^i-O8w9,_s6+^i") var userHash: String = ""
 
@@ -54,5 +58,11 @@ class User {
     fun getProfileResource(): Int {
         return AvatarMapper.getResourceId(this.profileImage)
     }
+
+    fun hasPurchasedProfile(item: ProfileImage): Boolean {
+        if (item.price <= 0) return true
+        return purchasedItems.contains(item.image)
+    }
+
     override fun toString() = "User($id, $username, $name, $profileImage)"
 }

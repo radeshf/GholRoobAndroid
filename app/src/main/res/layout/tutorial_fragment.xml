@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/lnrTutorial"
+        app:layout_constraintBottom_toTopOf="@+id/lnrBottomViews"
         android:orientation="vertical">
 
         <include android:id="@+id/toolbar"
@@ -88,38 +88,65 @@
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:id="@+id/lnrTutorial"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/btn_big_h"
-        android:background="@drawable/ig_btn_blue"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnrBottomViews"
         android:gravity="center"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/lnrTutorial"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_big_h"
+            android:layout_weight="1"
+            android:background="@drawable/ig_btn_blue"
             android:gravity="center"
-            android:text="آموزش کامل بازی"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textLarge" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:contentDescription="@string/contentDescription"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ig_hint"
-            android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="آموزش کامل"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textLarge" />
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrPlayTutorial"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_big_h"
+            android:layout_weight="1"
+            android:background="@drawable/ig_btn_purple"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="بازی آموزشی"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textLarge" />
+
+
+
+        </LinearLayout>
     </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

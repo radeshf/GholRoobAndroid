@@ -23,6 +23,7 @@ import com.mrprojects.gholrob.databinding.NoInternetDialogBinding
 import com.mrprojects.gholrob.databinding.PlayHintDialogBinding
 import com.mrprojects.gholrob.databinding.PleaseRateDialogBinding
 import com.mrprojects.gholrob.databinding.SettingsDialogBinding
+import com.mrprojects.gholrob.databinding.TutorialDoneDialogBinding
 import com.mrprojects.gholrob.databinding.UseLifeDialogBinding
 import com.mrprojects.gholrob.databinding.WarningDialogBinding
 import com.mrprojects.gholrob.helper.haptics.OnVibrationsSettingsChanged
@@ -281,9 +282,9 @@ fun <B : ViewBinding> BaseActivity<B>.showCloseGameDialog(onCloseClicked: () -> 
 }
 
 
-fun <B : ViewBinding> BaseFragment<B>.showCoinNotEnoughDialog() {
+fun <B : ViewBinding> BaseActivity<B>.showCoinNotEnoughDialog() {
     val binding = CoinNotEnoughDialogBinding.inflate(layoutInflater)
-    val dialog = Dialog(requireContext(), R.style.MyDialogTheme)
+    val dialog = Dialog(this, R.style.MyDialogTheme)
     dialog.basicConfig(binding.root)
     binding.btnShop.setOnClickListener {
         postEvent(OnShowCoinShopCalled())
@@ -411,6 +412,26 @@ fun <B : ViewBinding> BaseFragment<B>.showUseLifeDialog(user: User, onUsedLifeCL
     binding.lnrDismiss.root.setOnClickListener {
         dialog.dismiss()
     }
+    doOnTry({
+        dialog.show()
+    })
+}
+
+
+@SuppressLint("SetTextI18n")
+fun <B : ViewBinding> BaseFragment<B>.showTutorialDoneDialog(title: String, msg: String, btn: String="آموزش بعدی", onOkCLicked: (dialog: Dialog) -> Unit) {
+    val binding = TutorialDoneDialogBinding.inflate(layoutInflater)
+    val dialog = Dialog(requireContext(), R.style.MyDialogTheme)
+    dialog.basicConfig(binding.root)
+    binding.tvTitleDialog.text = title
+    binding.tvMessageDialog.text = msg
+    binding.btnContinue.btnText.text = btn
+
+    binding.winConfettiView.startConfetti()
+    binding.btnContinue.root.setOnClickListener {
+        onOkCLicked(dialog)
+    }
+
     doOnTry({
         dialog.show()
     })

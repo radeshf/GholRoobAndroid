@@ -38,7 +38,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/contentDescription"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ig_profile_unkown" />
+                android:src="@drawable/ig_profile_unknown" />
 
             <TextView
                 android:id="@+id/tvName"
@@ -60,15 +60,71 @@
                 android:textSize="@dimen/textNormal"
                 tools:text="اطلاعاتی درباره من و شما اطلاعاتی درباره من و شما اطلاعاتی درباره من و شما " />
 
+            <LinearLayout
+                android:id="@+id/lnrPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
 
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:textColor="@color/coin_color"
+                    android:textSize="@dimen/_30sdp"
+                    tools:text="120" />
+
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/ig_coin"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnrUserCoin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_4sdp">
+
+
+                <TextView
+                    android:id="@+id/tvUserCoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:textColor="@color/coin_color"
+                    android:textSize="@dimen/_15sdp"
+                    tools:text="120" />
+
+                <ImageView
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:src="@drawable/ig_coin"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textNormal"
+                    android:text="تعداد سکه های شما: " />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lnrBackButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -77,10 +133,17 @@
                 app:layout_constraintTop_toBottomOf="@id/tvMessageDialog2">
 
                 <include
-                    android:id="@+id/lnrSelect"
+                    android:id="@+id/btnSetProfile"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/hint_button_size"
                     layout="@layout/btn_green_layout" />
+
+                <include
+                    android:id="@+id/btnBuyProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/hint_button_size"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    layout="@layout/btn_red_layout" />
 
                 <include layout="@layout/btn_dismiss_layout"
                     android:layout_width="match_parent"
@@ -121,7 +184,7 @@
             android:gravity="center"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
-            android:text="نام شخصیت"
+            tools:text="نام شخصیت"
             android:textColor="@color/dialog_text_color"
             android:textSize="@dimen/textExtraLarge"
 

@@ -20,6 +20,7 @@ import com.mrprojects.gholrob.helper.setTutorialText
 import com.mrprojects.gholrob.helper.showEnemyInfoDialog
 import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.play.GameKill
+import com.mrprojects.gholrob.view.play.TutorialPlayFragment
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.getAdp
 import ir.radesh.basemodule.commons.init
@@ -54,6 +55,9 @@ class TutorialFragment : BaseFragment<TutorialFragmentBinding>(TutorialFragmentB
 
         binding.lnrTutorial.setOnClickListener {
             openFragment(TutorialWebFragment.newInstance())
+        }
+        binding.lnrPlayTutorial.setOnClickListener {
+            openFragment(TutorialPlayFragment.newInstance(1))
         }
         binding.tvHint.setOnClickListener {
             showTutorialDialog()

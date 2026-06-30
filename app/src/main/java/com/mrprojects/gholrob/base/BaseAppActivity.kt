@@ -52,7 +52,4 @@ abstract class BaseAppActivity<B : ViewBinding>(bindingFactory: (LayoutInflater)
         onBackPressedDispatcher.onBackPressed()
     }
 
-    fun postEvent(obj : Any){
-        EventBus.getDefault().post(obj)
-    }
 }

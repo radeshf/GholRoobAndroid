@@ -54,5 +54,10 @@ class PrefHelper(context: Context) {
         get() = shp.getFloat("sfxMusicVolume",1f)
         set(value) = shp.edit().putFloat("sfxMusicVolume",value).apply()
 
+    var isTutorialFinished: Boolean
+        get() = shp.getBoolean("isTutorialFinished",false)
+        set(value) = shp.edit().putBoolean("isTutorialFinished",value).apply()
+
+
 
 }

@@ -30,11 +30,11 @@ object AvatarMapper {
         "ig_profile_sindokht" to R.drawable.ig_profile_sindokht,
         "ig_profile_sohrab" to R.drawable.ig_profile_sohrab,
         "ig_profile_tahmine" to R.drawable.ig_profile_tahmine,
-        "ig_profile_unkown" to R.drawable.ig_profile_unkown,
+        "ig_profile_unkown" to R.drawable.ig_profile_unknown,
         "ig_profile_zal" to R.drawable.ig_profile_zal,
     )
 
     fun getResourceId(name: String?): Int {
-        return map[name] ?: R.drawable.ig_profile_unkown
+        return map[name] ?: R.drawable.ig_profile_unknown
     }
 }

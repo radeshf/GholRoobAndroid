@@ -259,7 +259,7 @@
             android:layout_height="@dimen/_30sdp"
             android:contentDescription="@string/contentDescription"
             android:rotationY="180"
-            android:src="@drawable/ig_profile_unkown"
+            android:src="@drawable/ig_profile_unknown"
 
             android:visibility="visible" />
 
@@ -284,7 +284,7 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_profile_unkown"
+            android:src="@drawable/ig_profile_unknown"
             android:visibility="visible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

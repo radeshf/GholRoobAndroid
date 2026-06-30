@@ -13,6 +13,39 @@ enum class CellTypes(
     val msg: String? = null,
 ) {
 
+    BUG(
+        id = 4,
+        key = "bug",
+        image = R.drawable.ig_enemy_hyena,
+        title = "شغال",
+        damage = 1,
+        count = 5,
+        description = "جانوری فرصت\u200Cطلب و مزاحم که در مسیرت پرسه می\u200Cزند؛ اما مطمئنم از پسش برمی\u200Cآیی، چون ضعیف\u200Cترین موجود بازی است.",
+        msg = "",
+    ),
+
+    RAT(
+        id = 10,
+        key = "rat",
+        image = R.drawable.ig_enemy_wolf,
+        title = "گرگ",
+        damage = 2,
+        count = 5,
+        description = "شکارچیِ بیابان و کمی قوی\u200Cتر از شغال؛ اگر حواست نباشد با یک حمله مسیرت را سخت می\u200Cکند.",
+        msg = "",
+    ),
+
+    BLUE_GHOST(
+        id = 6,
+        key = "blue_ghost",
+        image = R.drawable.ig_enemy_lion,
+        title = "شیر",
+        damage = 3,
+        count = 4,
+        description = "حریفی قوی و بی\u200Cرحم؛ اگر سر راهت باشد، مسیرت را سخت می\u200Cکند.",
+        msg = "",
+    ),
+
     SMALL_BOSS(
         id = 1,
         key = "small_boss",
@@ -46,17 +79,6 @@ enum class CellTypes(
         msg = "غول سوم",
     ),
 
-    BUG(
-        id = 4,
-        key = "bug",
-        image = R.drawable.ig_enemy_hyena,
-        title = "شغال",
-        damage = 1,
-        count = 5,
-        description = "جانوری فرصت\u200Cطلب و مزاحم که در مسیرت پرسه می\u200Cزند؛ اما مطمئنم از پسش برمی\u200Cآیی، چون ضعیف\u200Cترین موجود بازی است.",
-        msg = "",
-    ),
-
     EYE(
         id = 5,
         key = "eye",
@@ -68,16 +90,6 @@ enum class CellTypes(
         msg = "عامل کوری",
     ),
 
-    BLUE_GHOST(
-        id = 6,
-        key = "blue_ghost",
-        image = R.drawable.ig_enemy_lion,
-        title = "شیر",
-        damage = 3,
-        count = 4,
-        description = "حریفی قوی و بی\u200Cرحم؛ اگر سر راهت باشد، مسیرت را سخت می\u200Cکند.",
-        msg = "",
-    ),
 
     PURPLE_GHOST(
         id = 7,
@@ -101,16 +113,6 @@ enum class CellTypes(
         msg = "",
     ),
 
-    RAT(
-        id = 10,
-        key = "rat",
-        image = R.drawable.ig_enemy_wolf,
-        title = "گرگ",
-        damage = 2,
-        count = 5,
-        description = "شکارچیِ بیابان و کمی قوی\u200Cتر از شغال؛ اگر حواست نباشد با یک حمله مسیرت را سخت می\u200Cکند.",
-        msg = "",
-    ),
 
     SKELETON(
         id = 11,
@@ -127,7 +129,7 @@ enum class CellTypes(
         id = 12,
         key = "snake",
         image = R.drawable.ig_enemy_snake,
-        title = "مار های ضحاک",
+        title = "مارهای ضحاک",
         damage = 6,
         count = 2,
         description = "دو سایهٔ خزنده بر شانه\u200Cهای پادشاهی شوم؛ هر روز تشنهٔ جان",
@@ -154,6 +156,17 @@ enum class CellTypes(
         count = 8,
         description = "چاهی پر از نیزه که با نیرنگ شغاد کنده شد؛ همان دامی که پایان کار رستم شد… و شاید پایان بازی تو هم باشد.",
         msg = "مرگ حتمی",
+    ),
+
+    FLAG(
+        id = 15,
+        key = "flag",
+        image = R.drawable.ig_flag,
+        title = "پرچم",
+        damage = 0,
+        count = 0,
+        description = "درفش کاویانی برای مشخص کردن جای چاه شغاد",
+        msg = "",
     ),
 
     EMPTY(

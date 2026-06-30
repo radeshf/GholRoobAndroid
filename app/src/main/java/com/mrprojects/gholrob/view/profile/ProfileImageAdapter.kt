@@ -24,6 +24,12 @@ class ProfileImageAdapter(private val onItemClicked: (position: Int, item: Profi
         view.tvName.text = item.name
         view.tvPrice.text = item.price.toString()
         view.lnrComingSoon.visibleByBoolean(item.isComingSoon)
+
+        view.tvPrice.visibleByBoolean(!item.isPurchased)
+        view.tvPrice.text = if(item.isFree) "رایگان" else item.price.toString()
+
+        view.ivPrice.visibleByBoolean(!item.isFree)
+        view.ivPrice.setImageResource(if(item.isPurchased) R.drawable.ig_ok else R.drawable.ig_coin)
         val isSelected = position == selectedPosition
         view.lnrCard.setBackgroundResource(if (isSelected) R.drawable.box_btn_selected else R.drawable.box_btn)
         view.root.setOnClickListener {

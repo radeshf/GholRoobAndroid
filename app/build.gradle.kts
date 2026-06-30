@@ -18,8 +18,8 @@ android {
         applicationId = "com.mrprojects.gholrob"
         minSdk = 21
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1.2"
+        versionCode = 3
+        versionName = "1.2.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
 

@@ -15,7 +15,7 @@ object AppConfig {
     const val TUTORIAL_URL = "$BASE_URL/api/v1/gholrob/games/tutorial"
 
     const val DATABASE_NAME = "app_db"
-    const val DATABASE_VERSION = 15
+    const val DATABASE_VERSION = 17
 
 
     const val BOLD_FONT = "YekanBakhFaNum-Bold"

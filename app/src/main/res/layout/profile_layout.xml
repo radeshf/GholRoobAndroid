@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ig_profile_unkown" />
+            android:src="@drawable/ig_profile_unknown" />
     </FrameLayout>
 
 </FrameLayout>

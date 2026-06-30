@@ -2,35 +2,26 @@ package com.mrprojects.gholrob.view.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.mrprojects.gholrob.databinding.MainFragmentBinding
-import com.mrprojects.gholrob.helper.log
 import com.mrprojects.gholrob.helper.noInternetDialog
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.openMarketRatePage
 import com.mrprojects.gholrob.helper.openNextLevel
 import com.mrprojects.gholrob.helper.payment.LifePacks
 import com.mrprojects.gholrob.helper.showBuyEnergyDialog
-import com.mrprojects.gholrob.helper.showBuyLifeDoneDialog
-import com.mrprojects.gholrob.helper.showCloseGameDialog
-import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
 import com.mrprojects.gholrob.helper.showSettingsDialog
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
 import com.mrprojects.gholrob.helper.updateHearts
 import com.mrprojects.gholrob.helper.warningDialog
-import com.mrprojects.gholrob.model.ErrorTypes
-import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.model.User
 import com.mrprojects.gholrob.model.events.OnBuyNewLifeCalled
 import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
 import com.mrprojects.gholrob.model.events.OnProfileChanged
 import com.mrprojects.gholrob.model.events.OnShowCoinShopCalled
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
+import com.mrprojects.gholrob.repository.Provider
+import com.mrprojects.gholrob.view.play.TutorialPlayFragment
 import com.mrprojects.gholrob.view.play.history.HistoryFragment
 import com.mrprojects.gholrob.view.profile.showProfileInfoDialog
 import com.mrprojects.gholrob.view.rating.RatingFragment
@@ -38,8 +29,7 @@ import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.setEventBus
-import ir.radesh.basemodule.commons.showToast
-import kotlinx.coroutines.launch
+import ir.radesh.basemodule.helper.PrefHelper
 import org.greenrobot.eventbus.Subscribe
 
 class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
@@ -79,17 +69,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 val minutes = (millis / 1000) / 60
                 val seconds = (millis / 1000) % 60
                 binding.HeartsLayout.tvHeartTimer.text = String.format("%02d:%02d", minutes, seconds)
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                userViewModel.errorEvent.collect { error ->
-                    when (error) {
-                        ErrorTypes.COIN_NOT_ENOUGH -> showCoinNotEnoughDialog()
-                        else -> warningDialog(error.key)
-                    }
-
-                }
             }
         }
     }
@@ -144,6 +123,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     private fun clicks() {
         binding.brnPlay.setOnClickListener {
+            if (!PrefHelper(requireContext()).isTutorialFinished){
+                openFragment(TutorialPlayFragment.newInstance(1))
+                return@setOnClickListener
+            }
+
             val user = userViewModel.user.value!!
             if (user.haveUnfinishedAttempt()) {
                 openNextLevel(user.unfinishedAttemptId!!, true)

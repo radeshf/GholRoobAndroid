@@ -7,4 +7,9 @@ class ProfileImage(
     val description: String,
     val price: Int,
     val isComingSoon: Boolean,
-)
+){
+    var isPurchased: Boolean=false
+
+    val isFree: Boolean
+        get() = price == 0
+}

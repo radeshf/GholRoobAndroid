@@ -11,6 +11,7 @@ import io.reactivex.disposables.Disposable
 import ir.radesh.basemodule.commons.hideLoading
 import ir.radesh.basemodule.commons.showLoading
 import ir.radesh.basemodule.commons.showToast
+import org.greenrobot.eventbus.EventBus
 
 abstract class BaseActivity<B : ViewBinding>(val bindingFactory: (LayoutInflater) -> B) : AppCompatActivity(), ApiSubscriber {
     lateinit var binding: B
@@ -66,4 +67,7 @@ abstract class BaseActivity<B : ViewBinding>(val bindingFactory: (LayoutInflater
         disposables.clear()
     }
 
+    fun postEvent(obj : Any){
+        EventBus.getDefault().post(obj)
+    }
 }

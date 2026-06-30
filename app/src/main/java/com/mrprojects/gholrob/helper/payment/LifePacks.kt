@@ -3,6 +3,7 @@ package com.mrprojects.gholrob.helper.payment
 import androidx.annotation.DrawableRes
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.model.rest.BuyItemPost
+import com.mrprojects.gholrob.view.profile.ProfileImage
 
 enum class LifePacks(
     val sku: String,
@@ -79,6 +80,14 @@ enum class LifePacks(
         title = "آمبولانس",
         price = 399000,
         iconRes = R.drawable.ig_heart
+    ),
+
+    BUY_PROFILE(
+        sku = "buy_profile",
+        amount = 1,
+        title = "خرید پروفایل",
+        price = 0,
+        iconRes = R.drawable.ig_profile_unknown
     );
 
     fun isLife(): Boolean = this.name.startsWith("LIFE_")
@@ -86,6 +95,10 @@ enum class LifePacks(
 
     fun convertToItemPost() : BuyItemPost{
         return BuyItemPost(this.name.lowercase())
+    }
+
+    fun convertToItemPost(profileItem: ProfileImage) : BuyItemPost{
+        return BuyItemPost(this.name.lowercase(), profileItem.image)
     }
 
     companion object {

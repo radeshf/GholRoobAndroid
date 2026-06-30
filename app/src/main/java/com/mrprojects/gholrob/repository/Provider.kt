@@ -17,6 +17,8 @@ import com.mrprojects.gholrob.repository.api.ApiRepo
 import com.mrprojects.gholrob.repository.db.AppDatabase
 import com.mrprojects.gholrob.repository.db.DatabaseHelper
 import com.mrprojects.gholrob.repository.db.DatabaseProvider
+import com.mrprojects.gholrob.viewmodel.GameViewModel
+import com.mrprojects.gholrob.viewmodel.GameViewModelFactory
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import com.mrprojects.gholrob.viewmodel.UserViewModelFactory
 import ir.radesh.basemodule.baseViews.BaseFragment
@@ -64,11 +66,17 @@ object Provider {
         return ViewModelProvider(fragment.requireActivity(), UserViewModelFactory(dao)).get(UserViewModel::class.java)
     }
 
+    fun <B : ViewBinding> provideGameViewModel(fragment: BaseFragment<B>): GameViewModel {
+        val apiHelper = provideApiHelper(fragment)
+        return ViewModelProvider(fragment.requireActivity(), GameViewModelFactory(apiHelper)).get(GameViewModel::class.java)
+    }
+
 
     fun <B : ViewBinding> provideUserViewModel(activity: BaseAppActivity<B>): UserViewModel {
         val dao = provideDatabase(activity).userDao()
         return ViewModelProvider(activity, UserViewModelFactory(dao)).get(UserViewModel::class.java)
     }
+
 
     fun provideDatabase(context: Context): AppDatabase {
         return DatabaseProvider.get(context)

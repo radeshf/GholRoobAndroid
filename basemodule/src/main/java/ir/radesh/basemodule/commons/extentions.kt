@@ -2,6 +2,7 @@ package ir.radesh.basemodule.commons
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.app.Activity
@@ -39,6 +40,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
@@ -51,6 +54,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.cardview.widget.CardView
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEachIndexed
 import androidx.core.widget.doOnTextChanged
@@ -434,6 +438,18 @@ fun ImageView.dropDownAnimation(dropDown: Boolean) {
     this.startAnimation(arrowAnimation)
 }
 
+fun View.shakeAnimation(onEnd: (() -> Unit)? = null) {
+    val x = ObjectAnimator.ofFloat(this, "translationX", 0f, -25f, 25f, -15f, 15f, -8f, 8f, 0f)
+    val y = ObjectAnimator.ofFloat(this, "translationY", 0f, 10f, -10f, 15f, -15f, 8f, -8f, 0f)
+
+    AnimatorSet().apply {
+        playTogether(x, y)
+        duration = 600
+        interpolator = LinearInterpolator()
+        doOnEnd { onEnd?.invoke() }
+        start()
+    }
+}
 
 fun TextView.setTextCounterAnimation(text: String) {
     val duration = 100L

@@ -9,7 +9,7 @@ enum class Profiles(
     val titleFa: String,
     val descriptionFa: String,
     val price: Int,
-    val isComingSoon: Boolean = true,
+    val isComingSoon: Boolean = false,
 ) {
 
     SOHRAB(
@@ -154,7 +154,7 @@ enum class Profiles(
 
 
     UNKNOWN(
-        "ig_profile_unkown", R.drawable.ig_profile_unkown,
+        "ig_profile_unkown", R.drawable.ig_profile_unknown,
         "نامشخص", "پروفایل پیش‌فرض.", 0
     );
 

@@ -39,6 +39,7 @@ import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.BuildConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.HeartsLayoutBinding
+import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.User
 import com.mrprojects.gholrob.model.rest.AddHintPost
 import com.mrprojects.gholrob.view.play.PlayFragment
@@ -55,20 +56,13 @@ import java.io.File
 import java.io.IOException
 import kotlin.jvm.Throws
 
-fun Fragment.log(msg: String) {
-    Timber.tag("WITKiller").e(msg)
+fun Fragment.openFragment(fragment: Fragment, addToBackStack: Boolean = true) {
+    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = addToBackStack, animationGravity = Gravity.CENTER)
 }
 
-fun Fragment.openFragment(fragment: Fragment, addToContainer: Boolean = true) {
-    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = true, animationGravity = Gravity.BOTTOM, addToContainer = addToContainer)
-}
-
-fun Fragment.openPlayFragment(fragment: Fragment) {
-    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = false, animationGravity = Gravity.BOTTOM, addToContainer = false)
-}
 
 fun AppCompatActivity.openFragment(fragment: Fragment) {
-    supportFragmentManager.changeTo(R.id.mainContainer, fragment, true, Gravity.BOTTOM, true)
+    supportFragmentManager.changeTo(R.id.mainContainer, fragment, true, Gravity.CENTER, true)
 }
 
 fun RecyclerView.init(lm: RecyclerView.LayoutManager) {
@@ -347,7 +341,7 @@ fun <B : ViewBinding> BaseFragment<B>.openNextLevel(gameId: Int, isMain: Boolean
 
     val fragment = PlayFragment.newInstance(gameId)
     val addToBackStack = if(isMain) true else false
-    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = addToBackStack, animationGravity = Gravity.BOTTOM, addToContainer = false)
+    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = addToBackStack, animationGravity = Gravity.CENTER, addToContainer = false)
     return true
 }
 
@@ -359,13 +353,12 @@ fun TextView.setTutorialText(bigImage: Boolean=false) {
 
     val styles = mapOf(
         "ایرانی" to StyleConfig(R.color.green, 1.3f),
-        "ضحاک" to StyleConfig(R.color.enemy_color, 1.3f), // قرمز تیره
-        "ارژنگ دیو" to StyleConfig(R.color.enemy_color, 1.3f), // سبز
-        "دیو سپید" to StyleConfig(R.color.enemy_color, 1.3f), // آبی
-        "چاه‌های شغاد" to StyleConfig(R.color.redPrimary, 1.3f) // زرد
+        "ضحاک" to StyleConfig(R.color.enemy_color, 1.3f),
+        "ارژنگ دیو" to StyleConfig(R.color.enemy_color, 1.3f),
+        "دیو سپید" to StyleConfig(R.color.enemy_color, 1.3f),
+        "چاه‌های شغاد" to StyleConfig(R.color.redPrimary, 1.3f)
     )
 
-    // اعمال رنگ و سایز
     styles.forEach { (word, config) ->
         var startIndex = inputText.indexOf(word)
         while (startIndex != -1) {
@@ -398,6 +391,44 @@ fun TextView.setTutorialText(bigImage: Boolean=false) {
             spannable.setSpan(imageSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
             startIndex = inputText.indexOf(key, endIndex)
+        }
+    }
+
+    this.text = spannable
+}
+
+fun TextView.setTutorial1Text(inputText: String, bigImage: Boolean = false) {
+    val spannable = SpannableStringBuilder(inputText)
+
+    val imageMap = CellTypes.values().associate {
+        "[${it.key.uppercase()}]" to it.image
+    }.toMutableMap()
+
+    imageMap.forEach { (key, drawableRes) ->
+        var startIndex = inputText.indexOf(key)
+        while (startIndex != -1) {
+            val endIndex = startIndex + key.length
+            val drawable = ContextCompat.getDrawable(context, drawableRes)
+            val sizeInPx = dpToPx(if (bigImage) 35f else 25f)
+            drawable?.setBounds(0, 0, sizeInPx, sizeInPx)
+
+            val imageSpan = ImageSpan(drawable!!, ImageSpan.ALIGN_CENTER)
+            spannable.setSpan(imageSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            startIndex = inputText.indexOf(key, endIndex)
+        }
+    }
+
+    CellTypes.values().forEach { cell ->
+        val word = cell.title ?: ""
+        if (word.isNotEmpty()) {
+            var startIndex = inputText.indexOf(word)
+            while (startIndex != -1) {
+                val endIndex = startIndex + word.length
+                val color = ContextCompat.getColor(context, R.color.enemy_color)
+                spannable.setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                startIndex = inputText.indexOf(word, endIndex)
+            }
         }
     }
 

@@ -51,7 +51,7 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:contentDescription="@string/contentDescription"
         android:visibility="visible"
-        android:background="@drawable/touch_effect"
+
         android:src="@drawable/ig_energy"
         />
     <ImageView
@@ -61,7 +61,7 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:contentDescription="@string/contentDescription"
         android:visibility="gone"
-        android:background="@drawable/touch_effect"
+
         android:src="@drawable/ig_energy"
         />
     <ImageView
@@ -71,9 +71,10 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:contentDescription="@string/contentDescription"
         android:visibility="gone"
-        android:background="@drawable/touch_effect"
+
         android:src="@drawable/ig_energy"
         />
+
     <ImageButton
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"

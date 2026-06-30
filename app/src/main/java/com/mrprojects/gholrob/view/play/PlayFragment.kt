@@ -3,6 +3,8 @@ package com.mrprojects.gholrob.view.play
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import animateRiseAndSplit
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.GameOverDialogBinding
@@ -29,24 +31,32 @@ import com.mrprojects.gholrob.model.play.GameKill
 import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.view.main.MainActivity
 import com.mrprojects.gholrob.view.tutorial.TutorialFragment
+import com.mrprojects.gholrob.viewmodel.GameViewModel
 import com.mrprojects.gholrob.viewmodel.UserViewModel
+import createDamageOverlay
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.basicConfig
 import ir.radesh.basemodule.commons.clickOnTileAnimation
 import ir.radesh.basemodule.commons.disableAlphaByBoolean
+import ir.radesh.basemodule.commons.dropDownAnimation
 import ir.radesh.basemodule.commons.getAdp
 import ir.radesh.basemodule.commons.inVisibleByBoolean
 import ir.radesh.basemodule.commons.initGrid
 import ir.radesh.basemodule.commons.makeWordRed
+import ir.radesh.basemodule.commons.rotateAnimation
 import ir.radesh.basemodule.commons.setTextCollor
+import ir.radesh.basemodule.commons.shakeAnimation
 import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.interfaces.OnItemClickListener
+import showDamageEffect
 import timber.log.Timber
 
-class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::inflate), OnItemClickListener<GameCell> {
+class PlayFragment :
+    BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::inflate) {
     private lateinit var userViewModel: UserViewModel
+    private lateinit var gameViewModel: GameViewModel
     private lateinit var user: User
-
+    private lateinit var attempt: Attempt
 
     var gameId: Int = 0
 
@@ -68,7 +78,9 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         gameId = arguments?.getInt("gameId")!!
         binding.rvOptions.initGrid(7, canScroll = false)
         binding.rvKills.initGrid(7, canScroll = false)
-        binding.rvOptions.adapter = CellsAdapter(this)
+        binding.rvOptions.adapter = CellsAdapter({ item, position, view ->
+            onCellClicked(item, position, view)
+        })
         binding.rvKills.adapter = KillsAdapter(object : OnItemClickListener<GameKill> {
             override fun onItemClick(item: GameKill) {
                 onKillItemClicked(item)
@@ -77,6 +89,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
 
         getData()
         userConfig()
+//        gameConfig()
         clicks()
     }
 
@@ -84,6 +97,14 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         userViewModel = Provider.provideUserViewModel(this)
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             this.user = user
+        }
+    }
+
+    fun gameConfig() {
+        gameViewModel = Provider.provideGameViewModel(this)
+        gameViewModel.fetchGame(gameId)
+        gameViewModel.attempt.observe(viewLifecycleOwner) { attempt ->
+            loadGame(attempt)
         }
     }
 
@@ -111,6 +132,9 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             openFragment(TutorialFragment.newInstance())
         }
 
+        binding.ivBossImage.setOnClickListener {
+//            showPassedDialog(attempt)
+        }
     }
 
 
@@ -123,15 +147,16 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
 
 
     private fun loadGame(attempt: Attempt) {
+        this.attempt = attempt
         if (attempt.isShowPassedDialog) {
             postEvent(OnPlaySfx(SfxTypes.Win))
             postEvent(OnVibrate(VibrateTypes.Win))
             showPassedDialog(attempt)
+
         }
         if (attempt.isShowFailDialog) {
             postEvent(OnPlaySfx(SfxTypes.Lose))
             postEvent(OnVibrate(VibrateTypes.Lose))
-
             showFailedDialog(attempt, attempt.killedBy!!)
         }
         binding.tvTotalHearts.text = attempt.totalHearts.toString()
@@ -141,23 +166,26 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         when (attempt.totalHearts) {
             6 -> {
                 binding.ivBossImage.setImageResource(CellTypes.SMALL_BOSS.image)
-                binding.tvBossName.setText(CellTypes.SMALL_BOSS.title)
+                binding.tvBossName.text = CellTypes.SMALL_BOSS.title
             }
 
             10 -> {
                 binding.ivBossImage.setImageResource(CellTypes.BIG_BOSS.image)
-                binding.tvBossName.setText(CellTypes.BIG_BOSS.title)
+                binding.tvBossName.text = CellTypes.BIG_BOSS.title
             }
 
             15 -> {
                 binding.ivBossImage.setImageResource(CellTypes.FINAL_BOSS.image)
-                binding.tvBossName.setText(CellTypes.FINAL_BOSS.title)
+                binding.tvBossName.text = CellTypes.FINAL_BOSS.title
             }
         }
     }
 
+    fun onKillItemClicked(item: GameKill) {
+        showEnemyInfoDialog(item, true)
+    }
 
-    override fun onItemClick(item: GameCell) {
+    fun onCellClicked(item: GameCell, position: Int, view: View) {
         if (item.isDefeated) {
             Timber.e("item is Defeated")
             return
@@ -192,15 +220,12 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
                         playSfxOnDefeat(cell)
                     }
                     if (!cell.isEmpty() && cell.isDefeated) {
-                        showKilledEnemy(cell)
+//                        showKilledEnemy(cell)
+                        animateRiseAndSplit(binding.lnrMain, view, item.image())
                     }
                 }
             }
         }
-    }
-
-    fun onKillItemClicked(item: GameKill) {
-        showEnemyInfoDialog(item, true)
     }
 
     private fun useLifeApi(dialog: Dialog) {
@@ -225,6 +250,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         if (cell.isHeart()) {
             postEvent(OnPlaySfx(SfxTypes.ClickOnHeal))
             postEvent(OnVibrate(VibrateTypes.ClickOnHeal))
+            binding.healingOverlay.showHeal(1f)
 
         } else if (cell.isEmpty()) {
             postEvent(OnPlaySfx(SfxTypes.DefeatEmpty))
@@ -232,15 +258,22 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         } else if (cell.isBossSmall()) {
             postEvent(OnPlaySfx(SfxTypes.Boss1))
             postEvent(OnVibrate(VibrateTypes.Boss1))
+            binding.healingOverlay.showHeal(1f)
+
         } else if (cell.isBossBig()) {
             postEvent(OnPlaySfx(SfxTypes.Boss2))
             postEvent(OnVibrate(VibrateTypes.Boss2))
+            binding.healingOverlay.showHeal(1f)
+
         } else if (cell.isBossFinal()) {
             postEvent(OnPlaySfx(SfxTypes.Boss3))
             postEvent(OnVibrate(VibrateTypes.Boss3))
+            binding.healingOverlay.showHeal(1f)
+
         } else {
             postEvent(OnPlaySfx(SfxTypes.DefeatEnemy))
             postEvent(OnVibrate(VibrateTypes.DefeatEnemy))
+            binding.damageOverlay.showDamage(cell.damage)
 
         }
     }
@@ -249,9 +282,11 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         if (isFlagged) {
             postEvent(OnPlaySfx(SfxTypes.FlagOn))
             postEvent(OnVibrate(VibrateTypes.FlagOn))
+//            binding.lnrMain.shakeAnimation()
         } else {
             postEvent(OnPlaySfx(SfxTypes.FlagOff))
             postEvent(OnVibrate(VibrateTypes.FlagOff))
+//            binding.lnrMain.shakeAnimation()
         }
 
     }
@@ -260,7 +295,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
         val binding = GamePassedDialogBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         dialog.basicConfig(binding.root)
-
+        binding.tvCoin.text = "+${attempt.rewardCoin}"
         binding.lnrBoxes.tvXp.text = "+${attempt.score}"
         binding.lnrBoxes.tvTime.text = attempt.speed
         binding.lnrBoxes.tvEnemies.text = "${attempt.defeatedMonsters}"
@@ -278,6 +313,7 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             }
         }
 
+        binding.winConfettiView.startConfetti()
 
         doOnTry({
             dialog.show()
@@ -322,6 +358,9 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             binding.btnContinue.updateContinueButton(dialog, user.lives > 0)
         }
 
+        binding.ivEnemy.setOnClickListener {
+            binding.root.shakeAnimation()
+        }
 
         binding.btnExit.setOnClickListener {
             Provider.provideApiHelper(this).endGame(gameId) {
@@ -337,8 +376,19 @@ class PlayFragment : BaseFragment<PlayFragmentBinding>(PlayFragmentBinding::infl
             postEvent(OnShowLifeShopCalled())
 
         }
+
         doOnTry({
             dialog.show()
+            val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            val behavior = BottomSheetBehavior.from(bottomSheet!!)
+
+            behavior.peekHeight = (100 * resources.displayMetrics.density).toInt()
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            binding.ivMinimize.setOnClickListener {
+                val isCollapsed = behavior.state == BottomSheetBehavior.STATE_COLLAPSED
+                behavior.state = if (isCollapsed) BottomSheetBehavior.STATE_EXPANDED else BottomSheetBehavior.STATE_COLLAPSED
+                binding.ivMinimize.dropDownAnimation(!isCollapsed)
+            }
         })
     }
 

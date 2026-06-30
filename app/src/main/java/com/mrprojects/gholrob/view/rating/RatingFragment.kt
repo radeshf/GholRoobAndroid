@@ -61,7 +61,7 @@ class RatingFragment : BaseFragment<RatingFragmentBinding>(RatingFragmentBinding
             binding.userRatingLayout.ivUserProfile.setImageResource(it.data.me.user.getProfileResource())
             binding.userRatingLayout.lnrEditProfile.visibleByBoolean(true)
             binding.userRatingLayout.tvYou.visibleByBoolean(true)
-            binding.userRatingLayout.lnrRank.inVisibleByBoolean(it.data.me.haveRank())
+            binding.userRatingLayout.lnrRank.inVisibleByBoolean(it.data.me.showRank)
             binding.userRatingLayout.tvRank.text = it.data.me.getRankToDisplay()
             binding.userRatingLayout.lnrRank.setBackgroundResource(it.data.me.getRankBg())
             binding.rvRatings.getAdp<RatingsAdapter>().setData(it.data.ratings)

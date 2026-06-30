@@ -17,20 +17,39 @@ import com.mrprojects.gholrob.model.events.OnProfileChanged
 import com.mrprojects.gholrob.repository.Provider
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.basicConfig
+import ir.radesh.basemodule.commons.disableAlphaByBoolean
+import ir.radesh.basemodule.commons.toMoneyString
 import ir.radesh.basemodule.commons.visibleByBoolean
 
 
 @SuppressLint("SetTextI18n")
-fun <B : ViewBinding> BaseFragment<B>.showProfileImageInfoDialog(item: ProfileImage, onSetProfile: (item: ProfileImage) -> Unit) {
+fun <B : ViewBinding> BaseFragment<B>.showProfileImageInfoDialog(user: User, item: ProfileImage, onSetProfile: (item: ProfileImage) -> Unit, onBuyProfile: (item: ProfileImage) -> Unit) {
     val binding = ProfileImageInfoDialogBinding.inflate(layoutInflater)
     val dialog = Dialog(requireContext(), R.style.MyDialogTheme)
     dialog.basicConfig(binding.root)
+    binding.tvUserCoin.text = user.coins.toMoneyString()
     binding.ivImage.setImageResource(item.drawableRes)
+    binding.tvTitleDialog.text = item.name
     binding.tvName.text = item.name
     binding.tvBio.text = item.description
-    binding.lnrSelect.btnText.text = "انتخاب پروفایل"
-    binding.lnrSelect.root.setOnClickListener {
-        onSetProfile(item)
+    val isUserPurchased = user.hasPurchasedProfile(item)
+    binding.lnrPrice.visibleByBoolean(!isUserPurchased)
+    binding.lnrUserCoin.visibleByBoolean(!isUserPurchased)
+    binding.btnBuyProfile.root.visibleByBoolean(!isUserPurchased)
+    binding.tvPrice.text = item.price.toString()
+    binding.btnSetProfile.root.disableAlphaByBoolean(isUserPurchased)
+    binding.btnSetProfile.btnText.text = "انتخاب پروفایل"
+    binding.btnBuyProfile.btnText.text = "خرید پروفایل"
+
+    binding.btnSetProfile.root.setOnClickListener {
+        if (isUserPurchased){
+            onSetProfile(item)
+            dialog.dismiss()
+        }
+    }
+    binding.btnBuyProfile.root.setOnClickListener {
+
+        onBuyProfile(item)
         dialog.dismiss()
     }
     binding.lnrDismiss.root.setOnClickListener {

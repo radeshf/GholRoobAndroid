@@ -36,6 +36,7 @@ class AddHintPost(
 
 class BuyItemPost(
     @SerializedName("type") private val type: String,
+    @SerializedName("inventory_type") private val inventoryType: String?=null,
 )
 
 class BuyCoinPost(

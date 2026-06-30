@@ -1,6 +1,7 @@
 package com.mrprojects.gholrob.view.play
 
 import android.annotation.SuppressLint
+import android.view.View
 import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.OptionItemBinding
@@ -13,8 +14,8 @@ import ir.radesh.basemodule.interfaces.OnItemClickListener
 import timber.log.Timber
 
 
-class CellsAdapter(listener: OnItemClickListener<GameCell>?) :
-    RvAdapter<GameCell, OptionItemBinding>(OptionItemBinding::inflate, listener = listener) {
+class CellsAdapter(val onItemClicked: (item: GameCell, position: Int, view: View) -> Unit, val isTutorial: Boolean=false) :
+    RvAdapter<GameCell, OptionItemBinding>(OptionItemBinding::inflate) {
 
     var isGlobalLoading: Boolean = false
 
@@ -157,13 +158,19 @@ class CellsAdapter(listener: OnItemClickListener<GameCell>?) :
 
 
         view.root.setOnClickListener {
-            if (isGlobalLoading) return@setOnClickListener
+            if (isTutorial){
+                onItemClicked(item, position, view.root)
+            }else{
+                if (isGlobalLoading) return@setOnClickListener
 
-            if (!item.isDefeated){
-                item.isLoading = true
-                notifyItemChanged(position)
-                listener?.onItemClick(item)
+                if (!item.isDefeated){
+                    item.isLoading = true
+                    notifyItemChanged(position)
+                    listener?.onItemClick(item)
+                    onItemClicked(item, position, view.root)
+                }
             }
+
 
         }
 

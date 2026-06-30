@@ -18,7 +18,7 @@ import ir.radesh.basemodule.commons.initGrid
 import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.interfaces.OnItemClickListener
 
-class PlayHistoryFragment : BaseFragment<PlayHistoryFragmentBinding>(PlayHistoryFragmentBinding::inflate), OnItemClickListener<GameCell> {
+class PlayHistoryFragment : BaseFragment<PlayHistoryFragmentBinding>(PlayHistoryFragmentBinding::inflate) {
 
     var gameId: Int = 0
 
@@ -38,7 +38,7 @@ class PlayHistoryFragment : BaseFragment<PlayHistoryFragmentBinding>(PlayHistory
         gameId = arguments?.getInt("gameId")!!
         binding.rvOptions.initGrid(7, canScroll = false)
         binding.rvKills.initGrid(7, canScroll = false)
-        val adp = CellsAdapter(this)
+        val adp = CellsAdapter({_, _, _ -> })
         binding.rvKills.adapter = KillsAdapter(object : OnItemClickListener<GameKill> {
             override fun onItemClick(item: GameKill) {
                 onKillItemClicked(item)
@@ -85,10 +85,6 @@ class PlayHistoryFragment : BaseFragment<PlayHistoryFragmentBinding>(PlayHistory
 
     fun onKillItemClicked(item: GameKill) {
         showEnemyInfoDialog(item, true)
-    }
-
-    override fun onItemClick(item: GameCell) {
-
     }
 
 

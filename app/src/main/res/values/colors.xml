@@ -34,6 +34,7 @@
     <color name="xp_color">#7BC7EE</color>
     <color name="enemy_color">#9786FF</color>
     <color name="speed_color">#F4DFBD</color>
+    <color name="strategy_color">#E6C36A</color>
     <color name="life_color">#B23B15</color>
     <color name="coin_color">#FFD700</color>
     <color name="life_green_color">#97F997</color>
