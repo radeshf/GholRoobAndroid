@@ -38,7 +38,13 @@ interface Api {
     fun getGame(@Path("id") id: Int): Observable<Response<GameResponse>>
 
     @GET("api/v1/gholrob/profile/ratings")
-    fun getRatings(): Observable<Response<RatingResponse>>
+    fun getCurrentRatings(): Observable<Response<RatingResponse>>
+
+    @GET("api/v1/gholrob/profile/ratings/past")
+    fun getPreviousRatings(): Observable<Response<RatingResponse>>
+
+    @GET("api/v1/gholrob/profile/ratings/total")
+    fun getTotalRatings(): Observable<Response<RatingResponse>>
 
     @GET("api/v1/gholrob/profile/game/histories")
     fun getGameHistory(): Observable<Response<GameHistoriesResponse>>

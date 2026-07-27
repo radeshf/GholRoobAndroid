@@ -24,7 +24,7 @@ import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.view.play.TutorialPlayFragment
 import com.mrprojects.gholrob.view.play.history.HistoryFragment
 import com.mrprojects.gholrob.view.profile.showProfileInfoDialog
-import com.mrprojects.gholrob.view.rating.RatingFragment
+import com.mrprojects.gholrob.view.rating.MainRatingFragment
 import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
@@ -142,7 +142,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         }
         binding.brnRating.setOnClickListener {
-            openFragment(RatingFragment.newInstance())
+            openFragment(MainRatingFragment.newInstance())
         }
         binding.HeartsLayout.ivHeartAdd.setOnClickListener {
             showBuyEnergy()

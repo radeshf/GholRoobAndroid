@@ -13,7 +13,7 @@ import ir.radesh.basemodule.commons.hideLoading
 import ir.radesh.basemodule.commons.showLoading
 import org.greenrobot.eventbus.EventBus
 
-open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (LayoutInflater, ViewGroup, Boolean) -> B) : Fragment(), ApiSubscriber {
+open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (LayoutInflater, ViewGroup?, Boolean) -> B) : Fragment(), ApiSubscriber {
 
     private val disposables = CompositeDisposable()
 
@@ -21,7 +21,7 @@ open abstract class  BaseFragment<B : ViewBinding>(private var bindingClass: (La
     val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = bindingClass(inflater, container!!, false)
+        _binding = bindingClass(inflater, container, false)
         return binding.root
     }
 

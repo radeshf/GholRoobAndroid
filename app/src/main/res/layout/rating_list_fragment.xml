@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@+id/lnrLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:id="@+id/lnrHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:background="@drawable/bg_list_header"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/_4sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPageTitle"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:text="لیست قوی ترین بازیکنان"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textNormal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ig_ranking"
+                android:visibility="visible" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lnrReward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ranking_reward"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lnrHeader">
+
+            <ImageView
+                android:id="@+id/imgReward"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ig_money"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSeasonTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="جایزه این فصل"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textNormal"
+                app:layout_constraintEnd_toStartOf="@id/imgReward"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvReward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@color/money_color"
+                android:textSize="@dimen/textLarge"
+                app:layout_constraintEnd_toEndOf="@id/tvSeasonTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvSeasonTitle"
+                tools:text="100000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:text="@string/toman"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSmall"
+                app:layout_constraintBottom_toBottomOf="@+id/tvReward"
+                app:layout_constraintEnd_toStartOf="@+id/tvReward"
+                app:layout_constraintTop_toTopOf="@+id/tvReward" />
+
+            <LinearLayout
+                android:id="@+id/timerBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_timer_chip"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_time" />
+
+                <TextView
+                    android:id="@+id/tvSeasonEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSmall"
+                    tools:text="۳ روز ۱۲ ساعت" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvRewardDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:textColor="#D6CCFF"
+                android:textSize="@dimen/textSmall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvReward"
+                tools:text="جوایز این فصل بین نفرات 1و2و3و 5و 6 تقسیم میشود. برندگان میتوانند با آیدی /ثفثفث در بله تماس بگیرید" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRatings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/play_top_gap"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/userRatingLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lnrHeader"
+            tools:itemCount="3"
+            tools:listitem="@layout/rating_item" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/lnrLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:alpha="0.7"
+        android:background="@color/textColorOnDark"
+        app:layout_constraintBottom_toTopOf="@id/userRatingLayout" />
+
+    <include
+        android:id="@+id/userRatingLayout"
+        layout="@layout/rating_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

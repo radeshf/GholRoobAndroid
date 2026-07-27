@@ -29,6 +29,7 @@
     <color name="whatsapp">#075e54</color>
     <color name="likeColor">#BF003A</color>
     <color name="blackTransparent">#aa000000</color>
+    <color name="transparent">#00000000</color>
     <color name="ads_color">#1C450E</color>
     <color name="close_color">#771D0D</color>
     <color name="xp_color">#7BC7EE</color>

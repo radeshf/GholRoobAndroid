@@ -56,8 +56,16 @@ class ApiRepo(private val api: Api) {
         return api.getGame(gameId).networkSchedulers()
     }
 
-    fun getRatings() : Observable<Response<RatingResponse>> {
-        return api.getRatings().networkSchedulers()
+    fun getPreviousRatings() : Observable<Response<RatingResponse>> {
+        return api.getPreviousRatings().networkSchedulers()
+    }
+
+    fun getCurrentRatings() : Observable<Response<RatingResponse>> {
+        return api.getCurrentRatings().networkSchedulers()
+    }
+
+    fun getTotalRatings() : Observable<Response<RatingResponse>> {
+        return api.getTotalRatings().networkSchedulers()
     }
 
     fun getGameHistory() : Observable<Response<GameHistoriesResponse>> {

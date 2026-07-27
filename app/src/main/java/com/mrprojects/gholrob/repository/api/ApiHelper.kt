@@ -132,8 +132,13 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
 
     }
 
-    fun getRatings(doOnDone: (response: RatingResponse)->Unit){
-        apiSubscriber.subscribe(apiRepo.getRatings().subscribeWith(object : RadResponseHelper<RatingResponse>(apiSubscriber){
+    fun getRatings(type: String, doOnDone: (response: RatingResponse)->Unit){
+        val api = when(type){
+            "total" -> apiRepo.getTotalRatings()
+            "past" -> apiRepo.getPreviousRatings()
+            else -> apiRepo.getCurrentRatings()
+        }
+        apiSubscriber.subscribe(api.subscribeWith(object : RadResponseHelper<RatingResponse>(apiSubscriber){
             override fun onSuccessful(response: RatingResponse) {
                 doOnDone(response)
             }

@@ -28,10 +28,18 @@ class Rating {
 
     fun getRankBg(): Int{
         when (rank) {
+            "1" -> return R.drawable.bg_transparent
+            "2" -> return R.drawable.bg_transparent
+            "3" -> return R.drawable.bg_transparent
+            else -> return R.drawable.bg_rank
+        }
+    }
+    fun getRankImage(): Int{
+        when (rank) {
             "1" -> return R.drawable.ig_rank_1
             "2" -> return R.drawable.ig_rank_2
             "3" -> return R.drawable.ig_rank_3
-            else -> return R.drawable.bg_rank
+            else -> return R.drawable.bg_transparent
         }
     }
 }

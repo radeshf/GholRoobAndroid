@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_4sdp"
+    android:layout_marginVertical="@dimen/_3sdp"
+    app:cardBackgroundColor="#1E2A3A"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_2sdp"
+    app:rippleColor="#33FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_60sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_6sdp">
+
+        <!-- Rank Badge -->
+        <LinearLayout
+            android:id="@+id/lnrRank"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/bg_rank"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tvRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textLarge"
+                android:visibility="visible"
+                tools:text="25" />
+
+            <ImageView
+                android:id="@+id/ivRank"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:visibility="gone"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ig_rank_1" />
+        </LinearLayout>
+
+        <!-- Avatar -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivUserProfile"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_44sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/ig_profile_anoshirvan"
+            app:strokeColor="#44FFFFFF"
+            app:strokeWidth="1dp"
+            app:layout_constraintEnd_toStartOf="@id/lnrRank"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Name + Stats -->
+        <LinearLayout
+            android:id="@+id/lnrRevealed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:orientation="vertical"
+            android:gravity="end"
+            app:layout_constraintEnd_toStartOf="@id/ivUserProfile"
+            app:layout_constraintStart_toEndOf="@id/lnrReward"
+            app:layout_constraintTop_toTopOf="@id/ivUserProfile"
+            app:layout_constraintBottom_toBottomOf="@id/ivUserProfile">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvYou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:text="(شما)"
+                    android:textColor="#BB86FC"
+                    android:textSize="@dimen/textSmall"
+                    android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/textLarge"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="رادش" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:src="@drawable/ig_xp"
+                    android:contentDescription="@string/contentDescription" />
+
+                <TextView
+                    android:id="@+id/tvUserXp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:textColor="#B0BEC5"
+                    android:textSize="@dimen/textNormal"
+                    tools:text="0" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:src="@drawable/ig_kills"
+                    android:contentDescription="@string/contentDescription" />
+
+                <TextView
+                    android:id="@+id/tvUserGames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:textColor="#B0BEC5"
+                    android:textSize="@dimen/textNormal"
+                    tools:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Reward -->
+        <LinearLayout
+            android:id="@+id/lnrReward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ig_money"
+                android:contentDescription="@string/contentDescription" />
+
+            <TextView
+                android:id="@+id/tvReward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus2sdp"
+                android:textColor="#FFD700"
+                android:textSize="@dimen/textNormal"
+                android:textStyle="bold"
+                tools:text="100000" />
+        </LinearLayout>
+
+        <!-- Edit -->
+        <ImageView
+            android:id="@+id/lnrEditProfile"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:visibility="invisible"
+            android:src="@drawable/ig_edit"
+            android:contentDescription="@string/contentDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

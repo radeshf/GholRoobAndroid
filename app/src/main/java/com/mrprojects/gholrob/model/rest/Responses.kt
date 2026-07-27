@@ -51,6 +51,7 @@ class RatingResponse: RadBaseResponse() {
 
         class SeasonReward(){
             @SerializedName("is_active") val isActive: Boolean = false
+            @SerializedName("title") val title: String? = ""
             @SerializedName("price_pool") val pricePool: String? = ""
             @SerializedName("season_end") val seasonEnd: String? = ""
             @SerializedName("description") val description: String? = ""

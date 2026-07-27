@@ -16,6 +16,7 @@ class RatingsAdapter(listener: OnItemClickListener<Rating>?) : RvAdapter<Rating,
     @SuppressLint("SetTextI18n")
     override fun onBindView(view: RatingItemBinding, item: Rating, position: Int, listener: OnItemClickListener<Rating>?) {
         view.tvUserXp.text = item.totalScore
+        view.tvUserGames.text = item.totalAttempts
         view.tvUserName.text = item.user.name
         view.ivUserProfile.setImageResource(item.user.getProfileResource())
         view.lnrRank.visibleByBoolean(item.showRank)
@@ -23,6 +24,9 @@ class RatingsAdapter(listener: OnItemClickListener<Rating>?) : RvAdapter<Rating,
         if (item.showRank){
             view.tvRank.text = item.getRankToDisplay()
             view.lnrRank.setBackgroundResource(item.getRankBg())
+            view.ivRank.setImageResource(item.getRankImage())
+            view.ivRank.visibleByBoolean(item.isInHighRank())
+            view.tvRank.visibleByBoolean(!item.isInHighRank())
         }
         if (item.showReward){
             view.tvReward.text = item.reward
