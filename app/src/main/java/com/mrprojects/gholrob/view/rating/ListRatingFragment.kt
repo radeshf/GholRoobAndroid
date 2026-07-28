@@ -83,6 +83,7 @@ class ListRatingFragment : BaseFragment<RatingListFragmentBinding>(RatingListFra
                 binding.tvReward.text = it.data.seasonReward.pricePool
                 binding.tvSeasonEndTime.text = it.data.seasonReward.seasonEnd
                 binding.tvRewardDescription.loadHtml(it.data.seasonReward.description.toString())
+
             }
         }
     }

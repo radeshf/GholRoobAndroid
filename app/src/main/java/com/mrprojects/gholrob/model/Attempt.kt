@@ -56,6 +56,39 @@ class Attempt {
             )
 
         }
+        fun tutorialZero(): Attempt {
+            val cells = arrayListOf<GameCell>()
+            cells.add(GameCell(5, 1, CellTypes.EMPTY))
+            cells.add(GameCell(5, 2, CellTypes.EMPTY))
+            cells.add(GameCell(5, 3, CellTypes.BOTTOMLESS_PIT, true, false))
+            cells.add(GameCell(5, 4, CellTypes.SMALL_BOSS, true, false))
+            cells.add(GameCell(5, 5, CellTypes.BOTTOMLESS_PIT, true, false))
+            cells.add(GameCell(5, 6, CellTypes.EMPTY))
+            cells.add(GameCell(5, 7, CellTypes.EMPTY))
+
+            cells.add(GameCell(6, 1, CellTypes.EMPTY))
+            cells.add(GameCell(6, 2, CellTypes.EMPTY))
+            cells.add(GameCell(6, 3, CellTypes.HEART,true, false))
+            cells.add(GameCell(5, 4, CellTypes.BIG_BOSS, true, false))
+            cells.add(GameCell(6, 5, CellTypes.HEART,true, false))
+            cells.add(GameCell(6, 6, CellTypes.EMPTY))
+            cells.add(GameCell(6, 7, CellTypes.EMPTY))
+
+            cells.add(GameCell(7, 1, CellTypes.EMPTY))
+            cells.add(GameCell(7, 2, CellTypes.EMPTY))
+            cells.add(GameCell(7, 3, CellTypes.BOTTOMLESS_PIT,true, false))
+            cells.add(GameCell(7, 4, CellTypes.FINAL_BOSS,true, false))
+            cells.add(GameCell(7, 5, CellTypes.BOTTOMLESS_PIT,true, false))
+            cells.add(GameCell(7, 6, CellTypes.EMPTY))
+            cells.add(GameCell(7, 7, CellTypes.EMPTY))
+
+            return Attempt(
+                hearts = 6,
+                totalHearts = 6,
+                cells = cells,
+            )
+
+        }
         fun tutorialKill(): Attempt {
             val cells = arrayListOf<GameCell>()
             cells.add(GameCell(5, 1, CellTypes.EMPTY))

@@ -113,7 +113,7 @@
                     android:id="@+id/tvUserGames"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#B0BEC5"
+                    android:textColor="#1788A2"
                     android:textSize="@dimen/textNormal"
                     tools:text="0" />
                 <ImageView

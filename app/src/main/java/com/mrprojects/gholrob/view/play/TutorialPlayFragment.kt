@@ -70,7 +70,7 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
             isFlagSelected = !isFlagSelected
             if (isFlagSelected) {
                 binding.btnFlag.setBackgroundResource(R.drawable.box_btn_selected)
-                if (tutorialId == 3){
+                if (tutorialId == 4){
                     checkTutorialMission(1)
                 }
             } else {
@@ -95,37 +95,41 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
 
 
     private fun getData() {
-        binding.tvArrows.visibleByBoolean(tutorialId == 1)
-        binding.lnrArrows.visibleByBoolean(tutorialId == 1)
-        binding.lnrHeartArrows.visibleByBoolean(tutorialId == 2)
-        binding.lnrFlagArrows.visibleByBoolean(tutorialId == 3)
+        binding.tvArrows.visibleByBoolean(tutorialId == 2)
+        binding.lnrArrows.visibleByBoolean(tutorialId == 2)
+        binding.lnrHeartArrows.visibleByBoolean(tutorialId == 3)
+        binding.lnrFlagArrows.visibleByBoolean(tutorialId == 4)
 
         binding.ivLast.visibleByBoolean(tutorialId != 1)
-        binding.ivNext.visibleByBoolean(tutorialId != 5 && PrefHelper(requireContext()).isTutorialFinished)
+        binding.ivNext.visibleByBoolean(tutorialId != 6 && PrefHelper(requireContext()).isTutorialFinished)
 
         binding.tvTutorialNumber.text = "راهنمای $tutorialId"
 
         if (tutorialId == 1){
+            attempt = Attempt.tutorialZero()
+            binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_0))
+        }
+        if (tutorialId == 2){
             attempt = Attempt.tutorialKill()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_1))
 
         }
-        if (tutorialId == 2){
+        if (tutorialId == 3){
             attempt = Attempt.tutorialHeart()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_2))
 
         }
-        if (tutorialId == 3){
+        if (tutorialId == 4){
             attempt = Attempt.tutorialFlag()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_3))
 
         }
-        if (tutorialId == 4){
+        if (tutorialId == 5){
             attempt = Attempt.tutorialEye()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_4))
 
         }
-        if (tutorialId == 5){
+        if (tutorialId == 6){
             attempt = Attempt.tutorialFinal()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_5))
 
@@ -135,6 +139,22 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
 
     private fun tutorialActions(item: GameCell){
         if(tutorialId == 1){
+            if (item.isBossSmall()){
+                checkTutorialMission(1)
+            }
+            if (item.isBossBig()){
+                checkTutorialMission(2)
+            }
+            if (item.isBossFinal()){
+                checkTutorialMission(3)
+                showTutorialDoneDialog("بزن بریم","آماده ای که بریم پله پله همه چیزی که لازم هست بدونی رو یاد بگیری") { dialog ->
+                    openFragment(newInstance(2), false)
+                    dialog.dismiss()
+                }
+            }
+
+        }
+        if(tutorialId == 2){
             if (item.isHyena()){
                 checkTutorialMission(1)
             }
@@ -146,12 +166,12 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
             }
             if (attempt.hearts == 0){
                 showTutorialDoneDialog("آفرین","ماموریت اول رو انجام دادی! بریم برای آموزش شکست ضحاک") { dialog ->
-                    openFragment(newInstance(2), false)
+                    openFragment(newInstance(3), false)
                     dialog.dismiss()
                 }
             }
         }
-        else if(tutorialId == 2){
+        else if(tutorialId == 3){
             if (item.isSnake()){
                 if (killedSnacks < 2){
                     killedSnacks += 1
@@ -167,37 +187,37 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
             if(item.isBossSmall()){
                 checkTutorialMission(2)
                 showTutorialDoneDialog("دست خوش", "ضحاک رو شکست دادی. بریم سراغ کار با پرچم") { dialog ->
-                    openFragment(newInstance(3), false)
+                    openFragment(newInstance(4), false)
                     dialog.dismiss()
                 }
             }
 
         }
-        else if(tutorialId == 3){
+        else if(tutorialId == 4){
             Timber.e("item: $item")
             if (item.isFlagged && item.isBottomLessPit()){
                 checkTutorialMission(2)
                 showTutorialDoneDialog("ایول", "اینم از پرچم گذاری. بزن بریم ") { dialog ->
-                    openFragment(newInstance(4), false)
+                    openFragment(newInstance(5), false)
                     dialog.dismiss()
                 }
             }
         }
-        else if(tutorialId == 4){
+        else if(tutorialId == 5){
             if (item.isDessert()){
                 checkTutorialMission(1)
             }
             if (item.isGhost()){
                 checkTutorialMission(2)
                 showTutorialDoneDialog("عالیه", "بریم سراغ آخرین آموزش") { dialog ->
-                    openFragment(newInstance(5), false)
+                    openFragment(newInstance(6), false)
                     dialog.dismiss()
                 }
             }
 
 
         }
-        else if(tutorialId == 5){
+        else if(tutorialId == 6){
             if (item.isBossBig()){
                 checkTutorialMission(1)
             }
