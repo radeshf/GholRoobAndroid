@@ -1,0 +1,52 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/play_x_gap">
+
+    <FrameLayout
+        android:id="@+id/btnAction"
+        android:layout_width="@dimen/play_btn_size"
+        android:layout_height="@dimen/play_btn_size"
+        android:background="@drawable/bg_action_btn"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:id="@+id/ivIcon"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig_shield" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tvActionCounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/_15sdp"
+        android:minHeight="@dimen/_15sdp"
+        android:background="@drawable/bg_action_badge"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textMedium"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/btnAction"
+        app:layout_constraintBottom_toTopOf="@id/btnAction"
+        app:layout_constraintStart_toStartOf="@id/btnAction"
+        app:layout_constraintEnd_toEndOf="@id/btnAction"
+        tools:text="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

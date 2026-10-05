@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- لایه ۱: شیشه دودی وینیِت با کانون بنفش تیره در مرکز -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="70%p"
+                android:centerX="50%"
+                android:centerY="45%"
+                android:startColor="#B31A1530"
+                android:centerColor="#E60D0E14"
+                android:endColor="#F208090C" />
+        </shape>
+    </item>
+
+    <!-- لایه ۲: بازتاب نوری ملایم شیشه در لبه بالایی (Specular Glass Reflection) -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="#1AFFFFFF"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
+
+</layer-list>

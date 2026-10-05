@@ -1,0 +1,56 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/lnrEyeOn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    android:background="@drawable/bg_eye_active_banner"
+    android:paddingVertical="@dimen/_2sdp"
+    android:paddingHorizontal="@dimen/_6sdp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btnTutorial"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/frameEyeIcon"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@drawable/bg_eye_avatar_frame"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ig_eye" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="center_vertical|end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/frameEyeIcon"
+        app:layout_constraintEnd_toStartOf="@id/frameEyeIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frameEyeIcon">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="حالت چشم عقاب فعال است"
+            android:textColor="#63B3ED"
+            android:textSize="@dimen/textSmall"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="روی یک مربع بزن تا آشکار بشه"
+            android:textColor="#E2E8F0"
+            android:textSize="@dimen/textMedium" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

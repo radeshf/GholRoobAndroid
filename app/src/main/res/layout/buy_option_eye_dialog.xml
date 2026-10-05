@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_12sdp">
+
+    <!-- کارت بدنه دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingTop="@dimen/_36sdp"
+            android:paddingBottom="@dimen/_12sdp">
+
+            <!-- عنوان دیالوگ -->
+            <TextView
+                android:id="@+id/tvTitleDialog"
+                style="@style/Widget.Game.Dialog.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قدرت چشم عقاب"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- توضیح -->
+            <TextView
+                android:id="@+id/tvMessageDialog"
+                style="@style/Widget.Game.Dialog.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="با چشم عقاب میتونی زیر یه کاشی رو بدون آسیب دیدن ببینی"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleDialog" />
+
+            <!-- ================= ردیف پکیج‌ها ================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lnrCards"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTierLarge"
+                    style="@style/Widget.Game.Dialog.TierCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_14sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_8sdp">
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_14sdp" />
+
+                        <TextView
+                            android:id="@+id/tvLargeCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="۲۵ عدد"
+                            android:textColor="@color/game_text_primary"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivLarge"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:src="@drawable/ig_eye" />
+
+                        <include layout="@layout/shop_buy_btn"
+                            android:id="@+id/btnBuyLarge"
+                            />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTierMedium"
+                    style="@style/Widget.Game.Dialog.TierCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:strokeColor="#8B5CF6"
+                    app:strokeWidth="1.5dp"
+                    app:cardBackgroundColor="#2D294A"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_8sdp">
+
+                        <TextView
+                            android:id="@+id/badgePopular"
+                            style="@style/Widget.Game.Badge.Popular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#8B5CF6"
+                            android:text="★ محبوب ترین" />
+
+                        <TextView
+                            android:id="@+id/tvMediumCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="۱۰ عدد"
+                            android:textColor="#C4B5FD"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivMedium"
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:src="@drawable/ig_eye" />
+
+                        <include layout="@layout/shop_buy_target_btn"
+                            android:id="@+id/btnBuyTarget"
+                            />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardTierSmall"
+                    style="@style/Widget.Game.Dialog.TierCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_8sdp">
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_14sdp" />
+
+                        <TextView
+                            android:id="@+id/tvSmallCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="۳ عدد"
+                            android:textColor="@color/game_text_primary"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_28sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:id="@+id/ivSmall"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:src="@drawable/ig_eye" />
+
+                        <include layout="@layout/shop_buy_btn"
+                            android:id="@+id/btnBuySmall"
+                            />
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- ================= ردیف تبلیغ ================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnAdAction"
+                style="@style/Widget.Game.Dialog.AdCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnrCards">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <include layout="@layout/timer_layout"
+                        android:visibility="gone"
+                        android:id="@+id/lnrTimer"/>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/btnByAds"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_8sdp"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/lnrDot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tvBonusHeartDots"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🟢"
+                                android:textSize="@dimen/_9sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            android:gravity="center_vertical|end"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/ivBonusHeart"
+                            app:layout_constraintStart_toEndOf="@id/lnrDot"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tvAdsTitle"
+                                android:text="مشاهده تبلیغ (۱ چشم رایگان)"
+                                android:textColor="@color/game_text_primary"
+                                android:textSize="@dimen/_11sdp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvBonusHeartLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="دریافت آنی بدون نیاز به سکه یا خرید"
+                                android:textColor="@color/game_text_muted"
+                                android:textSize="@dimen/_8sdp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/ivBonusHeart"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
+                            android:src="@drawable/ig_ads"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+      <include layout="@layout/dialog_dismiss_btn" android:id="@+id/btnDismiss"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- آیکون هیرو شناور -->
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="@dimen/_68sdp"
+        android:layout_height="@dimen/_68sdp"
+        android:elevation="@dimen/_10sdp"
+        android:src="@drawable/ig_eye"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

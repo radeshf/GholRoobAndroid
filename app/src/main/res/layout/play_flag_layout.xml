@@ -1,0 +1,72 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/lnrFlagOn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_flag_active_banner"
+    android:paddingVertical="@dimen/_2sdp"
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    android:visibility="visible"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btnTutorial"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- قاب آیکون تله / خطر -->
+    <FrameLayout
+        android:id="@+id/frameTrapIcon"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@drawable/bg_trap_avatar_frame"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivTrapImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ig_enemy_shoghad_trap" />
+    </FrameLayout>
+
+    <!-- کانتینر متن راهنما (راست‌چین و ساختاریافته) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="center_vertical|end"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/frameTrapIcon"
+        app:layout_constraintEnd_toStartOf="@id/frameTrapIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frameTrapIcon">
+
+        <!-- تیتر وضعیت ابزار -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="حالت پرچم‌گذاری فعال است"
+            android:textColor="#F6AD55"
+            android:textSize="@dimen/textSmall"
+            android:textStyle="bold" />
+
+        <!-- متن راهنمای اکشن کاربر -->
+        <TextView
+            android:id="@+id/tvFlagHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:includeFontPadding="false"
+            android:text="روی خانه‌ای که فکر می‌کنی چاه شغاد هست بزن"
+            android:textColor="#E2E8F0"
+            android:textSize="@dimen/textMedium" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

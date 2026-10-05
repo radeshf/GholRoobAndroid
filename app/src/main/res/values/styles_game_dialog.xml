@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Game.Dialog" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- حذف کامل نوار عنوان و اکشن‌بار -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+
+        <!-- پس‌زمینه شفاف شیشه‌ای لایه سیستمی -->
+        <item name="android:windowBackground">@drawable/bg_glass_dialog</item>
+
+        <!-- غیرفعال کردن شناور بودن: اجازه میده دیالوگ کل صفحه رو بگیره و حاشیه‌های بدقواره نندازه -->
+        <item name="android:windowIsFloating">false</item>
+
+        <!-- تاریک‌سازی پشت دیالوگ با آلفای نرمال -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.65</item>
+
+        <!-- شیشه‌ای و ترنسلوسنت کردن پنجره -->
+        <item name="android:windowIsTranslucent">true</item>
+
+        <!-- انیمیشن ورود و خروج -->
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+
+        <!-- پر کردن کامل صفحه شامل محدوده Status Bar و Navigation Bar برای حالت ایمرسیو -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- ۱. استایل بدنه اصلی دیالوگ -->
+    <style name="Widget.Game.Dialog.Container" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/game_dialog_bg</item>
+        <item name="cardCornerRadius">@dimen/_22sdp</item>
+        <item name="cardElevation">@dimen/_8sdp</item>
+        <item name="strokeColor">@color/game_dialog_stroke</item>
+        <item name="strokeWidth">1.2dp</item>
+    </style>
+
+    <!-- ۲. تایپوگرافی دیالوگ -->
+    <style name="Widget.Game.Dialog.Title" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/game_text_primary</item>
+        <item name="android:textSize">@dimen/_17sdp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Widget.Game.Dialog.Subtitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/game_text_secondary</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <!-- ۳. کارت‌های گزینه‌ها (Tiers) -->
+    <style name="Widget.Game.Dialog.TierCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/game_card_tier_bg</item>
+        <item name="cardCornerRadius">@dimen/_12sdp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/game_card_tier_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- ۴. نوار ردیف تماشای تبلیغ -->
+    <style name="Widget.Game.Dialog.AdCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/game_ad_row_bg</item>
+        <item name="cardCornerRadius">@dimen/_12sdp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/game_ad_row_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- ۵. دکمه بستن/رد کردن پایینی -->
+    <style name="Widget.Game.Dialog.DismissButton" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/game_text_muted</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:paddingStart">@dimen/_16sdp</item>
+        <item name="android:paddingEnd">@dimen/_16sdp</item>
+        <item name="android:paddingTop">@dimen/_6sdp</item>
+        <item name="android:paddingBottom">@dimen/_6sdp</item>
+    </style>
+
+    <!-- ۶. برچسب نشان محبوب/ویژه (Badge) -->
+    <style name="Widget.Game.Badge.Popular" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">@dimen/_7sdp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/_1sdp</item>
+        <item name="android:paddingBottom">@dimen/_1sdp</item>
+        <item name="android:background">#8B5CF6</item>
+    </style>
+
+</resources>

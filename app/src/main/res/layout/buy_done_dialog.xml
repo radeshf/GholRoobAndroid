@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
+
+    <!-- کارت بدنه دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lnrDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_40sdp"
+            android:paddingBottom="@dimen/_16sdp">
+
+            <!-- عنوان دیالوگ -->
+            <TextView
+                android:id="@+id/tvTitleDialog"
+                style="@style/Widget.Game.Dialog.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="خرید موفق"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- کانتینر نمایش تعداد و آیکون آیتم خریداری شده -->
+            <LinearLayout
+                android:id="@+id/lnrCoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleDialog">
+
+                <ImageView
+                    android:id="@+id/ivPurchasedItem"
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_heart" />
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_32sdp"
+                    android:textStyle="bold"
+                    tools:text="+1" />
+
+            </LinearLayout>
+
+            <!-- پیام و توضیحات -->
+            <TextView
+                android:id="@+id/tvMessageDialog"
+                style="@style/Widget.Game.Dialog.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
+                android:textColor="@color/game_text_primary"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnrCoin"
+                tools:text="نوش دارو به حساب شما اضافه شد" />
+
+            <!-- دکمه بستن / تایید -->
+            <LinearLayout
+                android:id="@+id/lnrBackButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog">
+
+                <include layout="@layout/dialog_dismiss_btn" android:id="@+id/btnDismiss"/>
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- آیکون هیرو شناور دیالوگ (Success/Checkmark) -->
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:elevation="@dimen/_10sdp"
+        android:src="@drawable/ig_ok"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

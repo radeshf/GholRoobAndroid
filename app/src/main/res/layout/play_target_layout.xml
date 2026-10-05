@@ -1,0 +1,73 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/layTargetBanner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    android:background="@drawable/bg_target_banner"
+    android:paddingVertical="@dimen/_2sdp"
+    android:paddingHorizontal="@dimen/_2sdp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btnTutorial"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- کانتینر تصویر باس با قاب برجسته -->
+    <FrameLayout
+        android:id="@+id/frameBossAvatar"
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:background="@drawable/bg_boss_avatar_frame"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBossImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ig_enemy_zahak" />
+    </FrameLayout>
+
+    <!-- متون هدف (ترکیب منظم و راست‌چین) -->
+    <LinearLayout
+        android:id="@+id/layTargetText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/frameBossAvatar"
+        app:layout_constraintEnd_toStartOf="@id/frameBossAvatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frameBossAvatar">
+
+        <!-- عبارت اکشن -->
+        <TextView
+            android:id="@+id/tvTargetAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="را پیدا کن و نابود کن"
+            android:textColor="#CBD5E0"
+            android:textSize="@dimen/textSemiLarge" />
+
+        <!-- نام باس با هایلایت و افکت خونی/قرمز -->
+        <TextView
+            android:id="@+id/tvBossName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:includeFontPadding="false"
+            android:textColor="#FF4D4D"
+            android:textSize="@dimen/textExtraLarge"
+            android:textStyle="bold"
+            tools:text="ضحاک" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

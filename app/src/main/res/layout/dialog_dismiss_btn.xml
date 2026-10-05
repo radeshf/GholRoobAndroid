@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/btnDismiss"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/_7sdp"
+    android:paddingBottom="@dimen/_7sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:background="@drawable/bg_btn_dismiss_glass"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/_14sdp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btnAdAction"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:alpha="0.7"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close"
+        app:tint="@color/game_text_secondary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/_40sdp"
+        android:id="@+id/tvDismiss"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="حله"
+        android:textColor="@color/game_text_secondary"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="normal" />
+
+</LinearLayout>
+
+

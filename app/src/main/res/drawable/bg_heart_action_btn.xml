@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FF4D4D">
+    <item>
+        <layer-list>
+            <!-- سایه زیرین / لبه سه‌بعدی دکمه -->
+            <item android:top="2.5dp">
+                <shape android:shape="rectangle">
+                    <corners android:radius="100dp" />
+                    <solid android:color="#1A1315" />
+                </shape>
+            </item>
+
+            <!-- بدنه اصلی کپسول -->
+            <item android:bottom="2.5dp">
+                <shape android:shape="rectangle">
+                    <corners android:radius="100dp" />
+                    <gradient
+                        android:angle="270"
+                        android:startColor="#2D1B22"
+                        android:endColor="#1C1014" />
+                    <!-- استروک لطیف با تن رنگی قرمز تیره -->
+                    <stroke
+                        android:width="1.2dp"
+                        android:color="#5C2533" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</ripple>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF">
+
+    <item>
+        <selector>
+            <!-- ۱. وضعیت انتخاب شده (Selected State) -->
+            <item android:state_selected="true">
+                <layer-list>
+                    <!-- بدنه در وضعیت فشرده‌شده (پایین نشسته) -->
+                    <item android:top="2dp">
+                        <shape android:shape="rectangle">
+                            <corners android:radius="14dp" />
+                            <gradient
+                                android:angle="270"
+                                android:startColor="#319795"
+                                android:endColor="#1D4044" />
+                            <!-- حاشیه فعال و درخشان -->
+                            <stroke
+                                android:width="1.5dp"
+                                android:color="#4FD1C5" />
+                        </shape>
+                    </item>
+                </layer-list>
+            </item>
+
+            <!-- ۲. وضعیت پیش‌فرض / عادی (Normal State) -->
+            <item>
+                <layer-list>
+                    <!-- سایه/ضخامت لبه پایین -->
+                    <item android:top="2dp">
+                        <shape android:shape="rectangle">
+                            <corners android:radius="14dp" />
+                            <solid android:color="#1A202C" />
+                        </shape>
+                    </item>
+
+                    <!-- بدنه اصلی دکمه -->
+                    <item android:bottom="2dp">
+                        <shape android:shape="rectangle">
+                            <corners android:radius="14dp" />
+                            <gradient
+                                android:angle="270"
+                                android:startColor="#2D3748"
+                                android:endColor="#1A202C" />
+                            <stroke
+                                android:width="1dp"
+                                android:color="#4A5568" />
+                        </shape>
+                    </item>
+                </layer-list>
+            </item>
+        </selector>
+    </item>
+</ripple>

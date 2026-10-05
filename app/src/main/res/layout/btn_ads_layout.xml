@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrTimer"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_30sdp"
+    android:background="@drawable/bg_timer"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingEnd="@dimen/_8sdp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    >
+
+    <!-- آیکون زمان مینیمال -->
+    <ImageView
+        android:id="@+id/ivTimerIcon"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:src="@drawable/ig_time"
+        app:layout_constraintBottom_toTopOf="@+id/timerProgress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- ساعت (سفید شفاف) -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivTimerIcon"
+        app:layout_constraintStart_toEndOf="@+id/ivTimerIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivTimerIcon"
+        tools:text="11" />
+
+    <!-- دونقطه ۱ -->
+    <TextView
+        android:id="@+id/colon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:includeFontPadding="false"
+        android:text=":"
+        android:textColor="#80FFFFFF"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHours"
+        app:layout_constraintStart_toEndOf="@+id/tvHours"
+        app:layout_constraintTop_toTopOf="@+id/tvHours" />
+
+    <!-- دقیقه (سفید شفاف) -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHours"
+        app:layout_constraintStart_toEndOf="@+id/colon1"
+        app:layout_constraintTop_toTopOf="@+id/tvHours"
+        tools:text="45" />
+
+    <!-- دونقطه ۲ -->
+    <TextView
+        android:id="@+id/colon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:includeFontPadding="false"
+        android:text=":"
+        android:textColor="#4CD7D0"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHours"
+        app:layout_constraintStart_toEndOf="@+id/tvMinutes"
+        app:layout_constraintTop_toTopOf="@+id/tvHours" />
+
+    <!-- ثانیه (رنگ اختصاصی نئونی با پویایی بالا) -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:includeFontPadding="false"
+        android:textColor="#4CD7D0"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHours"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/colon2"
+        app:layout_constraintTop_toTopOf="@+id/tvHours"
+        tools:text="24" />
+
+    <!-- خط باریک پروگرس در کف کپسول (۲dp) -->
+    <ProgressBar
+        android:id="@+id/timerProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="2.5dp"
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        android:layout_marginBottom="2dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="60"
+        android:progressDrawable="@drawable/progress_timer_neon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
