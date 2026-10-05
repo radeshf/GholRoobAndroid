@@ -1,4 +1,7 @@
 
+V1.4.5 in 1405/07/13
+- Major Update
+
 V1.3.5 in 1405/05/06
 - Add new tutorial
 

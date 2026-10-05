@@ -4,20 +4,34 @@
     android:id="@+id/lnrMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/poster2"
+    android:background="@drawable/poster"
+
     >
 
-
-
-    <ImageView
-        android:id="@+id/mainContainer"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/contentDescription"
-        android:background="#aa000000"
-        android:src="@drawable/mr_logo"
-        android:orientation="vertical" />
+        android:id="@+id/lnrLogos"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="#aa000000">
 
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:contentDescription="@string/contentDescription"
+            android:orientation="vertical"
+            android:src="@drawable/mr_logo" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:contentDescription="@string/contentDescription"
+            android:orientation="vertical"
+            android:src="@drawable/logo" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

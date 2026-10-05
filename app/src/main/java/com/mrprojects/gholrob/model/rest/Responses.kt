@@ -53,6 +53,7 @@ class RatingResponse: RadBaseResponse() {
             @SerializedName("is_active") val isActive: Boolean = false
             @SerializedName("title") val title: String? = ""
             @SerializedName("price_pool") val pricePool: String? = ""
+            @SerializedName("show_toman") val showToman: Boolean? = false
             @SerializedName("season_end") val seasonEnd: String? = ""
             @SerializedName("description") val description: String? = ""
 
@@ -73,6 +74,15 @@ class ClickOnCellResponse: RadBaseResponse() {
 }
 
 class FlagCellResponse: RadBaseResponse() {
+    @SerializedName("data") val data: Data = Data()
+    class Data(){
+        @SerializedName("cell") val cell: GameCell? = null
+        @SerializedName("attempt") val game: Attempt? = null
+
+    }
+}
+
+class ActionOnCellResponse: RadBaseResponse() {
     @SerializedName("data") val data: Data = Data()
     class Data(){
         @SerializedName("cell") val cell: GameCell? = null

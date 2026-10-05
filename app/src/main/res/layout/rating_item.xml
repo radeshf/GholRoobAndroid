@@ -10,7 +10,6 @@
     android:layout_marginVertical="@dimen/_2sdp"
     app:cardBackgroundColor="#1E2A3A"
     app:cardCornerRadius="@dimen/_10sdp"
-    app:cardElevation="@dimen/_2sdp"
     app:rippleColor="#33FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout

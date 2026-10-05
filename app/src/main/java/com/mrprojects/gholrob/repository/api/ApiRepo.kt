@@ -17,6 +17,10 @@ class ApiRepo(private val api: Api) {
         return api.editProfile(post).networkSchedulers()
     }
 
+    fun editProfileImage(post: EditProfileImagePost) : Observable<Response<UserResponse>> {
+        return api.editProfileImage(post).networkSchedulers()
+    }
+
     fun sendOtp(post: OtpPost) : Observable<Response<EmptyResponse>> {
         return api.sendOtp(post).networkSchedulers()
     }
@@ -93,6 +97,14 @@ class ApiRepo(private val api: Api) {
 
     fun flagCell(gameId: Int, cellId: Int) : Observable<Response<FlagCellResponse>> {
         return api.flagCell(gameId, cellId).networkSchedulers()
+    }
+
+    fun useEye(gameId: Int, cellId: Int) : Observable<Response<ActionOnCellResponse>> {
+        return api.useEye(gameId, cellId).networkSchedulers()
+    }
+
+    fun useShield(gameId: Int, cellId: Int) : Observable<Response<ActionOnCellResponse>> {
+        return api.useShield(gameId, cellId).networkSchedulers()
     }
 
 

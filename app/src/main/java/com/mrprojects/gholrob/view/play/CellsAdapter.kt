@@ -105,6 +105,14 @@ class CellsAdapter(val onItemClicked: (item: GameCell, position: Int, view: View
         view.tvCellDefeated.visibleByBoolean(true)
     }
 
+    fun setCellLoading(item: GameCell, isLoading: Boolean) {
+        val index = itemsList.indexOf(item)
+        if (index != -1) {
+            itemsList[index].isLoading = isLoading
+            notifyItemChanged(index)
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onBindView(view: OptionItemBinding, item: GameCell, position: Int, listener: OnItemClickListener<GameCell>?) {
 

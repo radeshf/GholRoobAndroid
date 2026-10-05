@@ -8,195 +8,16 @@
     android:background="@color/colorPrimary">
 
     <LinearLayout
-        android:id="@+id/lnrTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:gravity="center"
-        android:visibility="visible"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="را پیدا کن و بکش "
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSemiLarge" />
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:id="@+id/ivBossImage"
-            android:contentDescription="@string/contentDescription"
-            android:scaleType="fitCenter"
-            android:visibility="visible" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/textVeryLarge" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvBossName"
-            android:gravity="center"
-            tools:text="ضحاک"
-            android:textColor="@color/red"
-            android:textSize="@dimen/textVeryLarge" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lnrFlagOn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
         android:gravity="center"
-        android:visibility="invisible"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="هست بزن تا علامت گذاری بشه"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textMedium" />
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:contentDescription="@string/contentDescription"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ig_enemy_shoghad_trap"
-            android:visibility="visible" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="روی مربعی که فکر میکنی "
-            android:textColor="@color/white"
-            android:textSize="@dimen/textMedium" />
-
-    </LinearLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOptions"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/play_x_margin"
-        android:layout_marginTop="@dimen/play_top_gap"
-        android:layout_marginEnd="@dimen/play_x_margin"
-        android:layout_marginBottom="@dimen/play_top_gap"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/lnrTarget"
-        app:spanCount="7"
-        tools:itemCount="77"
-        tools:listitem="@layout/option_item" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKills"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/play_x_margin"
-        android:layout_marginTop="@dimen/play_top_gap"
-        app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
-        android:layout_marginEnd="@dimen/play_x_margin"
-        android:layout_marginBottom="@dimen/play_top_gap"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/rvOptions"
-        app:spanCount="7"
-        tools:itemCount="12"
-        tools:listitem="@layout/play_kills_item" />
-
-
-    <LinearLayout
-        android:id="@+id/lnrBottomViews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-        <LinearLayout
-            android:id="@+id/btnHeart"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/play_btn_size"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/play_x_gap"
-            android:layout_marginStart="@dimen/play_x_gap"
-            android:paddingEnd="@dimen/btn_x_paddings_small"
-            android:paddingStart="@dimen/btn_x_paddings_small"
-            android:background="@drawable/box_btn"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvTotalHearts"
-                android:gravity="center"
-                android:text="6"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="@dimen/textExtraLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="از"
-                android:textStyle="bold"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSemiLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvHearts"
-                android:gravity="center"
-                android:text="6"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="@dimen/textExtraLarge" />
-
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_heart"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+        android:id="@+id/lnrTopViews">
         <LinearLayout
             android:id="@+id/btnTutorial"
             android:layout_width="@dimen/play_btn_size"
@@ -218,69 +39,125 @@
                 android:visibility="visible" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btnFlag"
-            android:layout_width="@dimen/play_btn_size"
-            android:layout_height="@dimen/play_btn_size"
-            android:layout_marginEnd="@dimen/play_x_gap"
-            android:layout_marginStart="@dimen/play_x_gap"
-            android:gravity="center"
-            android:background="@drawable/box_btn"
-            android:orientation="horizontal">
+        <include layout="@layout/play_target_layout"
+            android:visibility="visible"
+            android:id="@+id/layTargetHeader"/>
 
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_flag"
-                android:visibility="visible" />
-        </LinearLayout>
+        <include layout="@layout/play_flag_layout"
+            android:visibility="gone"
+            android:id="@+id/layFlagHeader"/>
+
+        <include layout="@layout/play_eye_layout"
+            android:visibility="gone"
+            android:id="@+id/layEyeHeader"/>
+
+        <include layout="@layout/play_shield_layout"
+            android:visibility="gone"
+            android:id="@+id/layShieldHeader"/>
+
+
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOptions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginTop="@dimen/play_top_gap"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:layout_marginBottom="@dimen/play_top_gap"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/lnrTopViews"
+        app:spanCount="7"
+        tools:itemCount="77"
+        tools:listitem="@layout/option_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKills"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lnrClickResult"
-        android:orientation="vertical"
-        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginTop="@dimen/play_top_gap"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:layout_marginBottom="@dimen/play_top_gap"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/rvOptions"
+        app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
+        app:spanCount="7"
+        tools:itemCount="12"
+        android:visibility="visible"
+        tools:listitem="@layout/play_kills_item" />
+
+
+    <LinearLayout
+        android:id="@+id/lnrBottomViews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
         android:gravity="center"
-        android:alpha="1"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:id="@+id/ivClickResult"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:contentDescription="@string/contentDescription"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ig_enemy_arzhang_troll"
-            android:visibility="visible" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvClickResultName"
-            android:gravity="center"
-            tools:text="مار ضحاک"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_25sdp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/btnHeart"
             android:layout_width="wrap_content"
+            android:layout_height="@dimen/play_btn_size"
+            android:layout_marginHorizontal="@dimen/play_x_gap"
+            android:background="@drawable/bg_heart_action_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/tvHeartStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textLarge"
+                android:textStyle="bold"
+                tools:text="6 / 6" />
+
+            <ImageView
+                android:id="@+id/ivHeart"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ig_heart" />
+
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvClickResultDamage"
-            android:gravity="center"
-            tools:text="-6"
-            android:textColor="@color/red"
-            android:textSize="@dimen/_60sdp" />
+            android:layout_weight="1"/>
+
+        <include layout="@layout/play_action_layout"
+            android:id="@+id/layEye"/>
+
+        <include layout="@layout/play_action_layout"
+            android:id="@+id/layShield"/>
+
+        <include layout="@layout/play_action_layout"
+            android:id="@+id/layFlag"/>
+
     </LinearLayout>
 
 

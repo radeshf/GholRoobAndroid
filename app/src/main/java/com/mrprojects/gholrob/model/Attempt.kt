@@ -36,6 +36,9 @@ class Attempt {
     @SerializedName("kills")
     var kills: ArrayList<GameKill> = arrayListOf()
 
+    @SerializedName("remaining_flags")
+    var remainingFlags: Int = 0
+
     constructor() {
     }
 

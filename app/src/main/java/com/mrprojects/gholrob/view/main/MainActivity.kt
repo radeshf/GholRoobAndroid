@@ -9,7 +9,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.base.BaseAppActivity
 import com.mrprojects.gholrob.databinding.ActivityMainBinding
@@ -21,21 +20,27 @@ import com.mrprojects.gholrob.helper.isAbove
 import com.mrprojects.gholrob.helper.payment.LifePacks
 import com.mrprojects.gholrob.helper.payment.PaymentInterface
 import com.mrprojects.gholrob.helper.payment.PaymentOperation
-import com.mrprojects.gholrob.helper.showBuyCoinDialog
-import com.mrprojects.gholrob.helper.showBuyCoinDoneDialog
-import com.mrprojects.gholrob.helper.showBuyLifeDialog
-import com.mrprojects.gholrob.helper.showBuyLifeDoneDialog
 import com.mrprojects.gholrob.helper.showCloseGameDialog
 import com.mrprojects.gholrob.helper.showClosePlayDialog
 import com.mrprojects.gholrob.helper.showCoinNotEnoughDialog
-import com.mrprojects.gholrob.helper.showSuccessDialog
-import com.mrprojects.gholrob.helper.warningDialog
+import com.mrprojects.gholrob.helper.sound.bg.BgMusicPlayer
 import com.mrprojects.gholrob.helper.sound.bg.OnBgMusicSettingsChanged
-import com.mrprojects.gholrob.model.events.OnBuyNewLifeCalled
+import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
+import com.mrprojects.gholrob.helper.sound.sfx.OnSfxMusicSettingsChanged
+import com.mrprojects.gholrob.helper.sound.sfx.SfxPlayer
+import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
+import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
+import com.mrprojects.gholrob.helper.warningDialog
+import com.mrprojects.gholrob.model.ErrorTypes
 import com.mrprojects.gholrob.model.events.OnShowCoinShopCalled
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
-import com.mrprojects.gholrob.model.rest.BuyItemPost
+import com.mrprojects.gholrob.model.events.shop.OnBuyWithAds
+import com.mrprojects.gholrob.model.events.shop.OnBuyWithCoin
+import com.mrprojects.gholrob.model.events.shop.OnBuyWithPayment
 import com.mrprojects.gholrob.repository.Provider
+import com.mrprojects.gholrob.view.dialogs.showBuyCoinDialog
+import com.mrprojects.gholrob.view.dialogs.showBuyLifeDialog
+import com.mrprojects.gholrob.view.dialogs.showShopDoneDialog
 import com.mrprojects.gholrob.view.play.PlayFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import com.mrprojects.helper.payment.PaymentHelper
@@ -43,13 +48,7 @@ import com.mrprojects.helper.payment.PaymentPost
 import ir.radesh.basemodule.commons.changeTo
 import ir.radesh.basemodule.commons.setEventBus
 import ir.radesh.basemodule.helper.PrefHelper
-import com.mrprojects.gholrob.helper.sound.bg.BgMusicPlayer
-import com.mrprojects.gholrob.helper.sound.sfx.SfxPlayer
-import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
-import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
-import com.mrprojects.gholrob.helper.sound.sfx.OnSfxMusicSettingsChanged
-import com.mrprojects.gholrob.model.ErrorTypes
-import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
+import ir.radesh.basemodule.helper.loading.showLoading
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 
@@ -60,6 +59,8 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
     private var sfx: SfxPlayer  ?= null
     private var vibrationPlayer: VibrationPlayer?= null
     lateinit var paymentInterface: PaymentInterface
+    lateinit var adsHelper: TapSellHelper
+
     private var skipBackDialog = false
     private var testPackToBuy: LifePacks? = null
 
@@ -68,25 +69,14 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
         supportFragmentManager.changeTo(R.id.mainContainer, MainFragment.newInstance(),false, Gravity.CENTER,false)
 
         configPayment()
+        configAdHelper()
         userConfig()
         hideSystemUI()
         onBackHandle()
         configMusic()
     }
 
-    fun buyPack(pack: LifePacks){
-        val post = BuyItemPost(pack.name.lowercase())
-        Provider.provideApiHelper(this).buyItem(post) {
-            userViewModel.storeUser(it.data)
-            if(pack.isLife()){
-                showBuyLifeDoneDialog(pack.amount)
-            }else if (pack.isCoin()){
-                showBuyCoinDoneDialog(pack.amount)
-            }else{
-                showSuccessDialog(it.getMessage())
-            }
-        }
-    }
+
 
     private fun configPayment() {
         paymentInterface = PaymentHelper(this) { success, type, purchase ->
@@ -98,7 +88,7 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
                         warningDialog("بسته مورد نظر پیدا نشد${payment.productId}", title="پرداخت نا موفق")
                         return@PaymentHelper
                     }
-                    buyPack(pack)
+                    submitBuyWithPayment(pack)
 
                 } else {
                     warningDialog("پرداخت شما انجام نشد. اگر مبلغی کسر شده باشد، به\u200Cزودی به حسابتان بازگردانده می\u200Cشود", title="پرداخت ناموفق")
@@ -154,28 +144,25 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
         }
     }
 
-
-    public override fun onStart() {
-        super.onStart()
-        setEventBus(true)
+    private fun configAdHelper() {
+        adsHelper = TapSellHelper(
+            this,
+            onBonusEnergyRewarded = {
+                submitBuyWithAds(LifePacks.ADS_BONUS_ENERGY)
+            },
+            onBonusCoinRewarded = {
+                submitBuyWithAds(LifePacks.ADS_BONUS_COIN)
+            },
+            onBonusEyeRewarded = {
+                submitBuyWithAds(LifePacks.ADS_BONUS_EYE)
+            },
+            onBonusShieldRewarded = {
+                submitBuyWithAds(LifePacks.ADS_BONUS_SHIELD)
+            }
+        )
     }
 
-    public override fun onStop() {
-        super.onStop()
-        setEventBus(false)
-    }
 
-    override fun onPause() {
-        super.onPause()
-        bgMusic?.pause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (PrefHelper(this).isBgMusicOn){
-            bgMusic?.resume()
-        }
-    }
     private fun playMusic(){
         bgMusic?.play(R.raw.bg_music)
     }
@@ -215,10 +202,43 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
         })
     }
 
+
     fun closeWithoutDialog() {
         skipBackDialog = true
         onBackPressedDispatcher.onBackPressed()
     }
+//     -------------------------- API CALLS -----------------------------
+
+    fun submitBuyWithAds(pack: LifePacks) {
+        showLoading("در حال دریافت جایزه...")
+        val post = pack.convertToItemPost()
+        Provider.provideApiHelper(this).buyItem(post) {
+            userViewModel.storeUser(it.data)
+            showShopDoneDialog(pack)
+        }
+    }
+
+    fun submitBuyWithPayment(pack: LifePacks){
+        showLoading("در حال پرداخت ...")
+        val post = pack.convertToItemPost()
+        Provider.provideApiHelper(this).buyItem(post) {
+            userViewModel.storeUser(it.data)
+            showShopDoneDialog(pack)
+        }
+    }
+    fun submitBuyWithCoin(pack: LifePacks){
+        showLoading("در حال خرید ...")
+        val post = pack.convertToItemPost()
+        Provider.provideApiHelper(this).buyItem(post) {
+            userViewModel.storeUser(it.data)
+            showShopDoneDialog(pack)
+        }
+    }
+
+//     -------------------------- EVENTS -----------------------------
+
+
+//     ---------------- Settings Events -----------------
 
     @Subscribe
     fun onBgMusicSettingsChanged(event: OnBgMusicSettingsChanged) {
@@ -276,44 +296,102 @@ class MainActivity : BaseAppActivity<ActivityMainBinding>(ActivityMainBinding::i
             }
         }
 
-
-
     }
+
+//     ---------------- Shop Events -----------------
 
     @Subscribe
     fun openBuyCoinDialog(event: OnShowCoinShopCalled) {
-        showBuyCoinDialog {
-//            testPackToBuy = LifePacks.COIN_PACK_1
-            paymentInterface.purchase(it.sku, it.name)
-        }
+        showBuyCoinDialog(userViewModel)
     }
 
     @Subscribe
     fun openBuyLifeDialog(event: OnShowLifeShopCalled) {
-        showBuyLifeDialog(userViewModel.user.value?.lives.toString()) {
-//            testPackToBuy = LifePacks.LIFE_1
-            paymentInterface.purchase(it.sku, it.name)
+        showBuyLifeDialog(userViewModel)
+    }
+
+
+
+    @Subscribe
+    fun onBuyWithAds(event: OnBuyWithAds) {
+        when (event.item){
+            LifePacks.ADS_BONUS_ENERGY -> {
+                if (!userViewModel.checkUserHeartBeforeFill()) return
+                if (!userViewModel.checkUserLastBuyEnergyTime()) return
+                adsHelper.requestBonusEnergyAds()
+//                submitBuyWithAds(LifePacks.ADS_BONUS_ENERGY)
+
+            }
+
+            LifePacks.ADS_BONUS_COIN -> {
+                if (!userViewModel.checkUserLastBonusCoin()) return
+                adsHelper.requestBonusCoinAds()
+//                submitBuyWithAds(LifePacks.ADS_BONUS_COIN)
+            }
+            LifePacks.ADS_BONUS_EYE -> {
+                if (!userViewModel.checkUserLastBonusEye()) return
+                adsHelper.requestBonusEyeAds()
+//                submitBuyWithAds(LifePacks.ADS_BONUS_EYE)
+
+            }
+            LifePacks.ADS_BONUS_SHIELD -> {
+                if (!userViewModel.checkUserLastBonusShield()) return
+                adsHelper.requestBonusShieldAds()
+//                submitBuyWithAds(LifePacks.ADS_BONUS_SHIELD)
+
+            }
+            else -> {
+
+            }
         }
-    }
-
-    @Subscribe
-    fun onBuyFillEnergy(event: OnBuyRefillEnergyCalled) {
-        val pack = LifePacks.BUY_FILL_ENERGY
-//        testPackToBuy = pack
-        paymentInterface.purchase(pack.sku, pack.title)
 
     }
 
     @Subscribe
-    fun onBuyNewEnergy(event: OnBuyNewLifeCalled) {
-        val pack = LifePacks.BUY_NEW_ENERGY
-//        testPackToBuy = pack
-        paymentInterface.purchase(pack.sku, pack.title)
+    fun onBuyWithCoin(event: OnBuyWithCoin) {
+        if (!userViewModel.checkUserCoin(event.item.price)) return
+        submitBuyWithCoin(event.item)
+    }
+
+    @Subscribe
+    fun onBuyWithPayment(event: OnBuyWithPayment)
+    {
+        if (event.item == LifePacks.BUY_FILL_ENERGY){
+            if (!userViewModel.checkUserHeartBeforeFill()) return
+        }
+
+        paymentInterface.purchase(event.item.sku, event.item.title)
+
+    }
+
+//     -------------------------- LIFE CYCLES -----------------------------
+
+    public override fun onStart() {
+        super.onStart()
+        setEventBus(true)
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        setEventBus(false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        bgMusic?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (PrefHelper(this).isBgMusicOn){
+            bgMusic?.resume()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         bgMusic?.release()
         sfx?.release()
+        adsHelper.destroyAd()
     }
 }

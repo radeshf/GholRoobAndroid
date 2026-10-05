@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="wrap_content"
+<LinearLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:orientation="vertical"
     android:layout_marginTop="@dimen/_6sdp"
@@ -30,7 +30,6 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:visibility="visible"
         android:contentDescription="@string/contentDescription"
-        android:background="@drawable/touch_effect"
         android:src="@drawable/ig_energy"
         />
     <ImageView
@@ -41,7 +40,6 @@
         android:contentDescription="@string/contentDescription"
         android:layout_marginStart="@dimen/_4sdp"
         android:visibility="visible"
-        android:background="@drawable/touch_effect"
         android:src="@drawable/ig_energy"
         />
     <ImageView
@@ -88,21 +86,13 @@
         />
 </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <include layout="@layout/timer_layout"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:id="@+id/lnrTimer"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvHeartTimer"
-            android:visibility="gone"
-            android:text=""
-            android:textSize="@dimen/textExtraLarge"
-            android:textColor="@color/white"
-            />
-    </LinearLayout>
 
 </LinearLayout>

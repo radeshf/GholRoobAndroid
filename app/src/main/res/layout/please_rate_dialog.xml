@@ -1,166 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center">
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lnrDialog"
+    <!-- بدنه اصلی کارت دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_big_h"
-        android:paddingTop="@dimen/dialog_y_padding"
-        android:paddingBottom="@dimen/dialog_y_padding"
-        android:paddingEnd="@dimen/dialog_x_padding"
-        android:paddingStart="@dimen/dialog_x_padding"
-        android:layout_marginStart="@dimen/dialog_x_margin"
-        android:layout_marginEnd="@dimen/dialog_x_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/ig_panel">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
-            app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:id="@+id/tvMessageDialog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginEnd="@dimen/dialog_text_x_margin"
-                android:layout_marginStart="@dimen/dialog_text_x_margin"
-                android:text="تونستی توران رو پاک سازی کنی!!"
-                android:textColor="@color/dialog_text_color"
-                android:textSize="@dimen/textSemiLarge" />
-
-            <TextView
-                android:id="@+id/tvMessageDialog2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginEnd="@dimen/dialog_text_x_margin"
-                android:layout_marginStart="@dimen/dialog_text_x_margin"
-                android:text="مثل اینکه یه قهرمان جدید داریم! "
-                android:textColor="@color/dialog_text_color"
-                android:textSize="@dimen/textNormal" />
-
-
-            <TextView
-                android:id="@+id/tvMessageDialog3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginEnd="@dimen/dialog_text_x_margin"
-                android:layout_marginStart="@dimen/dialog_text_x_margin"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="اگه بازی رو دوست داشتی میتونی با ثبت نظرت مارو حمایت کنی"
-                android:textColor="@color/dialog_text_color"
-                android:textSize="@dimen/textSemiLarge" />
-        </LinearLayout>
-
-
-
-
-
-        <LinearLayout
-            android:id="@+id/lnrBackButtons"
+            android:id="@+id/lnrDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <LinearLayout
-                android:id="@+id/btnRate"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/hint_button_size"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:background="@drawable/ig_btn_green"
-                android:gravity="center">
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_54sdp"
+            android:paddingBottom="@dimen/_16sdp">
 
+            <!-- عنوان دیالوگ -->
+            <TextView
+                android:id="@+id/tvTitleDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="حمایت قهرمانانه"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+
+            <!-- محتوای متنی -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvMessageDialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:text="ثبت نظر"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:paddingStart="@dimen/_20sdp"
+                    android:gravity="center"
+                    android:text="تونستی توران رو پاک سازی کنی!!"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/textVeryLarge"
-                    android:visibility="visible" />
+                    android:textSize="@dimen/textSemiLarge"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/tvMessageDialog2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:text="مثل اینکه یه قهرمان جدید داریم!"
+                    android:textColor="#9CA3AF"
+                    android:textSize="@dimen/textNormal" />
+
+                <TextView
+                    android:id="@+id/tvMessageDialog3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/_2sdp"
+                    android:text="اگه بازی رو دوست داشتی میتونی با ثبت نظرت مارو حمایت کنی"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSemiLarge" />
             </LinearLayout>
 
-            <include layout="@layout/btn_dismiss_layout"
-                android:id="@+id/lnrDismiss"/>
+            <!-- بخش دکمه‌ها -->
+            <LinearLayout
+                android:id="@+id/lnrBackButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <!-- دکمه ثبت نظر مدرن -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#10B981"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:strokeColor="#34D399"
+                    app:strokeWidth="1.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="ثبت نظر"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textVeryLarge"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- دکمه بستن -->
+                <include
+                    android:id="@+id/lnrDismiss"
+                    layout="@layout/dialog_dismiss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
+            </LinearLayout>
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    <!-- آیکون شناور بالای دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardIconFrame"
+        android:layout_width="@dimen/_96sdp"
+        android:layout_height="@dimen/_96sdp"
+        app:cardBackgroundColor="#1A1D24"
+        app:cardCornerRadius="@dimen/_48sdp"
+        app:cardElevation="@dimen/_10sdp"
+        app:strokeColor="#EF4444"
+        app:strokeWidth="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody">
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="@dimen/dialog_header_w"
-        android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/ig_panel_header"
-        app:layout_constraintTop_toTopOf="@+id/lnrDialog"
-        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
-        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
-        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
-        android:gravity="center">
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_warning_red"
-            android:rotationY="180"
-
-            android:visibility="visible" />
-        <TextView
-            android:id="@+id/tvTitleDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="حمایت قهرمانانه"
-            android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/textExtraLarge"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_warning_red"
-            android:visibility="visible" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ig_warning_red" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

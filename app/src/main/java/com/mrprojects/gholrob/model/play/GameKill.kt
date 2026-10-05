@@ -30,7 +30,7 @@ class GameKill {
     fun image() = CellTypes.fromKey(this.type).image
 
     companion object {
-        fun fromCellType(cellType: CellTypes, id: Int = 0): GameKill {
+        fun fromCellType(cellType: CellTypes, id: Int = 0, remained: Int? = null): GameKill {
             return GameKill().apply {
                 this.id = id
                 this.type = cellType.key
@@ -38,6 +38,13 @@ class GameKill {
                 this.description = cellType.description.orEmpty()
                 this.damage = cellType.damage ?: 0
                 this.total = cellType.count ?: 0
+
+                if (remained != null){
+                    this.remained = remained
+                }else{
+                    this.remained = if (cellType in setOf(CellTypes.SMALL_BOSS, CellTypes.BIG_BOSS, CellTypes.FINAL_BOSS)) 1 else 0
+
+                }
             }
         }
     }

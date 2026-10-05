@@ -35,9 +35,11 @@ import android.text.style.RelativeSizeSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
@@ -398,6 +400,65 @@ fun TextView.setTextWithAnimation(text: String, duration: Long = 100L) {
 
 fun View.clickAnimation(duration: Long = 200) {
     animate().setDuration(duration).alpha(0f).withEndAction { animate().setDuration(duration).alpha(1f) }
+}
+
+fun View.applyPressAnimation() {
+    setOnTouchListener { v, event ->
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                v.animate().scaleX(0.92f).scaleY(0.92f).setDuration(80).start()
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(80).start()
+            }
+        }
+        false
+    }
+}
+
+fun View.splashBreathAnimation(
+    fadeInDuration: Long = 1200L,
+    fadeOutDuration: Long = 600L,
+    scaleFactor: Float = 1.15f,
+    onEnded: (() -> Unit)? = null
+) {
+    // مقداردهی اولیه وضعیت ویو
+    alpha = 0f
+    scaleX = 1.0f
+    scaleY = 1.0f
+
+    // فاز اول: ظاهر شدن تدریجی همراه با زوم نرم و نامحسوس
+    animate()
+        .alpha(1f)
+        .scaleX(scaleFactor)
+        .scaleY(scaleFactor)
+        .setDuration(fadeInDuration)
+        .setInterpolator(AccelerateDecelerateInterpolator())
+        .withEndAction {
+            // فاز دوم: محو شدن تدریجی (اختیاری: ادامه زوم ملایم)
+            animate()
+                .alpha(0f)
+                .scaleX(scaleFactor * 1.05f) // ادامه بسیار اندک زوم در هنگام محو شدن
+                .scaleY(scaleFactor * 1.05f)
+                .setDuration(fadeOutDuration)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .withEndAction {
+                    onEnded?.invoke()
+                }
+                .start()
+        }
+        .start()
+}
+
+fun View.heartBeatAnimation(){
+    animate()
+        .scaleX(1.3f)
+        .scaleY(1.3f)
+        .setDuration(120)
+        .withEndAction {
+            animate().scaleX(1.0f).scaleY(1.0f).setDuration(120).start()
+        }
+        .start()
 }
 
 fun View.scaleAnimation(duration: Long = 200, onEnded: (() -> Unit)? = null) {
@@ -1147,4 +1208,16 @@ fun TextView.makeWordRed(
     }
 
     text = spannable
+}
+
+fun TextView.convertMillisToHuman(millis: Long){
+    val totalSeconds = millis / 1000
+    val hours = totalSeconds / 3600
+    val minutes = (totalSeconds % 3600) / 60
+    val seconds = totalSeconds % 60
+    this.text = if (hours > 0) {
+        String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    } else {
+        String.format("%02d:%02d", minutes, seconds)
+    }
 }

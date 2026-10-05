@@ -4,287 +4,301 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/dialog_x_margin"
-    android:gravity="center">
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lnrDialog"
+    <!-- بدنه اصلی کارت دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dialog_x_margin"
-        android:layout_marginEnd="@dimen/dialog_x_margin"
-        android:background="@drawable/ig_panel"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dialog_start_padding"
-        android:paddingTop="@dimen/dialog_y_padding"
-        android:paddingEnd="@dimen/dialog_x_padding"
-        android:paddingBottom="@dimen/dialog_y_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/lnrDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_54sdp"
+            android:paddingBottom="@dimen/_16sdp">
 
+            <!-- عنوان دیالوگ -->
+            <TextView
+                android:id="@+id/tvTitleDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اکانت"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <!-- کارت بخش ذخیره اکانت -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_4sdp"
-                android:id="@+id/lnrAddNumber"
-                android:gravity="end"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ذخیره اکانت"
-                    android:textSize="@dimen/textMedium"
-                    android:textColor="@color/dialog_text_color"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:text="برای حفظ پیشرفت بازی، شماره موبایل خود را متصل کنید. با این کار، در صورت تعویض گوشی یا حذف بازی، حساب شما همیشه امن می‌ماند."
-                    android:textSize="@dimen/textSemiSmall"
-                    android:textColor="@color/dialog_text_subtitle_color" />
+                android:layout_marginTop="@dimen/_12sdp"
+                app:cardBackgroundColor="#1A1D24"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#2E333D"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
+                    android:id="@+id/lnrAddNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
 
-                    <ImageView
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:id="@+id/ivCreate"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginHorizontal="@dimen/_1sdp"
-                        android:src="@drawable/ig_ok"
-                        android:contentDescription="@string/contentDescription"/>
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/DarkTextInputStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:hint="شماره موبایل"
-                        >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/etCreate"
-                            android:inputType="number"
-                            android:gravity="center"
-                            android:textSize="@dimen/textNormal"
-                            android:padding="@dimen/_8sdp"
-                            android:textColorHint="@color/white"
-                            android:textColor="@color/white" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <LinearLayout
-                        android:id="@+id/btnCreateAccount"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:paddingHorizontal="@dimen/_8sdp"
-                        android:paddingVertical="@dimen/_4sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:background="@drawable/box_btn">
+                        android:text="ذخیره اکانت"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textMedium"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ذخیره اکانت"
-                            android:textColor="@color/dialog_text_color"
-                            android:textSize="@dimen/textSmall"
-                            />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:gravity="start"
+                        android:lineSpacingExtra="@dimen/_1sdp"
+                        android:text="برای حفظ پیشرفت بازی، شماره موبایل خود را متصل کنید. با این کار، در صورت تعویض گوشی یا حذف بازی، حساب شما همیشه امن می‌ماند."
+                        android:textColor="#9CA3AF"
+                        android:textSize="@dimen/textSemiSmall" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/ivCreate"
                             android:layout_width="@dimen/_22sdp"
                             android:layout_height="@dimen/_22sdp"
-                            android:padding="@dimen/_3sdp"
-                            android:layout_marginHorizontal="@dimen/_5sdp"
-                            android:src="@drawable/ig_edit"
-                            android:contentDescription="@string/contentDescription"/>
+                            android:layout_marginHorizontal="@dimen/_1sdp"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_ok"
+                            android:visibility="gone" />
+
+                        <!-- دکمه ذخیره اکانت -->
+                        <LinearLayout
+                            android:id="@+id/btnCreateAccount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/box_btn"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:paddingVertical="@dimen/_4sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ذخیره اکانت"
+                                android:textColor="@color/dialog_text_color"
+                                android:textSize="@dimen/textSmall" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_22sdp"
+                                android:layout_height="@dimen/_22sdp"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:contentDescription="@string/contentDescription"
+                                android:padding="@dimen/_3sdp"
+                                android:src="@drawable/ig_edit" />
+
+                        </LinearLayout>
+
+                        <!-- فیلد ورودی شماره موبایل -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/DarkTextInputStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:hint="شماره موبایل">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etCreate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white"
+                                android:textSize="@dimen/textNormal" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-
-            </LinearLayout>
+            <!-- جداکننده بخش‌ها -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:background="#EEEEEE" />
-            <LinearLayout
+                android:background="#2E333D" />
+
+            <!-- کارت بخش بازیابی اکانت -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_4sdp"
-                android:id="@+id/LnrRestore"
-                android:gravity="end"
-                android:orientation="vertical">
+                app:cardBackgroundColor="#1A1D24"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#2E333D"
+                app:strokeWidth="1dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="بازیابی اکانت"
-                    android:textSize="@dimen/textMedium"
-                    android:textColor="@color/dialog_text_color"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:text="اگر قبلاً در این بازی ثبت‌نام کرده‌اید، شماره خود را وارد کنید تا به اکانت قبلی‌تان برگردید."
-                    android:textSize="@dimen/textSemiSmall"
-                    android:textColor="@color/dialog_text_subtitle_color" />
                 <LinearLayout
+                    android:id="@+id/LnrRestore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/DarkTextInputStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:hint="شماره موبایل"
-
-                        >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/etRestore"
-                            android:inputType="number"
-                            android:gravity="center"
-                            android:textSize="@dimen/textNormal"
-                            android:padding="@dimen/_8sdp"
-                            android:textColorHint="@color/white"
-                            android:textColor="@color/white" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <LinearLayout
-                        android:id="@+id/btnRestoreAccount"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:paddingHorizontal="@dimen/_8sdp"
-                        android:paddingVertical="@dimen/_4sdp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal"
-                        android:background="@drawable/box_btn">
+                        android:text="بازیابی اکانت"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textMedium"
+                        android:textStyle="bold" />
 
-                        <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:gravity="start"
+                        android:lineSpacingExtra="@dimen/_1sdp"
+                        android:text="اگر قبلاً در این بازی ثبت‌نام کرده‌اید، شماره خود را وارد کنید تا به اکانت قبلی‌تان برگردید."
+                        android:textColor="#9CA3AF"
+                        android:textSize="@dimen/textSemiSmall" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- دکمه بازیابی اکانت -->
+                        <LinearLayout
+                            android:id="@+id/btnRestoreAccount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="بازیابی اکانت"
-                            android:textColor="@color/dialog_text_color"
-                            android:textSize="@dimen/textSmall"
-                            />
+                            android:background="@drawable/box_btn"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:paddingVertical="@dimen/_4sdp">
 
-                        <ImageView
-                            android:layout_width="@dimen/_22sdp"
-                            android:layout_height="@dimen/_22sdp"
-                            android:padding="@dimen/_3sdp"
-                            android:layout_marginHorizontal="@dimen/_5sdp"
-                            android:src="@drawable/ig_edit"
-                            android:contentDescription="@string/contentDescription"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="بازیابی اکانت"
+                                android:textColor="@color/dialog_text_color"
+                                android:textSize="@dimen/textSmall" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_22sdp"
+                                android:layout_height="@dimen/_22sdp"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:contentDescription="@string/contentDescription"
+                                android:padding="@dimen/_3sdp"
+                                android:src="@drawable/ig_edit" />
+
+                        </LinearLayout>
+
+                        <!-- فیلد ورودی شماره موبایل بازیابی -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/DarkTextInputStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_weight="1"
+                            android:hint="شماره موبایل">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etRestore"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white"
+                                android:textSize="@dimen/textNormal" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <!-- button -->
-
-
-            </LinearLayout>
-
+            <!-- بخش دکمه بازگشت / بستن -->
             <LinearLayout
                 android:id="@+id/lnrBackButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog2">
+                android:orientation="vertical">
 
                 <include
-                    android:id="@+id/lnrDismiss"
-                    layout="@layout/btn_dismiss_layout" />
+                    android:id="@+id/btnDismiss"
+                    layout="@layout/dialog_dismiss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp" />
 
             </LinearLayout>
 
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <LinearLayout
-        android:layout_width="@dimen/dialog_header_w"
-        android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/ig_panel_header"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
-        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
-        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
-        app:layout_constraintTop_toTopOf="@+id/lnrDialog">
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:rotationY="180"
-            android:src="@drawable/ig_profile_unknown"
-
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tvTitleDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="اکانت"
-            android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/textExtraLarge"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- آواتار شناور بالای دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAvatarFrame"
+        android:layout_width="@dimen/_96sdp"
+        android:layout_height="@dimen/_96sdp"
+        app:cardBackgroundColor="#1A1D24"
+        app:cardCornerRadius="@dimen/_48sdp"
+        app:cardElevation="@dimen/_10sdp"
+        app:strokeColor="#F59E0B"
+        app:strokeWidth="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_profile_unknown"
-            android:visibility="visible" />
-    </LinearLayout>
+            android:scaleType="centerCrop"
+            android:src="@drawable/ig_profile_unknown" />
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

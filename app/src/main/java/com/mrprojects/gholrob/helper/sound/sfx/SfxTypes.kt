@@ -15,4 +15,7 @@ enum class SfxTypes(@RawRes val resId: Int) {
     Pit(R.raw.sfx_pit),
     FlagOn(R.raw.sfx_click_on_flag),
     FlagOff(R.raw.sfx_click_off_flag),
+
+    EYE(R.raw.sfx_reveal),
+    SHIELD(R.raw.sfx_block),
 }

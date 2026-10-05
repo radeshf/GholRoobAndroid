@@ -1,213 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lnrMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/poster2"
+    android:background="@drawable/poster"
     android:clickable="true"
-    android:focusable="true"
-    android:paddingVertical="@dimen/_10sdp"
-    android:paddingHorizontal="@dimen/_10sdp"
-    >
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            android:id="@+id/profileLayout"
-            layout="@layout/profile_layout" />
-        <include
-            android:id="@+id/HeartsLayout"
-            layout="@layout/hearts_layout" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/lnrLife"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_primary2"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnrCoin">
-
-            <ImageView
-                android:id="@+id/ivLife"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/touch_effect"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_heart"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvLifeCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textExtraLarge"
-                app:layout_constraintStart_toEndOf="@id/ivCoin"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="0" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lnrCoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_primary2"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:background="@drawable/touch_effect"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_coin"
-                android:visibility="visible"
-                />
-
-            <TextView
-                android:id="@+id/tvCoins"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textExtraLarge"
-                tools:text="0" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ivBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/bg_primary2"
-            android:paddingVertical="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:gravity="center"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/lnrLife"
-            app:layout_constraintTop_toBottomOf="@+id/lnrLife">
-
-            <ImageView
-                android:layout_width="@dimen/main_box_size"
-                android:layout_height="@dimen/main_box_size"
-                android:background="@drawable/touch_effect"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_star"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ivBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/bg_primary2"
-            android:paddingVertical="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="@id/ivBox1"
-            app:layout_constraintTop_toBottomOf="@+id/ivBox1">
-
-            <ImageView
-                android:layout_width="@dimen/main_box_size"
-                android:layout_height="@dimen/main_box_size"
-                android:background="@drawable/touch_effect"
-                android:contentDescription="@string/contentDescription"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ig_settings"
-                android:visibility="visible" />
-        </LinearLayout>
-    </LinearLayout>
-
-
+    android:focusable="true">
 
     <LinearLayout
         android:id="@+id/lnrFooterViews"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:contentDescription="@string/contentDescription"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ig_logo_type"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@id/ivBox1"
-            app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_40sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/lnrTutorial"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_46sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/_14sdp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/bg_home_tutorial"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:contentDescription="@string/contentDescription"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ig_hint" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:text="آموزش"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ivBox2"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:visibility="visible"
+                app:cardBackgroundColor="#CC1A1D24"
+                app:cardCornerRadius="@dimen/_14sdp"
+                app:cardElevation="0dp">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/touch_effect"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_settings" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/lnrHistory"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_46sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/_14sdp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/bg_home_history"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:contentDescription="@string/contentDescription"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ig_history" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:text="تاریخچه "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/brnRating"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/_14sdp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
 
             <LinearLayout
-                android:id="@+id/brnPlay"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_big_h"
-                android:background="@drawable/ig_btn_green"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/bg_home_ranking"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_12sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_ranking" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="رده بندی"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/brnPlay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_56sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/_14sdp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_home_play"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -215,130 +196,206 @@
                     android:id="@+id/tvStart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/btn_x_paddings_small"
-                    android:paddingEnd="@dimen/btn_x_paddings_small"
-                    android:text="شروع"
-                    android:textColor="#EDD4A0"
-                    android:textSize="@dimen/textExtraLarge" />
+                    android:text="شروع بازی"
+                    android:textColor="#1A1D24"
+                    android:textSize="@dimen/_18sdp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:contentDescription="@string/contentDescription"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ig_play_btn"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toStartOf="@id/ivBox1"
-                    app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
+                    />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/brnRating"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_big_h"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:background="@drawable/ig_btn_yellow"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="رده بندی"
-                    android:textColor="@color/text_color_on_yellow"
-                    android:textSize="@dimen/textExtraLarge" />
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:contentDescription="@string/contentDescription"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ig_ranking"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toStartOf="@id/ivBox1"
-                    app:layout_constraintTop_toBottomOf="@+id/ivBox1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_2sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <LinearLayout
-                android:id="@+id/lnrTutorial"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/btn_big_h"
-                android:layout_weight="1"
-                android:background="@drawable/ig_btn_blue"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="آموزش بازی"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textLarge" />
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:contentDescription="@string/contentDescription"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ig_hint"
-                    android:visibility="visible" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lnrHistory"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/btn_big_h"
-                android:layout_weight="1"
-                android:background="@drawable/ig_btn_purple"
-                android:gravity="center"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="تاریخچه بازی ها"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textLarge" />
-
-                <ImageView
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_4sdp"
-                    android:contentDescription="@string/contentDescription"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ig_history"
-                    android:visibility="visible" />
-
-            </LinearLayout>
-        </LinearLayout>
-
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lnrTopRight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/profileLayout"
+            layout="@layout/profile_layout" />
+
+        <include
+            android:id="@+id/HeartsLayout"
+            layout="@layout/hearts_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/lnrTopLeftStats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnrTopRight">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/lnrCoin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/bg_home_coin"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:background="@drawable/touch_effect"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_coin" />
+
+                <TextView
+                    android:id="@+id/tvCoins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:textColor="@color/coin_color"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    tools:text="1,250" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/lnrInventory"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="@dimen/_14sdp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/bg_home_inventory"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_inventory" />
+
+                <TextView
+                    android:id="@+id/tvInventory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:text="@string/inventory"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/lnrLife"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/bg_home_life"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/ivLife"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:background="@drawable/touch_effect"
+                    android:contentDescription="@string/contentDescription"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ig_heart" />
+
+                <TextView
+                    android:id="@+id/tvLifeCount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:textColor="@color/heart_color"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    tools:text="5" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@id/lnrTopLeftStats"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:contentDescription="@string/contentDescription"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/videoBanner"
@@ -347,9 +404,4 @@
         android:layout_gravity="center"
         android:gravity="center" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

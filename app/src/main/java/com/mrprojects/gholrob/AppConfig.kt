@@ -12,10 +12,12 @@ object AppConfig {
     const val PAYMENT_KEY = BuildConfig.PAYMENT_KEY
 
     const val BASE_URL = "http://gholrob.radeshf.ir"
+//    const val BASE_URL = "http://192.168.1.101:18001"
+//    const val BASE_URL = "http://10.86.178.72:18001"
     const val TUTORIAL_URL = "$BASE_URL/api/v1/gholrob/games/tutorial"
 
     const val DATABASE_NAME = "app_db"
-    const val DATABASE_VERSION = 17
+    const val DATABASE_VERSION = 23
 
 
     const val BOLD_FONT = "YekanBakhFaNum-Bold"

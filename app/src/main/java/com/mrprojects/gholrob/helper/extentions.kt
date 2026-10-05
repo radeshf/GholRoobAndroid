@@ -39,6 +39,7 @@ import com.mrprojects.gholrob.AppConfig
 import com.mrprojects.gholrob.BuildConfig
 import com.mrprojects.gholrob.R
 import com.mrprojects.gholrob.databinding.HeartsLayoutBinding
+import com.mrprojects.gholrob.databinding.TimerLayoutBinding
 import com.mrprojects.gholrob.model.CellTypes
 import com.mrprojects.gholrob.model.User
 import com.mrprojects.gholrob.model.rest.AddHintPost
@@ -56,8 +57,8 @@ import java.io.File
 import java.io.IOException
 import kotlin.jvm.Throws
 
-fun Fragment.openFragment(fragment: Fragment, addToBackStack: Boolean = true) {
-    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = addToBackStack, animationGravity = Gravity.CENTER)
+fun Fragment.openFragment(fragment: Fragment, addToBackStack: Boolean = true, addToContainer: Boolean =false) {
+    parentFragmentManager.changeTo(R.id.mainContainer, fragment, addToBackStack = addToBackStack, addToContainer = addToContainer, animationGravity = Gravity.CENTER)
 }
 
 
@@ -311,9 +312,10 @@ fun getDeviceUsername(): String {
 fun HeartsLayoutBinding.updateHearts(user: User, showAdd: Boolean = false, showTimer: Boolean = false) {
     val userCurrentHeart = user.currentHearts
     val userMaxHearts = user.maxHearts
+    val isFullEnergy = userCurrentHeart != userMaxHearts
     tvHeartCount.text = userCurrentHeart.toString()
     ivHeartAdd.visibleByBoolean(showAdd)
-    tvHeartTimer.visibleByBoolean(showTimer && userCurrentHeart != userMaxHearts)
+    lnrTimer.root.visibleByBoolean((showTimer || userCurrentHeart == 0) && isFullEnergy)
 
     val hearts = arrayListOf(ivHeart1, ivHeart2, ivHeart3)
     ivHeart4.visibleByBoolean(userMaxHearts >= 4)
@@ -433,4 +435,14 @@ fun TextView.setTutorial1Text(inputText: String, bigImage: Boolean = false) {
     }
 
     this.text = spannable
+}
+
+fun TimerLayoutBinding.setTime(millis: Long){
+    val totalSeconds = millis / 1000
+    val hours = totalSeconds / 3600
+    val minutes = (totalSeconds % 3600) / 60
+    val seconds = totalSeconds % 60
+    tvHours.text = String.format("%02d", hours)
+    tvMinutes.text = String.format("%02d", minutes)
+    tvSeconds.text = String.format("%02d", seconds)
 }

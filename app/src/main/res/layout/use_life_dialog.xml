@@ -4,138 +4,207 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/dialog_x_margin"
-    android:gravity="center">
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lnrDialog"
+    <!-- کارت بدنه دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dialog_x_margin"
-        android:layout_marginEnd="@dimen/dialog_x_margin"
-        android:background="@drawable/ig_panel"
-        android:paddingStart="@dimen/dialog_x_padding"
-        android:paddingTop="@dimen/dialog_y_padding"
-        android:paddingEnd="@dimen/dialog_x_padding"
-        android:paddingBottom="@dimen/dialog_y_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/containerLivesInfo"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lnrDialog"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/lnrBackButtons"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_40sdp"
+            android:paddingBottom="@dimen/_14sdp">
 
-            <ImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/ig_heart" />
-
+            <!-- عنوان دیالوگ -->
             <TextView
-                android:id="@+id/tvLifeCount"
+                android:id="@+id/tvTitleDialog"
+                style="@style/Widget.Game.Dialog.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="5"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textExtraLarge"
-                android:textStyle="bold" />
+                android:text="موجودی نوش دارو"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvMessageDialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="با استفاده از نوش دارو قلب شما پر میشود"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSemiLarge"
-            android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/containerLivesInfo"
-            />
-
-
-        <LinearLayout
-            android:id="@+id/lnrBackButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tvMessageDialog"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
-
-            <include
-                android:id="@+id/btnUseLife"
-                layout="@layout/btn_green_layout" />
-
-            <include
-                android:id="@+id/btnBuyLife"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/hint_button_size"
+            <!-- بخش نمایش تعداد موجودی نوش‌دارو / جان -->
+            <LinearLayout
+                android:id="@+id/containerLivesInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                layout="@layout/btn_red_layout" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleDialog">
 
-            <include
-                android:id="@+id/lnrDismiss"
+                <ImageView
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:contentDescription="@string/contentDescription"
+                    android:src="@drawable/ig_heart" />
+
+                <TextView
+                    android:id="@+id/tvLifeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_28sdp"
+                    android:textStyle="bold"
+                    tools:text="5" />
+
+            </LinearLayout>
+
+            <!-- توضیحات دیالوگ -->
+            <TextView
+                android:id="@+id/tvMessageDialog"
+                style="@style/Widget.Game.Dialog.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="با استفاده از نوش دارو قلب شما پر می‌شود"
+                android:textColor="@color/game_text_primary"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerLivesInfo" />
+
+            <!-- بخش دکمه‌های عملیاتی -->
+            <LinearLayout
+                android:id="@+id/lnrBackButtons"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/hint_button_size"
-                android:layout_marginTop="@dimen/_10sdp"
-                layout="@layout/btn_dismiss_layout" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog">
 
-        </LinearLayout>
+                <!-- دکمه استفاده از نوش‌دارو (CTA اصلی - سبز) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnUseLife"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#10B981"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:strokeColor="#34D399"
+                    app:strokeWidth="1.5dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_12sdp">
 
-    <LinearLayout
-        android:layout_width="@dimen/dialog_header_w"
-        android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/ig_panel_header"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
-        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
-        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
-        app:layout_constraintTop_toTopOf="@+id/lnrDialog">
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_ok" />
 
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:rotationY="180"
-            android:src="@drawable/ig_heart"
-            android:visibility="visible" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="@dimen/_50sdp"
+                            android:gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:text="استفاده"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvTitleDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="نوش دارو"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textExtraLarge"
-            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_heart"
-            android:visibility="visible" />
-    </LinearLayout>
+                <!-- دکمه خرید نوش‌دارو (CTA ثانویه - قرمز/بنفش فروشگاهی) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnBuyLife"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#E11D48"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:strokeColor="#FB7185"
+                    app:strokeWidth="1.5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_12sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_heart" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="@dimen/_50sdp"
+                            android:gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:text="خرید"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- دکمه بستن استاندارد دیالوگ -->
+                <include
+                    android:id="@+id/btnDismiss"
+                    layout="@layout/dialog_dismiss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- آیکون هیرو شناور قلب در بالای دیالوگ -->
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:elevation="@dimen/_10sdp"
+        android:src="@drawable/ig_heart"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,15 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
         }))
     }
 
+    fun editProfileImage(profileImage: String, doOnDone: (response: UserResponse)->Unit){
+        val data = EditProfileImagePost(profileImage)
+        apiSubscriber.subscribe(apiRepo.editProfileImage(data).subscribeWith(object : RadResponseHelper<UserResponse>(apiSubscriber){
+            override fun onSuccessful(response: UserResponse) {
+                doOnDone(response)
+            }
+        }))
+    }
+
 
     fun sendOtp(mobile: String, type: String, doOnDone: (response: EmptyResponse)->Unit){
         val data = OtpPost(mobile, type)
@@ -185,7 +194,7 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
 
     }
 
-    fun clickOnCell(gameId: Int, cellId: Int, doOnDone: (response: ClickOnCellResponse)->Unit){
+    fun clickOnCell(gameId: Int, cellId: Int, doOnDone: (response: ClickOnCellResponse)->Unit, onError: (msg: String)->Unit){
         apiSubscriber.subscribe(apiRepo.clickOnCell(gameId, cellId).subscribeWith(object : RadResponseHelper<ClickOnCellResponse>(apiSubscriber){
             override fun onSuccessful(response: ClickOnCellResponse) {
                 doOnDone(response)
@@ -193,12 +202,16 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
             override fun onShowLoading() {
 
             }
+            override fun onError(msg: String, code: Int) {
+                super.onError(msg, code)
+                onError(msg)
 
+            }
         }))
 
     }
 
-    fun flagCell(gameId: Int, cellId: Int, doOnDone: (response: FlagCellResponse)->Unit){
+    fun flagCell(gameId: Int, cellId: Int, doOnDone: (response: FlagCellResponse)->Unit, onError: (msg: String)->Unit){
         apiSubscriber.subscribe(apiRepo.flagCell(gameId, cellId).subscribeWith(object : RadResponseHelper<FlagCellResponse>(apiSubscriber){
             override fun onSuccessful(response: FlagCellResponse) {
                 doOnDone(response)
@@ -207,7 +220,49 @@ class ApiHelper(private val context: Context, private val apiSubscriber: ApiSubs
             override fun onShowLoading() {
 
             }
+            override fun onError(msg: String, code: Int) {
+                super.onError(msg, code)
+                onError(msg)
 
+            }
+        }))
+
+    }
+
+
+    fun useEye(gameId: Int, cellId: Int, doOnDone: (response: ActionOnCellResponse)->Unit, onError: (msg: String)->Unit){
+        apiSubscriber.subscribe(apiRepo.useEye(gameId, cellId).subscribeWith(object : RadResponseHelper<ActionOnCellResponse>(apiSubscriber){
+            override fun onSuccessful(response: ActionOnCellResponse) {
+                doOnDone(response)
+            }
+
+            override fun onShowLoading() {
+
+            }
+            override fun onError(msg: String, code: Int) {
+                super.onError(msg, code)
+                onError(msg)
+
+            }
+        }))
+
+    }
+
+
+    fun useShield(gameId: Int, cellId: Int, doOnDone: (response: ActionOnCellResponse)->Unit, onError: (msg: String)->Unit){
+        apiSubscriber.subscribe(apiRepo.useShield(gameId, cellId).subscribeWith(object : RadResponseHelper<ActionOnCellResponse>(apiSubscriber){
+            override fun onSuccessful(response: ActionOnCellResponse) {
+                doOnDone(response)
+            }
+
+            override fun onShowLoading() {
+
+            }
+            override fun onError(msg: String, code: Int) {
+                super.onError(msg, code)
+                onError(msg)
+
+            }
         }))
 
     }

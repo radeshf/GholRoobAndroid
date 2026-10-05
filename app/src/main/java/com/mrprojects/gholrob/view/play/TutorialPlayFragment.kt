@@ -10,24 +10,18 @@ import com.mrprojects.gholrob.helper.haptics.VibrateTypes
 import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.setTutorial1Text
-import com.mrprojects.gholrob.helper.setTutorialText
-import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.showTutorialDoneDialog
 import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
 import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.Attempt
 import com.mrprojects.gholrob.model.GameCell
-import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.getAdp
-import ir.radesh.basemodule.commons.inVisibleByBoolean
 import ir.radesh.basemodule.commons.initGrid
-import ir.radesh.basemodule.commons.showToast
 import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.helper.PrefHelper
-import ir.radesh.basemodule.interfaces.OnItemClickListener
 import timber.log.Timber
 
 class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialPlayFragmentBinding::inflate) {

@@ -8,6 +8,7 @@ import com.mrprojects.gholrob.view.main.MainActivity
 import ir.radesh.basemodule.commons.delay
 import ir.radesh.basemodule.commons.goTo
 import ir.radesh.basemodule.commons.scaleAnimation
+import ir.radesh.basemodule.commons.splashBreathAnimation
 
 class SplashActivity : BaseAppActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate){
 
@@ -16,8 +17,10 @@ class SplashActivity : BaseAppActivity<ActivitySplashBinding>(ActivitySplashBind
         val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
-        binding.mainContainer.scaleAnimation(2500)
-        delay(750) {
+
+        binding.lnrLogos.splashBreathAnimation()
+
+        delay(1200) {
             goTo(MainActivity::class.java)
         }
     }

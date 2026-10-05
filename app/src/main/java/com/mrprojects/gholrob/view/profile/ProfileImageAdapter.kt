@@ -13,7 +13,7 @@ import ir.radesh.basemodule.helper.RvAdapter
 import ir.radesh.basemodule.interfaces.OnItemClickListener
 
 
-class ProfileImageAdapter(private val onItemClicked: (position: Int, item: ProfileImage) -> Unit)
+class ProfileImageAdapter(val showPrice: Boolean=true, private val onItemClicked: (position: Int, item: ProfileImage) -> Unit)
     : RvAdapter<ProfileImage, ProfileImageItemBinding>(ProfileImageItemBinding::inflate) {
 
     var selectedPosition: Int = RecyclerView.NO_POSITION
@@ -24,12 +24,14 @@ class ProfileImageAdapter(private val onItemClicked: (position: Int, item: Profi
         view.tvName.text = item.name
         view.tvPrice.text = item.price.toString()
         view.lnrComingSoon.visibleByBoolean(item.isComingSoon)
+        view.lnrPrice.visibleByBoolean(showPrice)
 
         view.tvPrice.visibleByBoolean(!item.isPurchased)
         view.tvPrice.text = if(item.isFree) "رایگان" else item.price.toString()
 
         view.ivPrice.visibleByBoolean(!item.isFree)
         view.ivPrice.setImageResource(if(item.isPurchased) R.drawable.ig_ok else R.drawable.ig_coin)
+
         val isSelected = position == selectedPosition
         view.lnrCard.setBackgroundResource(if (isSelected) R.drawable.box_btn_selected else R.drawable.box_btn)
         view.root.setOnClickListener {
@@ -44,6 +46,15 @@ class ProfileImageAdapter(private val onItemClicked: (position: Int, item: Profi
         if (oldPos != RecyclerView.NO_POSITION) notifyItemChanged(oldPos)
         notifyItemChanged(position)
     }
+
+    fun setSelectedByName(name: String?) {
+        if (name.isNullOrEmpty()) return
+        val index = getData().indexOfFirst { it.image == name || it.name == name }
+        if (index != -1) {
+            selectItem(index)
+        }
+    }
+
 
     fun getSelectedItem(): ProfileImage? {
         return if (selectedPosition != RecyclerView.NO_POSITION) {

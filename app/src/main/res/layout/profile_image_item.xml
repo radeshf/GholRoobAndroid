@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/_1sdp"
             android:layout_marginBottom="@dimen/_1sdp"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_enemy_arzhang_troll"
+            android:src="@drawable/ig_profile_simorgh"
             tools:layout_constraintBottom_toBottomOf="parent"
             tools:layout_constraintEnd_toEndOf="parent"
             tools:layout_constraintTop_toTopOf="parent" />

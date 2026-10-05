@@ -54,7 +54,7 @@ class ListRatingFragment : BaseFragment<RatingListFragmentBinding>(RatingListFra
     private fun clicks() {
 
         binding.userRatingLayout.root.setOnClickListener {
-            openFragment(ProfileFragment.newInstance())
+            openFragment(ProfileFragment.newInstance(), addToContainer=true)
         }
     }
 
@@ -81,6 +81,7 @@ class ListRatingFragment : BaseFragment<RatingListFragmentBinding>(RatingListFra
             if (it.data.seasonReward.isActive){
                 binding.tvSeasonTitle.text = it.data.seasonReward.title
                 binding.tvReward.text = it.data.seasonReward.pricePool
+                binding.tvToman.visibleByBoolean(it.data.seasonReward.showToman ?: false)
                 binding.tvSeasonEndTime.text = it.data.seasonReward.seasonEnd
                 binding.tvRewardDescription.loadHtml(it.data.seasonReward.description.toString())
 

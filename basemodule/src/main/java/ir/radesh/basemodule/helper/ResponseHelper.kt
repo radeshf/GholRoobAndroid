@@ -3,6 +3,7 @@ package ir.radesh.basemodule.helper
 import com.google.gson.JsonSyntaxException
 import io.reactivex.observers.DisposableObserver
 import timber.log.Timber
+import java.io.EOFException
 import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -66,8 +67,14 @@ abstract class ResponseHelper<T>() : DisposableObserver<retrofit2.Response<T>>()
                         Timber.e("ConnectException : when server is off e: ${e.message}")
                         onNoInternetError()
                     }
+
+                    is EOFException -> {
+                        Timber.e("UnexpectedEndOfStream: Connection closed by server abruptly: ${e.message}")
+                        onNoInternetError()
+                    }
+
                     else -> {
-//                        onError("خطا در پردازش")
+                        onNoInternetError()
                     }
                 }
             }

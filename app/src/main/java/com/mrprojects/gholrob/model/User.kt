@@ -15,6 +15,8 @@ class User {
     @SerializedName("username") var username: String = ""
     @SerializedName("mobile") var mobile: String? = ""
     @SerializedName("name") var name: String = ""
+
+    @SerializedName("badge") var badge: String? = ""
     @SerializedName("bio") var bio: String? = ""
     @SerializedName("profile_image") var profileImage: String? = ""
     @SerializedName("total_games") var totalGames: String? = ""
@@ -23,10 +25,20 @@ class User {
     @SerializedName("max_hearts") var maxHearts: Int = 3
     @SerializedName("current_hearts") var currentHearts: Int = 3
     @SerializedName("next_heart_time") var nextHeartTime: Long = 0
+    @SerializedName("next_heart_time_v2") var nextHeartTimeV2: Long = 0
     @SerializedName("heart_refill_interval") var heartRefillInterval: Long = 0
+
+    @SerializedName("bonus_heart_remaining") var bonusHeartRemaining: Long = 0
+    @SerializedName("next_bonus_heart_time") var nextBonusHeartTime: Long = 0
+
+    @SerializedName("next_bonus_coin_time") var nextBonusCoinTime: Long = 0
+    @SerializedName("next_bonus_eye_time") var nextBonusEyeTime: Long = 0
+    @SerializedName("next_bonus_shield_time") var nextBonusShieldTime: Long = 0
 
     @SerializedName("lives") var lives: Int = 0
     @SerializedName("coins") var coins: Int = 0
+    @SerializedName("eyes") var eyes: Int = 0
+    @SerializedName("shields") var shields: Int = 0
     @SerializedName("fill_all_energy_price") var fillAllEnergyPrice: String? = ""
     @SerializedName("energy_refill_interval") var energyRefillInterval: Int = 0
     @SerializedName("buy_new_energy_price") var buyNewEnergyPrice: String? = ""
@@ -57,6 +69,10 @@ class User {
 
     fun getProfileResource(): Int {
         return AvatarMapper.getResourceId(this.profileImage)
+    }
+
+    fun canGetBonusEnergy(): Boolean {
+        return this.nextBonusHeartTime <= 0
     }
 
     fun hasPurchasedProfile(item: ProfileImage): Boolean {

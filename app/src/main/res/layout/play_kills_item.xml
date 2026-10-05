@@ -4,7 +4,7 @@
     android:layout_height="@dimen/_39sdp"
     android:paddingHorizontal="@dimen/_5sdp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/box_btn"
+    android:background="@drawable/bg_play_kills_normal"
     android:id="@+id/lnrCell"
     android:gravity="center"
     android:layout_marginEnd="@dimen/_1sdp"

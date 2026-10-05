@@ -5,28 +5,26 @@ import android.view.View
 import com.mrprojects.gholrob.databinding.ProfileFragmentBinding
 import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.payment.LifePacks
-import com.mrprojects.gholrob.helper.showBuyCoinDoneDialog
-import com.mrprojects.gholrob.helper.showBuyLifeDoneDialog
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.events.OnProfileChanged
-import com.mrprojects.gholrob.model.rest.BuyItemPost
 import com.mrprojects.gholrob.repository.Provider
 import com.mrprojects.gholrob.viewmodel.UserViewModel
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.getAdp
 import ir.radesh.basemodule.commons.initGrid
 import ir.radesh.basemodule.commons.showToast
-import timber.log.Timber
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBinding::inflate) {
 
     private lateinit var userViewModel: UserViewModel
+    var showToolbar: Boolean = true
 
     companion object {
-        fun newInstance(): ProfileFragment {
+        fun newInstance(showToolbar: Boolean = true): ProfileFragment {
             val frag = ProfileFragment()
             val b = Bundle()
+            b.putBoolean("showToolbar", showToolbar)
             frag.arguments = b
             return frag
         }
@@ -34,7 +32,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar(title = "پروفایل")
+        showToolbar = arguments?.getBoolean("showToolbar", true)!!
+
+        initToolbar(title = "پروفایل", showToolbar=showToolbar)
 
         binding.rvProfiles.initGrid(3)
         binding.rvProfiles.adapter = ProfileImageAdapter { position, item ->

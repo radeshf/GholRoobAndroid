@@ -18,6 +18,9 @@ interface Api {
     @POST("api/v1/users/edit")
     fun editProfile(@Body body: EditProfilePost): Observable<Response<UserResponse>>
 
+    @POST("api/v1/users/edit/profile/image")
+    fun editProfileImage(@Body body: EditProfileImagePost): Observable<Response<UserResponse>>
+
     @POST("api/v1/gholrob/account/otp")
     fun sendOtp(@Body body: OtpPost): Observable<Response<EmptyResponse>>
 
@@ -72,5 +75,11 @@ interface Api {
 
     @POST("api/v1/gholrob/games/{id}/cells/{cell_id}/flag")
     fun flagCell(@Path("id") id: Int, @Path("cell_id") cellId: Int): Observable<Response<FlagCellResponse>>
+
+    @POST("api/v1/gholrob/games/{id}/cells/{cell_id}/eyes/use")
+    fun useEye(@Path("id") id: Int, @Path("cell_id") cellId: Int): Observable<Response<ActionOnCellResponse>>
+
+    @POST("api/v1/gholrob/games/{id}/cells/{cell_id}/shields/use")
+    fun useShield(@Path("id") id: Int, @Path("cell_id") cellId: Int): Observable<Response<ActionOnCellResponse>>
 
 }

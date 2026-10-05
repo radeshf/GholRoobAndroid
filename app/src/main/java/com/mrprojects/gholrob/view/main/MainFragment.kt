@@ -8,34 +8,34 @@ import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.openMarketRatePage
 import com.mrprojects.gholrob.helper.openNextLevel
 import com.mrprojects.gholrob.helper.payment.LifePacks
-import com.mrprojects.gholrob.helper.showBuyEnergyDialog
-import com.mrprojects.gholrob.helper.showSettingsDialog
+import com.mrprojects.gholrob.helper.setTime
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
 import com.mrprojects.gholrob.helper.updateHearts
 import com.mrprojects.gholrob.helper.warningDialog
 import com.mrprojects.gholrob.model.User
-import com.mrprojects.gholrob.model.events.OnBuyNewLifeCalled
-import com.mrprojects.gholrob.model.events.OnBuyRefillEnergyCalled
 import com.mrprojects.gholrob.model.events.OnProfileChanged
 import com.mrprojects.gholrob.model.events.OnShowCoinShopCalled
 import com.mrprojects.gholrob.model.events.OnShowLifeShopCalled
 import com.mrprojects.gholrob.repository.Provider
+import com.mrprojects.gholrob.view.dialogs.showBuyEnergyDialog
+import com.mrprojects.gholrob.view.dialogs.showSettingsDialog
+import com.mrprojects.gholrob.view.inventory.InventoryFragment
 import com.mrprojects.gholrob.view.play.TutorialPlayFragment
 import com.mrprojects.gholrob.view.play.history.HistoryFragment
 import com.mrprojects.gholrob.view.profile.showProfileInfoDialog
 import com.mrprojects.gholrob.view.rating.MainRatingFragment
 import com.mrprojects.gholrob.view.tutorial.TutorialFragment
 import com.mrprojects.gholrob.viewmodel.UserViewModel
+import ir.radesh.basemodule.baseViews.BaseActivity
 import ir.radesh.basemodule.baseViews.BaseFragment
+import ir.radesh.basemodule.commons.convertMillisToHuman
 import ir.radesh.basemodule.commons.setEventBus
 import ir.radesh.basemodule.helper.PrefHelper
 import org.greenrobot.eventbus.Subscribe
 
 class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
     private lateinit var userViewModel: UserViewModel
-
-    lateinit var adsHelper: TapSellHelper
 
 
     companion object {
@@ -50,7 +50,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         userConfig()
         clicks()
         login()
-        configAdHelper()
+
 
     }
 
@@ -62,21 +62,16 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 onUserDataUpdated(user)
             }
         }
-        userViewModel.nextHeartTimer.observe(viewLifecycleOwner) { millis ->
-            if (millis <= 0) {
-                binding.HeartsLayout.tvHeartTimer.text = ""
-            } else {
-                val minutes = (millis / 1000) / 60
-                val seconds = (millis / 1000) % 60
-                binding.HeartsLayout.tvHeartTimer.text = String.format("%02d:%02d", minutes, seconds)
-            }
+        userViewModel.heartTimer.timer.observe(viewLifecycleOwner) { millis ->
+            binding.HeartsLayout.lnrTimer.setTime(millis)
         }
+
     }
 
     fun onUserDataUpdated(user: User) {
         binding.tvLifeCount.text = user.lives.toString()
         binding.tvCoins.text = user.coins.toString()
-        binding.HeartsLayout.updateHearts(user, showAdd = true, showTimer = true)
+        binding.HeartsLayout.updateHearts(user, showAdd = true, showTimer = false)
         binding.tvStart.text = if (user.haveUnfinishedAttempt()) "ادامه" else "شروع"
         binding.profileLayout.tvUsername.text = user.name
         binding.profileLayout.ivProfileImage.setImageResource(user.getProfileResource())
@@ -86,6 +81,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         Provider.provideApiHelper(this).login(
             {
                 userViewModel.storeUser(it.data)
+
             }, { msg ->
                 noInternetDialog(msg = msg) {
                     login()
@@ -93,30 +89,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             })
     }
 
-    private fun configAdHelper() {
-        adsHelper = TapSellHelper(
-            requireActivity(),
-            onAddHeartRewarded = {
-                addEnergyByAds()
-            }
-        )
-    }
+
 
     private fun showBuyEnergy() {
-        showBuyEnergyDialog(userViewModel,
-            {
-                if (!userViewModel.checkUserHeartBeforeFill()) return@showBuyEnergyDialog
-                adsHelper.requestAddHeartAds()
-            },
-            {
-                if (!userViewModel.checkUserHeartBeforeFill()) return@showBuyEnergyDialog
-                postEvent(OnBuyRefillEnergyCalled())
-            }, {
-                if (!userViewModel.checkUserHeartBeforeBuy()) return@showBuyEnergyDialog
-                postEvent(OnBuyNewLifeCalled())
 
-            }
-        )
+        (requireActivity() as? BaseActivity<*>)?.showBuyEnergyDialog(userViewModel)
 
 
     }
@@ -127,7 +104,13 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 openFragment(TutorialPlayFragment.newInstance(1))
                 return@setOnClickListener
             }
+            if (userViewModel.user.value == null){
+                noInternetDialog(msg = "اطلاعات حساب به درستی لود نشده است، مجددا تلاش نمایید") {
+                    login()
+                }
+                return@setOnClickListener
 
+            }
             val user = userViewModel.user.value!!
             if (user.haveUnfinishedAttempt()) {
                 openNextLevel(user.unfinishedAttemptId!!, true)
@@ -159,9 +142,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             openFragment(HistoryFragment.newInstance())
         }
 
-        binding.ivBox1.setOnClickListener {
-            requireContext().openMarketRatePage()
-        }
         binding.ivBox2.setOnClickListener {
             showSettingsDialog()
         }
@@ -173,6 +153,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         binding.lnrTutorial.setOnClickListener {
             openFragment(TutorialFragment.newInstance())
+        }
+
+        binding.lnrInventory.setOnClickListener {
+            openFragment(InventoryFragment.newInstance())
         }
 
     }
@@ -192,7 +176,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     override fun onDestroy() {
         super.onDestroy()
-        adsHelper.destroyAd()
     }
 
     public override fun onStart() {
@@ -210,5 +193,15 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         login()
     }
 
+    private fun mockUserState(remainingHearts: Long, secondsUntilReset: Long) {
+        val currentUser = userViewModel.user.value ?: User()
 
+        currentUser.apply {
+            nextBonusHeartTime = secondsUntilReset
+            fillAllEnergyPrice = "120"
+            buyNewEnergyPrice = "450"
+        }
+
+        userViewModel.storeUser(currentUser)
+    }
 }

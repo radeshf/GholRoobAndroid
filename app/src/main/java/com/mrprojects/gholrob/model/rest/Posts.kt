@@ -19,6 +19,11 @@ class EditProfilePost(
 )
 
 
+class EditProfileImagePost(
+    @SerializedName("profile_image") private val profileImage: String,
+)
+
+
 class PaymentMessagePost(
     @SerializedName("payment_id") private val paymentId: String,
     @SerializedName("username") private val username: String,

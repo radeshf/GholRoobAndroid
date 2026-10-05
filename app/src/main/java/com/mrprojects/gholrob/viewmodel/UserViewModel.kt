@@ -6,21 +6,37 @@ import androidx.lifecycle.viewModelScope
 import com.mrprojects.gholrob.model.ErrorTypes
 import com.mrprojects.gholrob.model.User
 import com.mrprojects.gholrob.repository.db.dao.UserDao
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import com.mrprojects.gholrob.viewmodel.user.BonusCoinTimerManager
+import com.mrprojects.gholrob.viewmodel.user.BonusEyeTimerManager
+import com.mrprojects.gholrob.viewmodel.user.BonusEnergyTimerManager
+import com.mrprojects.gholrob.viewmodel.user.BonusShieldTimerManager
+import com.mrprojects.gholrob.viewmodel.user.HeartTimerManager
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import kotlin.text.insert
 
-class UserViewModel(
-    private val dao: UserDao,
-) : ViewModel() {
+
+
+class UserViewModel(private val dao: UserDao) : ViewModel(){
 
     val user = MutableLiveData<User>()
-    val nextHeartTimer = MutableLiveData<Long>()
-    private var timerJob: Job? = null
 
+    val heartTimer = HeartTimerManager(dao, viewModelScope) { updated ->
+        user.postValue(updated)
+    }
+    val bonusEnergyTimer = BonusEnergyTimerManager(dao, viewModelScope) { updated ->
+        user.postValue(updated)
+    }
+
+    val bonusCoinTimer = BonusCoinTimerManager(dao, viewModelScope) { updated ->
+        user.postValue(updated)
+    }
+    val bonusEyeTimer = BonusEyeTimerManager(dao, viewModelScope) { updated ->
+        user.postValue(updated)
+    }
+    val bonusShieldTimer = BonusShieldTimerManager(dao, viewModelScope) { updated ->
+        user.postValue(updated)
+    }
     private val _errorEvent = MutableSharedFlow<ErrorTypes>(
         replay = 0,
         extraBufferCapacity = 1
@@ -43,119 +59,15 @@ class UserViewModel(
             val updatedUser = dao.getUser()
             updatedUser?.let {
                 user.postValue(it)
-                startHeartRegenIfNeeded(it)
+                heartTimer.start(it)
+                bonusEnergyTimer.start(it)
+                bonusCoinTimer.start(it)
+                bonusEyeTimer.start(it)
+                bonusShieldTimer.start(it)
             }
         }
     }
 
-    private fun startHeartRegenIfNeeded(u: User) {
-        if (u.currentHearts < u.maxHearts && u.nextHeartTimeMillis() > System.currentTimeMillis()) {
-            startHeartRegenTimer()
-        }
-    }
-
-    private fun startHeartRegenTimer() {
-        timerJob?.cancel()
-        timerJob = viewModelScope.launch {
-            var u = dao.getUser()
-            u?.let {
-                while (u.currentHearts < u.maxHearts) {
-                    val now = System.currentTimeMillis()
-                    val remaining = (u.nextHeartTimeMillis() - now).coerceAtLeast(0L)
-                    nextHeartTimer.postValue(remaining)
-                    var isUserChanged = false
-                    if (remaining <= 0) {
-                        isUserChanged = true
-                        u.currentHearts += 1
-                        if (u.currentHearts < u.maxHearts) {
-                            u.nextHeartTime = System.currentTimeMillis() + u.energyRefillInterval
-                        } else {
-                            u.nextHeartTime = 0L
-                            stopTimer()
-                        }
-                    }
-                    if (isUserChanged) {
-                        user.postValue(u!!)
-                        dao.update(u)
-                    }
-
-                    delay(1000)
-                    if (u.currentHearts >= u.maxHearts) {
-                        stopTimer()
-                        break // exit loop
-                    }
-                }
-
-            }
-        }
-    }
-
-    private fun stopTimer() {
-        timerJob?.cancel()
-        timerJob = null
-        nextHeartTimer.postValue(0L)
-    }
-
-
-
-    fun addHeart() {
-        val u = user.value ?: return
-        if (u.currentHearts < u.maxHearts) {
-            u.currentHearts += 1
-            if (u.currentHearts >= u.maxHearts) {
-                removeTimer(u)
-            }
-            viewModelScope.launch { dao.update(u) }
-            user.postValue(u)
-        }
-    }
-
-    fun removeTimer(u: User) {
-        u.nextHeartTime = 0L
-        stopTimer()
-    }
-
-    fun fullChargeHearts() {
-        val u = user.value ?: return
-        if (u.currentHearts >= u.maxHearts) return
-
-        u.currentHearts = u.maxHearts
-
-        removeTimer(u)
-
-        viewModelScope.launch { dao.update(u) }
-        user.postValue(u)
-    }
-
-    fun addExtraHeart() {
-        val u = user.value ?: return
-        u.maxHearts += 1
-        viewModelScope.launch { dao.update(u) }
-        user.postValue(u)
-        fullChargeHearts()
-    }
-
-
-    fun removeExtraHeart() {
-        val u = user.value ?: return
-        u.maxHearts -= 1
-        viewModelScope.launch { dao.update(u) }
-        user.postValue(u)
-    }
-
-    fun addCoins(amount: Int) {
-        val u = user.value ?: return
-        u.coins += amount
-        viewModelScope.launch { dao.update(u) }
-        user.postValue(u)
-    }
-
-    fun addLife(amount: Int) {
-        val u = user.value ?: return
-        u.lives += amount
-        viewModelScope.launch { dao.update(u) }
-        user.postValue(u)
-    }
 
     fun useLife() {
         val u = user.value ?: return
@@ -164,22 +76,20 @@ class UserViewModel(
         user.postValue(u)
     }
 
-
-    fun spendCoins(amount: Int) {
+    fun useEye() {
         val u = user.value ?: return
-        u.coins -= amount
+        u.eyes -= 1
         viewModelScope.launch { dao.update(u) }
         user.postValue(u)
     }
 
-
-    fun isUserNeedHearts(): Boolean {
-        return user.value!!.currentHearts <= 0
+    fun useShield() {
+        val u = user.value ?: return
+        u.shields -= 1
+        viewModelScope.launch { dao.update(u) }
+        user.postValue(u)
     }
 
-    fun isUserHasHearts(): Boolean {
-        return user.value!!.currentHearts > 0
-    }
 
 
     fun checkUserCoin(amount: Int): Boolean {
@@ -200,19 +110,52 @@ class UserViewModel(
         return true
     }
 
-    fun checkUserHeartBeforeBuy(): Boolean {
+    fun checkUserLastBuyEnergyTime(): Boolean {
         val u = user.value ?: return false
-        if (u.maxHearts >= 5) {
-            viewModelScope.launch { _errorEvent.emit(ErrorTypes.MAX_HEART_REACHED) }
+        if (bonusEnergyTimer.isRunning ) {
+            viewModelScope.launch { _errorEvent.emit(ErrorTypes.MAX_BONUS_ENERGY_REACHED) }
             return false
         }
         return true
     }
 
+    fun checkUserLastBonusCoin(): Boolean {
+        val u = user.value ?: return false
+        if (bonusCoinTimer.isRunning ) {
+            viewModelScope.launch { _errorEvent.emit(ErrorTypes.MAX_BONUS_COIN_REACHED) }
+            return false
+        }
+        return true
+    }
+
+    fun checkUserLastBonusEye(): Boolean {
+        val u = user.value ?: return false
+        if (bonusEyeTimer.isRunning ) {
+            viewModelScope.launch { _errorEvent.emit(ErrorTypes.MAX_BONUS_EYE_REACHED) }
+            return false
+        }
+        return true
+    }
+
+
+    fun checkUserLastBonusShield(): Boolean {
+        val u = user.value ?: return false
+        if (bonusShieldTimer.isRunning) {
+            viewModelScope.launch { _errorEvent.emit(ErrorTypes.MAX_BONUS_SHIELD_REACHED) }
+            return false
+        }
+        return true
+    }
+
+
     override fun onCleared() {
         super.onCleared()
-        timerJob?.cancel()
-        timerJob = null
+        heartTimer.stop()
+        bonusEnergyTimer.stop()
+        bonusCoinTimer.stop()
+        bonusEyeTimer.stop()
+        bonusShieldTimer.stop()
     }
+
 
 }

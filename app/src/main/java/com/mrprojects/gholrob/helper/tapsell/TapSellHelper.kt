@@ -4,7 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.widget.RelativeLayout
 import com.mrprojects.gholrob.helper.warningDialog
-import com.mrprojects.helper.tapsell.HeartAdsKey
+import com.mrprojects.helper.tapsell.BONUS_COIN_KEY
+import com.mrprojects.helper.tapsell.BONUS_ENERGY_KEY
+import com.mrprojects.helper.tapsell.BONUS_EYE_KEY
+import com.mrprojects.helper.tapsell.BONUS_SHIELD_KEY
 import com.mrprojects.helper.tapsell.HintAdsKey
 import com.mrprojects.helper.tapsell.TapSellKey
 import com.mrprojects.helper.tapsell.bannerKey
@@ -18,9 +21,10 @@ import java.lang.ref.WeakReference
 
 class TapSellHelper(
     val activity: Activity,
-    val onAddHeartRewarded: (() -> Unit)? = null,
-    val onHintRewarded: (() -> Unit)? = null,
-    val onDoubleCoinRewarded: (() -> Unit)? = null
+    val onBonusEnergyRewarded: (() -> Unit)? = null,
+    val onBonusCoinRewarded: (() -> Unit)? = null,
+    val onBonusEyeRewarded: (() -> Unit)? = null,
+    val onBonusShieldRewarded: (() -> Unit)? = null
 ) {
     private val activityRef = WeakReference(activity)
     private var responseId: String? = null
@@ -33,8 +37,21 @@ class TapSellHelper(
         activity()?.let { TapsellPlus.requestRewardedVideoAd(it, key, advListener()) }
 
     }
-    fun requestAddHeartAds() {
-        requestVideoAds(HeartAdsKey)
+    fun requestBonusEnergyAds() {
+        requestVideoAds(BONUS_ENERGY_KEY)
+    }
+
+    fun requestBonusCoinAds() {
+        requestVideoAds(BONUS_COIN_KEY)
+    }
+
+    fun requestBonusEyeAds() {
+        requestVideoAds(BONUS_EYE_KEY)
+    }
+
+
+    fun requestBonusShieldAds() {
+        requestVideoAds(BONUS_SHIELD_KEY)
     }
 
     fun requestHintAds() {
@@ -55,7 +72,7 @@ class TapSellHelper(
         rewarded = false
         if (activity() == null) return
         when (res.zoneId) {
-            in arrayOf(HeartAdsKey, HintAdsKey, doubleCoinAdsKey) -> {
+            in arrayOf(BONUS_ENERGY_KEY, HintAdsKey, doubleCoinAdsKey, BONUS_COIN_KEY, BONUS_EYE_KEY, BONUS_SHIELD_KEY) -> {
                 TapsellPlus.showRewardedVideoAd(activity(), res.responseId, advShowListener())
             }
             bannerKey -> {
@@ -107,25 +124,30 @@ class TapSellHelper(
                 super.onClosed(tapsellPlusAdModel)
                 Timber.e("AdShowListener onClosed")
                 val zoneId = tapsellPlusAdModel.zoneId
-                if (zoneId == doubleCoinAdsKey){
+                if (zoneId == BONUS_ENERGY_KEY){
                     if (rewarded) {
-                        onDoubleCoinRewarded?.invoke()
+                        onBonusEnergyRewarded?.invoke()
                     } else {
                         activity()!!.layoutInflater.warningDialog("برای دریافت جایزه باید ویدئو را تا پایان تماشا نمایید", "قطع تبلیغ")
-
                     }
                 }
-                else if (zoneId == HintAdsKey){
+                else if (zoneId == BONUS_COIN_KEY){
                     if (rewarded) {
-                        onHintRewarded?.invoke()
+                        onBonusCoinRewarded?.invoke()
                     } else {
                         activity()!!.layoutInflater.warningDialog("برای دریافت جایزه باید ویدئو را تا پایان تماشا نمایید", "قطع تبلیغ")
-
                     }
                 }
-                else if (zoneId == HeartAdsKey){
+                else if (zoneId == BONUS_EYE_KEY){
                     if (rewarded) {
-                        onAddHeartRewarded?.invoke()
+                        onBonusEyeRewarded?.invoke()
+                    } else {
+                        activity()!!.layoutInflater.warningDialog("برای دریافت جایزه باید ویدئو را تا پایان تماشا نمایید", "قطع تبلیغ")
+                    }
+                }
+                else if (zoneId == BONUS_SHIELD_KEY){
+                    if (rewarded) {
+                        onBonusShieldRewarded?.invoke()
                     } else {
                         activity()!!.layoutInflater.warningDialog("برای دریافت جایزه باید ویدئو را تا پایان تماشا نمایید", "قطع تبلیغ")
                     }

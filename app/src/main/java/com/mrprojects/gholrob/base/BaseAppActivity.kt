@@ -14,9 +14,8 @@ import androidx.viewbinding.ViewBinding
 import com.mrprojects.gholrob.helper.warningDialog
 import ir.radesh.basemodule.baseViews.ApiSubscriber
 import ir.radesh.basemodule.baseViews.BaseActivity
-import ir.radesh.basemodule.commons.hideLoading
-import ir.radesh.basemodule.commons.showLoading
-import org.greenrobot.eventbus.EventBus
+import ir.radesh.basemodule.helper.loading.hideLoading
+import ir.radesh.basemodule.helper.loading.showLoading
 
 abstract class BaseAppActivity<B : ViewBinding>(bindingFactory: (LayoutInflater) -> B) : BaseActivity<B>(bindingFactory), ApiSubscriber {
 

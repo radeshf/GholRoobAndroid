@@ -30,29 +30,27 @@ fun <B : ViewBinding> BaseFragment<B>.showProfileImageInfoDialog(user: User, ite
     binding.tvUserCoin.text = user.coins.toMoneyString()
     binding.ivImage.setImageResource(item.drawableRes)
     binding.tvTitleDialog.text = item.name
-    binding.tvName.text = item.name
     binding.tvBio.text = item.description
     val isUserPurchased = user.hasPurchasedProfile(item)
-    binding.lnrPrice.visibleByBoolean(!isUserPurchased)
-    binding.lnrUserCoin.visibleByBoolean(!isUserPurchased)
-    binding.btnBuyProfile.root.visibleByBoolean(!isUserPurchased)
-    binding.tvPrice.text = item.price.toString()
-    binding.btnSetProfile.root.disableAlphaByBoolean(isUserPurchased)
-    binding.btnSetProfile.btnText.text = "انتخاب پروفایل"
-    binding.btnBuyProfile.btnText.text = "خرید پروفایل"
 
-    binding.btnSetProfile.root.setOnClickListener {
+    binding.cardCoinInfo.visibleByBoolean(!isUserPurchased)
+    binding.btnBuyProfile.visibleByBoolean(!isUserPurchased)
+    binding.tvPrice.text = item.price.toString()
+    binding.btnSetProfile.disableAlphaByBoolean(isUserPurchased)
+
+    binding.btnSetProfile.setOnClickListener {
         if (isUserPurchased){
             onSetProfile(item)
             dialog.dismiss()
         }
     }
-    binding.btnBuyProfile.root.setOnClickListener {
+    binding.btnBuyProfile.setOnClickListener {
 
         onBuyProfile(item)
         dialog.dismiss()
     }
-    binding.lnrDismiss.root.setOnClickListener {
+    binding.btnDismiss.tvDismiss.text = "بستن"
+    binding.btnDismiss.root.setOnClickListener {
         dialog.dismiss()
     }
     doOnTry({
@@ -68,13 +66,19 @@ fun <B : ViewBinding> BaseFragment<B>.showProfileInfoDialog(user: User, isSelf: 
     dialog.basicConfig(binding.root)
     binding.ivProfileImage.setImageResource(user.getProfileResource())
     binding.tvUsername.text = user.name
+    binding.tvBadge.visibleByBoolean(!user.badge.isNullOrEmpty())
+    binding.tvBadge.text = user.badge.toString()
     binding.tvBio.text = user.bio
     binding.tvBattles.text = user.totalGames.toString()
     binding.tvWins.text = user.totalWins.toString()
     binding.tvKills.text = user.totalKills.toString()
     binding.btnEditProfile.visibleByBoolean(isSelf)
     binding.btnAccount.visibleByBoolean(isSelf)
+    binding.ivProfileImage.setOnClickListener {
+        openFragment(ProfileFragment.newInstance())
+        dialog.dismiss()
 
+    }
     binding.btnEditProfile.setOnClickListener {
         openFragment(ProfileFragment.newInstance())
         dialog.dismiss()
@@ -84,7 +88,8 @@ fun <B : ViewBinding> BaseFragment<B>.showProfileInfoDialog(user: User, isSelf: 
 
         dialog.dismiss()
     }
-    binding.lnrDismiss.root.setOnClickListener {
+    binding.btnDismiss.tvDismiss.text = "بستن"
+    binding.btnDismiss.root.setOnClickListener {
         dialog.dismiss()
     }
     doOnTry({
@@ -134,7 +139,8 @@ fun <B : ViewBinding> BaseFragment<B>.showProfileRestoreDialog(user: User) {
             dialog.dismiss()
         }
     }
-    binding.lnrDismiss.root.setOnClickListener {
+    binding.btnDismiss.tvDismiss.text = "بستن"
+    binding.btnDismiss.root.setOnClickListener {
         dialog.dismiss()
     }
     doOnTry({
@@ -147,8 +153,7 @@ fun <B : ViewBinding> BaseFragment<B>.showOtpDialog(type: String, mobile: String
     val binding = ProfileOtpDialogBinding.inflate(layoutInflater)
     val dialog = Dialog(requireContext(), R.style.MyDialogTheme)
     dialog.basicConfig(binding.root)
-    binding.lnrSubmit.btnText.text = "ثبت"
-    binding.lnrSubmit.root.setOnClickListener {
+    binding.lnrSubmit.setOnClickListener {
         val code = binding.etCode.text.toString()
         if (type == "create"){
             Provider.provideApiHelper(this).createAccount(mobile, code, type) {
@@ -165,7 +170,8 @@ fun <B : ViewBinding> BaseFragment<B>.showOtpDialog(type: String, mobile: String
         }
     }
 
-    binding.lnrDismiss.root.setOnClickListener {
+    binding.btnDismiss.tvDismiss.text = "بستن"
+    binding.btnDismiss.root.setOnClickListener {
         dialog.dismiss()
     }
     doOnTry({

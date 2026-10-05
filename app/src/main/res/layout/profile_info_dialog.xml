@@ -4,298 +4,328 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/dialog_x_margin"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
 
-    android:gravity="center">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lnrDialog"
+    <!-- بدنه اصلی کارت دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dialog_x_margin"
-        android:layout_marginEnd="@dimen/dialog_x_margin"
-        android:background="@drawable/ig_panel"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dialog_start_padding"
-        android:paddingTop="@dimen/dialog_y_padding"
-        android:paddingEnd="@dimen/dialog_x_padding"
-        android:paddingBottom="@dimen/dialog_y_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lnrDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/_54sdp"
+            android:paddingBottom="@dimen/_16sdp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- عنوان دیالوگ (پروفایل) -->
+
+
+            <!-- نام کاربری -->
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="نام کاربری" />
+
+            <TextView
+                android:id="@+id/tvBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="@color/coin_color"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                tools:text="#قهرمان شهریور" />
+
+            <!-- بیوگرافی و توضیحات کاربر -->
+            <TextView
+                android:id="@+id/tvBio"
+                style="@style/Widget.Game.Dialog.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:maxLines="3"
+                android:textColor="@color/game_text_primary"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBadge"
+                tools:text="اینجا بیوگرافی کاربر قرار می‌گیرد و به صورت هوشمند چند خطی نمایش داده می‌شود." />
+
+            <!-- دکمه ویرایش پروفایل -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#212631"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#2E333D"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBio">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:layout_marginEnd="@dimen/_12sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvUsername"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/dialog_text_color"
-                            android:textSize="@dimen/textLarge"
-                            tools:text="نام کاربری" />
-
-                        <TextView
-                            android:id="@+id/tvBio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:maxLines="3"
-                            android:textColor="@color/dialog_text_subtitle_color"
-                            android:textSize="@dimen/textSmall"
-                            tools:text="اینجا بیوگرافی کاربر قرار می‌گیرد و به صورت هوشمند چند خطی نمایش داده می‌شود. حداکثر میتواند 3 خط باشد" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/ivProfileImage"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:src="@drawable/ig_profile_unknown" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnEditProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/box_btn"
                     android:gravity="center"
-                    android:layout_gravity="center"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_8sdp"
-                    android:paddingVertical="@dimen/_4sdp"
-                    >
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_4sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_profile"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/textSmall"
+                        android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:layout_width="@dimen/_16sdp"
-                        android:layout_height="@dimen/_16sdp"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:src="@drawable/ig_edit"
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_13sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:contentDescription="@string/contentDescription"
-                         />
+                        android:src="@drawable/ig_edit" />
 
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:background="#EEEEEE" />
-
-            <LinearLayout
+            <!-- پنل آمار سه‌گانه نبردها (برد، نبرد، دشمن) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardStatsInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:layout_marginTop="@dimen/_12sdp"
+                app:cardBackgroundColor="#1A1D24"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#2E333D"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnEditProfile">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:weightSum="3">
 
-                    <TextView
-                        android:id="@+id/tvWins"
-                        android:layout_width="wrap_content"
+                    <!-- ستون ۱: بردها -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        tools:text="75"
-                        android:textColor="@color/dialog_text_color"
-                        android:textSize="@dimen/textVeryLarge"
-                        />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/tvWins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#4ADE80"
+                            android:textSize="@dimen/_17sdp"
+                            android:textStyle="bold"
+                            tools:text="75" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="برد"
+                            android:textColor="#9CA3AF"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+                    <!-- خط جداکننده -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#2E333D" />
+
+                    <!-- ستون ۲: نبردها -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="برد"
-                        android:textColor="@color/dialog_text_subtitle_color"
-                        android:textSize="@dimen/textSmall" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvBattles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#60A5FA"
+                            android:textSize="@dimen/_17sdp"
+                            android:textStyle="bold"
+                            tools:text="120" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="نبرد"
+                            android:textColor="#9CA3AF"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+                    <!-- خط جداکننده -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#2E333D" />
+
+                    <!-- ستون ۳: دشمن‌ها -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvKills"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F87171"
+                            android:textSize="@dimen/_17sdp"
+                            android:textStyle="bold"
+                            tools:text="340" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="دشمن"
+                            android:textColor="#9CA3AF"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
                 </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvBattles"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="120"
-                        android:textColor="@color/dialog_text_color"
-                        android:textSize="@dimen/textVeryLarge"
-                         />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="نبرد"
-                        android:textColor="@color/dialog_text_subtitle_color"
-                        android:textSize="@dimen/textSmall" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvKills"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="340"
-                        android:textColor="@color/dialog_text_color"
-                        android:textSize="@dimen/textVeryLarge"
-                         />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="دشمن"
-                        android:textColor="@color/dialog_text_subtitle_color"
-                        android:textSize="@dimen/textSmall" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_8sdp"
-                android:paddingVertical="@dimen/_4sdp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:background="@drawable/box_btn">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ذخیره و بازیابی اکانت"
-                    android:textColor="@color/dialog_text_color"
-                    android:textSize="@dimen/textSmall"
-                    />
-
-                <ImageView
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
-                    android:padding="@dimen/_3sdp"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:src="@drawable/ig_edit"
-                    android:contentDescription="@string/contentDescription"/>
-
-            </LinearLayout>
-
+            <!-- بخش دکمه‌های عملیاتی -->
             <LinearLayout
                 android:id="@+id/lnrBackButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_14sdp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog2">
+                app:layout_constraintTop_toBottomOf="@id/cardStatsInfo">
 
+                <!-- دکمه ذخیره و بازیابی اکانت -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#212631"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:cardElevation="@dimen/_2sdp"
+                    app:strokeColor="#374151"
+                    app:strokeWidth="1.2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ذخیره و بازیابی اکانت"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:contentDescription="@string/contentDescription"
+                            android:src="@drawable/ig_edit" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- دکمه بازگشت / انصراف -->
                 <include
-                    android:id="@+id/lnrDismiss"
-                    layout="@layout/btn_dismiss_layout" />
+                    android:id="@+id/btnDismiss"
+                    layout="@layout/dialog_dismiss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
 
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <LinearLayout
-        android:layout_width="@dimen/dialog_header_w"
-        android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/ig_panel_header"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/lnrDialog"
-        app:layout_constraintEnd_toEndOf="@+id/lnrDialog"
-        app:layout_constraintStart_toStartOf="@+id/lnrDialog"
-        app:layout_constraintTop_toTopOf="@+id/lnrDialog">
-
-        <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:contentDescription="@string/contentDescription"
-            android:rotationY="180"
-            android:src="@drawable/ig_profile_unknown"
-
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tvTitleDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:text="@string/profile"
-            android:textColor="@color/dialog_text_color"
-            android:textSize="@dimen/textExtraLarge"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!-- آواتار شناور بالای دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAvatarFrame"
+        android:layout_width="@dimen/_96sdp"
+        android:layout_height="@dimen/_96sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:cardBackgroundColor="#1A1D24"
+        app:cardCornerRadius="@dimen/_48sdp"
+        app:cardElevation="@dimen/_10sdp"
+        app:strokeColor="#F59E0B"
+        app:strokeWidth="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody">
 
         <ImageView
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:id="@+id/ivProfileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ig_profile_unknown"
-            android:visibility="visible" />
-    </LinearLayout>
+            android:scaleType="centerCrop"
+            android:src="@drawable/ig_profile_unknown" />
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
