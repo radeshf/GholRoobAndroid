@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/_16sdp">
+
+    <!-- کارت بدنه دیالوگ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDialogBody"
+        style="@style/Widget.Game.Dialog.Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lnrDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_14sdp"
+            android:paddingTop="@dimen/_42sdp"
+            android:paddingBottom="@dimen/_14sdp">
+
+            <!-- عنوان آپدیت -->
+            <TextView
+                android:id="@+id/tvTitleDialog"
+                style="@style/Widget.Game.Dialog.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="نسخه جدید در دسترس است!"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- شماره نسخه جدید (بج یا تگ اختیاری) -->
+            <TextView
+                android:id="@+id/tvVersionTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="#00E5FF"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleDialog"
+                tools:text="نسخه 2.4.0" />
+
+            <!-- متن توضیحات و تغییرات نسخه -->
+            <TextView
+                android:id="@+id/tvMessageDialog"
+                style="@style/Widget.Game.Dialog.Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp"
+                android:text="برای تجربه بهتر و اضافه شدن امکانات و مراحل جدید، بازی را به آخرین نسخه به‌روزرسانی کنید."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVersionTag" />
+
+            <!-- دکمه‌های استورها (بازار و مایکت کنار هم) -->
+            <LinearLayout
+                android:id="@+id/lnrStoreButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMessageDialog">
+
+                <LinearLayout
+                    android:id="@+id/btnBazaar"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_store_button_bazaar"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_bazaar"
+                        android:contentDescription="@string/contentDescription"
+                        app:tint="#2CD657"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnMyket"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_store_button_myket"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_myket"
+                        android:contentDescription="@string/contentDescription"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/lnrBackButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnrStoreButtons">
+
+                <include
+                    android:id="@+id/btnDismiss"
+                    layout="@layout/dialog_dismiss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- آیکون شناور بالای دیالوگ (راکت یا آیکون آپدیت) -->
+    <ImageView
+        android:id="@+id/ivUpdateIcon"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:contentDescription="@string/contentDescription"
+        android:elevation="@dimen/_10sdp"
+        android:src="@drawable/ig_gem"
+        app:layout_constraintBottom_toTopOf="@+id/cardDialogBody"
+        app:layout_constraintEnd_toEndOf="@+id/cardDialogBody"
+        app:layout_constraintStart_toStartOf="@+id/cardDialogBody"
+        app:layout_constraintTop_toTopOf="@+id/cardDialogBody" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

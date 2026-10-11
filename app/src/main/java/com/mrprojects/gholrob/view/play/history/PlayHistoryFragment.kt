@@ -38,7 +38,7 @@ class PlayHistoryFragment : BaseFragment<PlayHistoryFragmentBinding>(PlayHistory
         gameId = arguments?.getInt("gameId")!!
         binding.rvOptions.initGrid(7, canScroll = false)
         binding.rvKills.initGrid(7, canScroll = false)
-        val adp = CellsAdapter({_, _, _ -> })
+        val adp = CellsAdapter({_, _, _ -> }, {_, _ -> })
         binding.rvKills.adapter = KillsAdapter(object : OnItemClickListener<GameKill> {
             override fun onItemClick(item: GameKill) {
                 onKillItemClicked(item)

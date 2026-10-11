@@ -1,4 +1,10 @@
 
+V1.5.6 in 1405/07/19
+- Add progress to enemies
+- Add progress to game
+- Add new info in game
+- Add update dialog
+
 V1.4.5 in 1405/07/13
 - Major Update
 

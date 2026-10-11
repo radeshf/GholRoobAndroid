@@ -18,6 +18,7 @@ import com.mrprojects.gholrob.viewmodel.user.TimerState
 import ir.radesh.basemodule.baseViews.BaseActivity
 import ir.radesh.basemodule.commons.basicConfig
 import ir.radesh.basemodule.commons.disableAlphaByBoolean
+import ir.radesh.basemodule.commons.pulseAnimation
 import ir.radesh.basemodule.commons.toMoneyString
 import ir.radesh.basemodule.commons.visibleByBoolean
 
@@ -147,6 +148,7 @@ fun <B : ViewBinding> BaseActivity<B>.baseShopDialog(
     val showAds = adsItem != null
     binding.btnAdAction.visibleByBoolean(showAds)
     binding.tvAdsTitle.text = "مشاهده تبلیغ (${adsItem?.amount} ${adsItem?.title} رایگان)"
+    binding.tvBonusDot.pulseAnimation()
 
 //    val drawable = RoundedArcDrawable(
 //        arcColor = ContextCompat.getColor(requireContext(), R.color.colorAccent),
@@ -165,12 +167,12 @@ fun <B : ViewBinding> BaseActivity<B>.baseShopDialog(
             binding.lnrTimer.setTime(it.remainingMs)
             binding.btnByAds.disableAlphaByBoolean(false)
             binding.lnrTimer.root.visibleByBoolean(true)
-            binding.lnrDot.visibleByBoolean(false)
+            binding.tvBonusDot.visibleByBoolean(false)
             binding.lnrTimer.timerProgress.progress = it.percent
         } else {
             binding.btnByAds.disableAlphaByBoolean(true)
             binding.lnrTimer.root.visibleByBoolean(false)
-            binding.lnrDot.visibleByBoolean(true)
+            binding.tvBonusDot.visibleByBoolean(true)
             binding.lnrTimer.timerProgress.progress = 0
             binding.lnrTimer.setTime(0)
 

@@ -30,15 +30,6 @@ object AppConfig {
     const val HIDDEN_KEY = -9999
     const val REWARD_COIN = 100
 
-
-    fun isBazaar(): Boolean{
-        return SOURCE == "BAZAAR"
-    }
-
-    fun marketName(): String{
-        return if (this.isBazaar()) return "\"کافه بازار\"" else "\"مایکت\""
-    }
-
 }
 
 

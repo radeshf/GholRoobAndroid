@@ -10,6 +10,7 @@ import com.mrprojects.gholrob.helper.openNextLevel
 import com.mrprojects.gholrob.helper.payment.LifePacks
 import com.mrprojects.gholrob.helper.setTime
 import com.mrprojects.gholrob.helper.showSuccessDialog
+import com.mrprojects.gholrob.helper.showUpdateDialog
 import com.mrprojects.gholrob.helper.tapsell.TapSellHelper
 import com.mrprojects.gholrob.helper.updateHearts
 import com.mrprojects.gholrob.helper.warningDialog
@@ -81,6 +82,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         Provider.provideApiHelper(this).login(
             {
                 userViewModel.storeUser(it.data)
+                if (it.data.newVersion?.isAvailable == true){
+                    showUpdateDialog(it.data.newVersion)
+                }
 
             }, { msg ->
                 noInternetDialog(msg = msg) {

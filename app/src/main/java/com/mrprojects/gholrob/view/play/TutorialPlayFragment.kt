@@ -10,6 +10,7 @@ import com.mrprojects.gholrob.helper.haptics.VibrateTypes
 import com.mrprojects.gholrob.helper.initToolbar
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.setTutorial1Text
+import com.mrprojects.gholrob.helper.showEmptySellInfoDialog
 import com.mrprojects.gholrob.helper.showTutorialDoneDialog
 import com.mrprojects.gholrob.helper.sound.sfx.OnPlaySfx
 import com.mrprojects.gholrob.helper.sound.sfx.SfxTypes
@@ -49,14 +50,19 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
         initToolbar(title = "راهنمای $tutorialId")
 
         binding.rvTiles.initGrid(7, canScroll = false)
-        binding.rvTiles.adapter = CellsAdapter({ item, position, view ->
+        binding.rvTiles.adapter = CellsAdapter(
+            { item, position, view ->
             onCellClicked(item, position, view)
-        }, true)
+        },
+            onDefeatedClicked = { item, totalDamage ->
+                showEmptySellInfoDialog(item, totalDamage)
+            },
+            true
+        )
 
         getData()
         clicks()
     }
-
 
 
     private fun clicks() {
@@ -64,7 +70,7 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
             isFlagSelected = !isFlagSelected
             if (isFlagSelected) {
                 binding.btnFlag.setBackgroundResource(R.drawable.box_btn_selected)
-                if (tutorialId == 4){
+                if (tutorialId == 4) {
                     checkTutorialMission(1)
                 }
             } else {
@@ -99,31 +105,31 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
 
         binding.tvTutorialNumber.text = "راهنمای $tutorialId"
 
-        if (tutorialId == 1){
+        if (tutorialId == 1) {
             attempt = Attempt.tutorialZero()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_0))
         }
-        if (tutorialId == 2){
+        if (tutorialId == 2) {
             attempt = Attempt.tutorialKill()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_1))
 
         }
-        if (tutorialId == 3){
+        if (tutorialId == 3) {
             attempt = Attempt.tutorialHeart()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_2))
 
         }
-        if (tutorialId == 4){
+        if (tutorialId == 4) {
             attempt = Attempt.tutorialFlag()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_3))
 
         }
-        if (tutorialId == 5){
+        if (tutorialId == 5) {
             attempt = Attempt.tutorialEye()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_4))
 
         }
-        if (tutorialId == 6){
+        if (tutorialId == 6) {
             attempt = Attempt.tutorialFinal()
             binding.tvTarget.setTutorial1Text(requireContext().getString(R.string.tutorial_msg_5))
 
@@ -131,54 +137,53 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
         loadGame()
     }
 
-    private fun tutorialActions(item: GameCell){
-        if(tutorialId == 1){
-            if (item.isBossSmall()){
+    private fun tutorialActions(item: GameCell) {
+        if (tutorialId == 1) {
+            if (item.isBossSmall()) {
                 checkTutorialMission(1)
             }
-            if (item.isBossBig()){
+            if (item.isBossBig()) {
                 checkTutorialMission(2)
             }
-            if (item.isBossFinal()){
+            if (item.isBossFinal()) {
                 checkTutorialMission(3)
-                showTutorialDoneDialog("بزن بریم","آماده ای که بریم پله پله همه چیزی که لازم هست بدونی رو یاد بگیری") { dialog ->
+                showTutorialDoneDialog("بزن بریم", "آماده ای که بریم پله پله همه چیزی که لازم هست بدونی رو یاد بگیری") { dialog ->
                     openFragment(newInstance(2), false)
                     dialog.dismiss()
                 }
             }
 
         }
-        if(tutorialId == 2){
-            if (item.isHyena()){
+        if (tutorialId == 2) {
+            if (item.isHyena()) {
                 checkTutorialMission(1)
             }
-            if (item.isWolf()){
+            if (item.isWolf()) {
                 checkTutorialMission(2)
             }
-            if (item.isLion()){
+            if (item.isLion()) {
                 checkTutorialMission(3)
             }
-            if (attempt.hearts == 0){
-                showTutorialDoneDialog("آفرین","ماموریت اول رو انجام دادی! بریم برای آموزش شکست ضحاک") { dialog ->
+            if (attempt.hearts == 0) {
+                showTutorialDoneDialog("آفرین", "ماموریت اول رو انجام دادی! بریم برای آموزش شکست ضحاک") { dialog ->
                     openFragment(newInstance(3), false)
                     dialog.dismiss()
                 }
             }
-        }
-        else if(tutorialId == 3){
-            if (item.isSnake()){
-                if (killedSnacks < 2){
+        } else if (tutorialId == 3) {
+            if (item.isSnake()) {
+                if (killedSnacks < 2) {
                     killedSnacks += 1
-                }else{
+                } else {
                     val msg = binding.tvTarget.text.toString().replace("اختیاری)", "✅")
                     binding.tvTarget.setTutorial1Text(msg)
                 }
             }
-            if(item.isHeart()){
+            if (item.isHeart()) {
                 checkTutorialMission(1)
             }
 
-            if(item.isBossSmall()){
+            if (item.isBossSmall()) {
                 checkTutorialMission(2)
                 showTutorialDoneDialog("دست خوش", "ضحاک رو شکست دادی. بریم سراغ کار با پرچم") { dialog ->
                     openFragment(newInstance(4), false)
@@ -186,22 +191,20 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
                 }
             }
 
-        }
-        else if(tutorialId == 4){
+        } else if (tutorialId == 4) {
             Timber.e("item: $item")
-            if (item.isFlagged && item.isBottomLessPit()){
+            if (item.isFlagged && item.isBottomLessPit()) {
                 checkTutorialMission(2)
                 showTutorialDoneDialog("ایول", "اینم از پرچم گذاری. بزن بریم ") { dialog ->
                     openFragment(newInstance(5), false)
                     dialog.dismiss()
                 }
             }
-        }
-        else if(tutorialId == 5){
-            if (item.isDessert()){
+        } else if (tutorialId == 5) {
+            if (item.isDessert()) {
                 checkTutorialMission(1)
             }
-            if (item.isGhost()){
+            if (item.isGhost()) {
                 checkTutorialMission(2)
                 showTutorialDoneDialog("عالیه", "بریم سراغ آخرین آموزش") { dialog ->
                     openFragment(newInstance(6), false)
@@ -210,12 +213,11 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
             }
 
 
-        }
-        else if(tutorialId == 6){
-            if (item.isBossBig()){
+        } else if (tutorialId == 6) {
+            if (item.isBossBig()) {
                 checkTutorialMission(1)
             }
-            if (item.isBossFinal()){
+            if (item.isBossFinal()) {
                 checkTutorialMission(2)
                 postEvent(OnPlaySfx(SfxTypes.Win))
                 showTutorialDoneDialog("بی نظیر", "وقتشه خودت رو برای نبرد اصلی آماده کنی. آماده ای؟", "آماده نبرد") { dialog ->
@@ -228,7 +230,7 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
         }
     }
 
-    private fun checkTutorialMission(number: Int){
+    private fun checkTutorialMission(number: Int) {
         val msg = binding.tvTarget.text.toString().replace("$number)", "✅")
         binding.tvTarget.setTutorial1Text(msg)
     }
@@ -241,27 +243,26 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
     }
 
 
-
-    private fun defeatEnemy(item: GameCell, position: Int, view: View){
-        if (item.isBottomLessPit()){
+    private fun defeatEnemy(item: GameCell, position: Int, view: View) {
+        if (item.isBottomLessPit()) {
             warningDialog("چاه شغاد باعث مرگ شما میشود و هیچ راه بازگشتی ندارد. با پرچم میتونید چاه هارو بپوشونید")
             return
         }
-        if (item.damage > attempt.hearts){
+        if (item.damage > attempt.hearts) {
             warningDialog("جون شما برای شکست این دشمن کافی نیست و باعث باخت شما میشود. با نوش دارو جونت رو پر کن")
             return
         }
-        if (item.isHeart()){
+        if (item.isHeart()) {
             attempt.hearts = attempt.totalHearts
-        }else if(item.isBossSmall()){
+        } else if (item.isBossSmall()) {
             attempt.totalHearts = 10
             attempt.hearts = attempt.totalHearts
-        }else if(item.isBossBig()){
+        } else if (item.isBossBig()) {
             attempt.totalHearts = 15
             attempt.hearts = attempt.totalHearts
-        }else if(item.isBossFinal()){
+        } else if (item.isBossFinal()) {
 
-        } else{
+        } else {
             attempt.hearts -= item.damage
         }
         item.isDefeated = true
@@ -277,9 +278,10 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
 
         tutorialActions(item)
     }
+
     fun onCellClicked(item: GameCell, position: Int, view: View) {
         if (item.isDefeated) {
-            warningDialog("اعداد سفید نشان دهنده میزان آسیب در کاشی های اطراف می باشد")
+            Timber.e("item isDefeated") // it check in adapter so its not ganna happened
             return
         }
 
@@ -339,7 +341,6 @@ class TutorialPlayFragment : BaseFragment<TutorialPlayFragmentBinding>(TutorialP
         }
 
     }
-
 
 
     override fun showMsg(s: String) {

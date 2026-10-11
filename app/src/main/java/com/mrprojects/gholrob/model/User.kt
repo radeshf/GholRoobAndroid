@@ -47,6 +47,9 @@ class User {
     var purchasedItems: List<String> = emptyList()
 
     @Ignore
+    @SerializedName("new_version") var newVersion: NewVersion? = null
+
+    @Ignore
     @SerializedName("-O8w9,_s6+^i-O8w9,_s6+^i") var userHash: String = ""
 
     constructor(){
@@ -73,6 +76,14 @@ class User {
 
     fun canGetBonusEnergy(): Boolean {
         return this.nextBonusHeartTime <= 0
+    }
+
+    fun canGetBonusEye(): Boolean {
+        return this.nextBonusEyeTime <= 0
+    }
+
+    fun canGetBonusShield(): Boolean {
+        return this.nextBonusShieldTime <= 0
     }
 
     fun hasPurchasedProfile(item: ProfileImage): Boolean {

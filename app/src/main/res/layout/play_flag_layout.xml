@@ -17,10 +17,10 @@
     <!-- قاب آیکون تله / خطر -->
     <FrameLayout
         android:id="@+id/frameTrapIcon"
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:background="@drawable/bg_trap_avatar_frame"
-        android:padding="2dp"
+        android:padding="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,7 +38,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:gravity="center_vertical|end"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/frameTrapIcon"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:includeFontPadding="false"
-            android:text="روی خانه‌ای که فکر می‌کنی چاه شغاد هست بزن"
+            android:text="روی خانه‌ای که فکر می‌کنی چاه شغاد هست بزار"
             android:textColor="#E2E8F0"
             android:textSize="@dimen/textMedium" />
 

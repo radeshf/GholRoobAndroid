@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:layout_marginHorizontal="@dimen/_2sdp"
     android:background="@drawable/bg_target_banner"
     android:paddingVertical="@dimen/_2sdp"
     android:paddingHorizontal="@dimen/_2sdp"
@@ -16,8 +15,8 @@
     <!-- کانتینر تصویر باس با قاب برجسته -->
     <FrameLayout
         android:id="@+id/frameBossAvatar"
-        android:layout_width="@dimen/_34sdp"
-        android:layout_height="@dimen/_34sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:background="@drawable/bg_boss_avatar_frame"
         android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +37,6 @@
         android:id="@+id/layTargetText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/frameBossAvatar"
@@ -54,14 +52,14 @@
             android:includeFontPadding="false"
             android:text="را پیدا کن و نابود کن"
             android:textColor="#CBD5E0"
-            android:textSize="@dimen/textSemiLarge" />
+            android:textSize="@dimen/textLarge" />
 
         <!-- نام باس با هایلایت و افکت خونی/قرمز -->
         <TextView
             android:id="@+id/tvBossName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:includeFontPadding="false"
             android:textColor="#FF4D4D"
             android:textSize="@dimen/textExtraLarge"

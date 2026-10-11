@@ -14,6 +14,8 @@
         android:gravity="center"
         android:paddingTop="@dimen/_2sdp"
         android:paddingBottom="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginEnd="@dimen/play_x_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +25,6 @@
             android:layout_width="@dimen/play_btn_size"
             android:layout_height="@dimen/play_btn_size"
             android:layout_marginEnd="@dimen/play_x_gap"
-            android:layout_marginStart="@dimen/play_x_gap"
             android:gravity="center"
             android:background="@drawable/box_btn"
             android:orientation="horizontal">
@@ -38,61 +39,79 @@
                 android:src="@drawable/ig_hint"
                 android:visibility="visible" />
         </LinearLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <include layout="@layout/play_target_layout"
+            <include layout="@layout/play_target_layout"
+                android:visibility="visible"
+                android:id="@+id/layTargetHeader"/>
+
+            <include layout="@layout/play_flag_layout"
+                android:visibility="gone"
+                android:id="@+id/layFlagHeader"/>
+
+            <include layout="@layout/play_eye_layout"
+                android:visibility="gone"
+                android:id="@+id/layEyeHeader"/>
+
+            <include layout="@layout/play_shield_layout"
+                android:visibility="gone"
+                android:id="@+id/layShieldHeader"/>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lnrCenterViews"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/play_x_margin"
+        android:layout_marginEnd="@dimen/play_x_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnrTopViews"
+        app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/lnrTopViews"
+            app:spanCount="7"
+            tools:itemCount="77"
+            tools:listitem="@layout/option_item" />
+
+        <com.mrprojects.gholrob.helper.components.DualGameProgressBar
+            android:id="@+id/pbProgress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvKills"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/rvOptions"
+            app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
+            app:spanCount="7"
+            tools:itemCount="12"
             android:visibility="visible"
-            android:id="@+id/layTargetHeader"/>
-
-        <include layout="@layout/play_flag_layout"
-            android:visibility="gone"
-            android:id="@+id/layFlagHeader"/>
-
-        <include layout="@layout/play_eye_layout"
-            android:visibility="gone"
-            android:id="@+id/layEyeHeader"/>
-
-        <include layout="@layout/play_shield_layout"
-            android:visibility="gone"
-            android:id="@+id/layShieldHeader"/>
-
-
+            tools:listitem="@layout/play_kills_item" />
 
     </LinearLayout>
 
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvOptions"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/play_x_margin"
-        android:layout_marginTop="@dimen/play_top_gap"
-        android:layout_marginEnd="@dimen/play_x_margin"
-        android:layout_marginBottom="@dimen/play_top_gap"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/lnrTopViews"
-        app:spanCount="7"
-        tools:itemCount="77"
-        tools:listitem="@layout/option_item" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvKills"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/play_x_margin"
-        android:layout_marginTop="@dimen/play_top_gap"
-        android:layout_marginEnd="@dimen/play_x_margin"
-        android:layout_marginBottom="@dimen/play_top_gap"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/rvOptions"
-        app:layout_constraintBottom_toTopOf="@id/lnrBottomViews"
-        app:spanCount="7"
-        tools:itemCount="12"
-        android:visibility="visible"
-        tools:listitem="@layout/play_kills_item" />
 
 
     <LinearLayout
@@ -154,6 +173,10 @@
 
         <include layout="@layout/play_action_layout"
             android:id="@+id/layShield"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <include layout="@layout/play_action_layout"
             android:id="@+id/layFlag"/>

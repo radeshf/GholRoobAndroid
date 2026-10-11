@@ -9,7 +9,6 @@
     android:clipToPadding="false"
     android:paddingHorizontal="@dimen/_16sdp">
 
-    <!-- بدنه اصلی کارت دیالوگ -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardDialogBody"
         style="@style/Widget.Game.Dialog.Container"
@@ -30,7 +29,6 @@
             android:paddingTop="@dimen/_40sdp"
             android:paddingBottom="@dimen/_14sdp">
 
-            <!-- عنوان / نام دشمن -->
             <TextView
                 android:id="@+id/tvTitleDialog"
                 style="@style/Widget.Game.Dialog.Title"
@@ -132,7 +130,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="تعداد موجود در بازی:"
+                            android:text="تعداد در هر بازی:"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp" />
 
@@ -146,29 +144,56 @@
                         android:layout_marginVertical="@dimen/_4sdp"
                         android:background="#2E333D" />
 
-                    <!-- ردیف ۳: باقیمانده در این بازی -->
                     <LinearLayout
                         android:id="@+id/lnrRemain"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvRemain"
-                            android:layout_width="wrap_content"
+                        <!-- لیبل بالا: تایتل و درصد زنده بودن -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#10B981"
-                            android:textSize="@dimen/_16sdp"
-                            android:textStyle="bold"
-                            tools:text="1" />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="باقیمانده در این بازی:"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12sdp" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvRemainCounter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-black"
+                                android:textColor="#34D399"
+                                android:textSize="@dimen/_14sdp"
+                                tools:text="3 " />
+
+                            <TextView
+                                android:id="@+id/tvRemainTotal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-black"
+                                android:textColor="#F59E0B"
+                                android:textSize="@dimen/_10sdp"
+                                tools:text="/ 5" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="start"
+                                android:text="در این نبرد:"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp"/>
+                        </LinearLayout>
+
+                        <com.mrprojects.gholrob.helper.components.GameProgressBar
+                            android:id="@+id/pbRemaining"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_5sdp"/>
+
+
+
 
                     </LinearLayout>
 

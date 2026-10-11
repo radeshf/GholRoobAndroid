@@ -14,7 +14,7 @@ import ir.radesh.basemodule.interfaces.OnItemClickListener
 import timber.log.Timber
 
 
-class CellsAdapter(val onItemClicked: (item: GameCell, position: Int, view: View) -> Unit, val isTutorial: Boolean=false) :
+class CellsAdapter(val onItemClicked: (item: GameCell, position: Int, view: View) -> Unit, val onDefeatedClicked: (item: GameCell, totalDamage: Int) -> Unit, val isTutorial: Boolean=false) :
     RvAdapter<GameCell, OptionItemBinding>(OptionItemBinding::inflate) {
 
     var isGlobalLoading: Boolean = false
@@ -169,14 +169,20 @@ class CellsAdapter(val onItemClicked: (item: GameCell, position: Int, view: View
             if (isTutorial){
                 onItemClicked(item, position, view.root)
             }else{
-                if (isGlobalLoading) return@setOnClickListener
-
-                if (!item.isDefeated){
-                    item.isLoading = true
-                    notifyItemChanged(position)
-                    listener?.onItemClick(item)
-                    onItemClicked(item, position, view.root)
+                if (isGlobalLoading) {
+                    Timber.e("isGlobalLoading=True")
+                    return@setOnClickListener
                 }
+
+                if (item.isDefeated){
+                    val damage = item.getTotalDamage(itemsList)
+                    onDefeatedClicked(item, damage)
+                    return@setOnClickListener
+                }
+                item.isLoading = true
+                notifyItemChanged(position)
+                listener?.onItemClick(item)
+                onItemClicked(item, position, view.root)
             }
 
 

@@ -5,6 +5,8 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
@@ -59,9 +61,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEachIndexed
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -422,12 +426,10 @@ fun View.splashBreathAnimation(
     scaleFactor: Float = 1.15f,
     onEnded: (() -> Unit)? = null
 ) {
-    // مقداردهی اولیه وضعیت ویو
     alpha = 0f
     scaleX = 1.0f
     scaleY = 1.0f
 
-    // فاز اول: ظاهر شدن تدریجی همراه با زوم نرم و نامحسوس
     animate()
         .alpha(1f)
         .scaleX(scaleFactor)
@@ -460,6 +462,25 @@ fun View.heartBeatAnimation(){
         }
         .start()
 }
+
+fun View.pulseAnimation(
+    minScale: Float = 0.85f,
+    maxScale: Float = 1.15f,
+    durationMs: Long = 1000L
+): ObjectAnimator {
+    val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, minScale, maxScale)
+    val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, minScale, maxScale)
+    val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0.6f, 1.0f)
+
+    return ObjectAnimator.ofPropertyValuesHolder(this, scaleX, scaleY, alpha).apply {
+        duration = durationMs
+        repeatCount = ValueAnimator.INFINITE
+        repeatMode = ValueAnimator.REVERSE
+        interpolator = AccelerateDecelerateInterpolator()
+        start()
+    }
+}
+
 
 fun View.scaleAnimation(duration: Long = 200, onEnded: (() -> Unit)? = null) {
     animate().setDuration(duration).scaleX(1.5f).scaleY(1.5f).withEndAction {
@@ -517,6 +538,56 @@ fun TextView.setTextCounterAnimation(text: String) {
     animate().setDuration(duration).translationY(-100f).alpha(0f).withEndAction {
         this@setTextCounterAnimation.text = text
         animate().setDuration(duration).translationY(100f).translationY(0f).alpha(1f)
+    }
+}
+
+
+fun View.visibleByAnimation(
+    show: Boolean,
+    durationMs: Long = 220L,
+    useScale: Boolean = true
+) {
+    animate().cancel()
+
+    if (show) {
+        if (!isVisible) {
+            alpha = 0f
+            if (useScale) {
+                scaleX = 0.92f
+                scaleY = 0.92f
+            }
+            isVisible = true
+        }
+
+        animate()
+            .alpha(1f)
+            .apply {
+                if (useScale) {
+                    scaleX(1f)
+                    scaleY(1f)
+                }
+            }
+            .setDuration(durationMs)
+            .setInterpolator(FastOutSlowInInterpolator())
+            .withEndAction(null)
+            .start()
+    } else {
+        if (!isVisible) return
+
+        animate()
+            .alpha(0f)
+            .apply {
+                if (useScale) {
+                    scaleX(0.92f)
+                    scaleY(0.92f)
+                }
+            }
+            .setDuration((durationMs * 0.75f).toLong())
+            .setInterpolator(FastOutSlowInInterpolator())
+            .withEndAction {
+                isVisible = false
+            }
+            .start()
     }
 }
 

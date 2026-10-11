@@ -1,0 +1,11 @@
+<!-- res/drawable/bg_store_button.xml -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#40FFFFFF"> <!-- رنگ ریپل -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1B2838" />
+            <corners android:radius="@dimen/_10sdp" />
+            <stroke android:width="1.2dp" android:color="#2CD657" /> <!-- در فایل زیر تعریف کنید -->
+        </shape>
+    </item>
+</ripple>

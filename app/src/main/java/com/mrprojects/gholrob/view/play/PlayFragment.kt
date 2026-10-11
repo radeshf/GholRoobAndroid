@@ -15,6 +15,7 @@ import com.mrprojects.gholrob.helper.haptics.OnVibrate
 import com.mrprojects.gholrob.helper.haptics.VibrateTypes
 import com.mrprojects.gholrob.helper.openFragment
 import com.mrprojects.gholrob.helper.openNextLevel
+import com.mrprojects.gholrob.helper.showEmptySellInfoDialog
 import com.mrprojects.gholrob.helper.showEnemyInfoDialog
 import com.mrprojects.gholrob.helper.showSuccessDialog
 import com.mrprojects.gholrob.helper.showUseLifeDialog
@@ -38,13 +39,16 @@ import ir.radesh.basemodule.baseViews.BaseActivity
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.applyPressAnimation
 import ir.radesh.basemodule.commons.basicConfig
+import ir.radesh.basemodule.commons.clickAnimation
 import ir.radesh.basemodule.commons.disableAlphaByBoolean
 import ir.radesh.basemodule.commons.dropDownAnimation
 import ir.radesh.basemodule.commons.getAdp
 import ir.radesh.basemodule.commons.heartBeatAnimation
 import ir.radesh.basemodule.commons.initGrid
 import ir.radesh.basemodule.commons.makeWordRed
+import ir.radesh.basemodule.commons.pulseAnimation
 import ir.radesh.basemodule.commons.shakeAnimation
+import ir.radesh.basemodule.commons.visibleByAnimation
 import ir.radesh.basemodule.commons.visibleByBoolean
 import ir.radesh.basemodule.interfaces.OnItemClickListener
 import timber.log.Timber
@@ -78,15 +82,26 @@ class PlayFragment :
         gameId = arguments?.getInt("gameId")!!
         binding.rvOptions.initGrid(7, canScroll = false)
         binding.rvKills.initGrid(7, canScroll = false)
-        binding.rvOptions.adapter = CellsAdapter({ item, position, view ->
-            onCellClicked(item, position, view)
-        })
+        binding.rvOptions.adapter = CellsAdapter(
+            onItemClicked = { item, position, view ->
+                onCellClicked(item, position, view)
+            },
+            onDefeatedClicked = { item, totalDamage ->
+                showEmptySellInfoDialog(item, totalDamage)
+            }
+        )
         binding.rvKills.adapter = KillsAdapter(object : OnItemClickListener<GameKill> {
             override fun onItemClick(item: GameKill) {
                 onKillItemClicked(item)
             }
         })
+        binding.pbProgress.maxPrimary = 120f
+        binding.pbProgress.maxSecondary = 77f
 
+
+
+        binding.layShieldHeader.tvBonus.pulseAnimation()
+        binding.layEyeHeader.tvBonus.pulseAnimation()
         getData()
         userConfig()
 //        gameConfig()
@@ -99,6 +114,10 @@ class PlayFragment :
             this.user = user
             binding.layEye.tvActionCounts.text = "${user.eyes}"
             binding.layShield.tvActionCounts.text = "${user.shields}"
+
+            binding.layEyeHeader.tvBonus.visibleByBoolean(user.canGetBonusEye())
+            binding.layShieldHeader.tvBonus.visibleByBoolean(user.canGetBonusShield())
+
         }
     }
 
@@ -113,27 +132,27 @@ class PlayFragment :
     private fun toggleFlag(isOn: Boolean) {
         isFlagSelected = isOn
         binding.layFlag.btnAction.isSelected = isOn
-
-        binding.layFlagHeader.root.visibleByBoolean(isOn)
         binding.layTargetHeader.root.visibleByBoolean(!isOn)
+
+        binding.layFlagHeader.root.visibleByAnimation(isOn)
 
     }
 
     private fun toggleEye(isOn: Boolean) {
         isEyeSelected = isOn
         binding.layEye.btnAction.isSelected = isOn
-
-        binding.layEyeHeader.root.visibleByBoolean(isOn)
         binding.layTargetHeader.root.visibleByBoolean(!isOn)
+
+        binding.layEyeHeader.root.visibleByAnimation(isOn)
 
     }
 
     private fun toggleShield(isOn: Boolean) {
         isShieldSelected = isOn
         binding.layShield.btnAction.isSelected = isOn
-
-        binding.layShieldHeader.root.visibleByBoolean(isOn)
         binding.layTargetHeader.root.visibleByBoolean(!isOn)
+
+        binding.layShieldHeader.root.visibleByAnimation(isOn)
 
     }
 
@@ -184,7 +203,7 @@ class PlayFragment :
             }
         }
         binding.layFlagHeader.root.setOnClickListener {
-            showEnemyInfoDialog(GameKill.fromCellType(CellTypes.BOTTOMLESS_PIT, remained=attempt.remainingFlags), true)
+            showEnemyInfoDialog(GameKill.fromCellType(CellTypes.BOTTOMLESS_PIT, remained = attempt.remainingFlags), true)
         }
         binding.layEyeHeader.root.setOnClickListener {
             (requireActivity() as? BaseActivity<*>)?.showBuyEyeDialog(userViewModel)
@@ -219,6 +238,7 @@ class PlayFragment :
         }
         binding.tvHeartStatus.text = "${attempt.hearts} / ${attempt.totalHearts}"
         binding.layFlag.tvActionCounts.text = "${attempt.remainingFlags}"
+        binding.pbProgress.animateBoth(targetPrimary = attempt.defeatedMonsters.toFloat(), targetSecondary = attempt.revealedCells.toFloat())
 
 
         binding.rvOptions.getAdp<CellsAdapter>().setData(attempt.cells)
@@ -247,7 +267,8 @@ class PlayFragment :
 
     fun onCellClicked(item: GameCell, position: Int, view: View) {
         if (item.isDefeated) {
-            Timber.e("item is Defeated")
+            Timber.e("item isDefeated") // it check in adapter so its not ganna happened
+
             return
         }
         if (binding.rvOptions.getAdp<CellsAdapter>().isGlobalLoading) {
@@ -270,7 +291,7 @@ class PlayFragment :
     }
 
     private fun onFlagCell(cell: GameCell) {
-        if (attempt.remainingFlags <= 0 && !cell.isFlagged){
+        if (attempt.remainingFlags <= 0 && !cell.isFlagged) {
             warningDialog("یه جای کارت میلنگه! کلا 8 تا چاه شغاد داریم")
             offLoading(cell)
             return
@@ -292,12 +313,12 @@ class PlayFragment :
     }
 
     private fun onEyeCell(attempt: Attempt, cell: GameCell, cellView: View) {
-        if (userViewModel.user.value?.eyes!! <= 0){
+        if (userViewModel.user.value?.eyes!! <= 0) {
             (requireActivity() as? BaseActivity<*>)?.showBuyEyeDialog(userViewModel)
             offLoading(cell)
             return
         }
-        if (cell.isFlagged){
+        if (cell.isFlagged) {
             warningDialog("نمیتونی روی پرچم بزنی! احتمالا بیوفتی تو چاه! بهتره اول پرچمش رو برداری")
             offLoading(cell)
             return
@@ -318,12 +339,12 @@ class PlayFragment :
 
 
     private fun onShieldCell(cell: GameCell, cellView: View) {
-        if (userViewModel.user.value?.shields!! <= 0){
+        if (userViewModel.user.value?.shields!! <= 0) {
             (requireActivity() as? BaseActivity<*>)?.showBuyShieldDialog(userViewModel)
             offLoading(cell)
             return
         }
-        if (cell.isFlagged){
+        if (cell.isFlagged) {
             warningDialog("نمیتونی روی پرچم بزنی! احتمالا بیوفتی تو چاه! بهتره اول پرچمش رو برداری")
             offLoading(cell)
             return
@@ -345,7 +366,7 @@ class PlayFragment :
     }
 
     private fun onRevealCell(cell: GameCell, cellView: View) {
-        if (cell.isFlagged){
+        if (cell.isFlagged) {
             warningDialog("نمیتونی روی پرچم بزنی! احتمالا بیوفتی تو چاه! بهتره اول پرچمش رو برداری")
             offLoading(cell)
             return
@@ -377,7 +398,6 @@ class PlayFragment :
         loadGame(attempt)
         if (cell.isDefeated) {
             playSfxOnDefeat(cell)
-            binding.ivHeart.heartBeatAnimation()
         }
         if (!cell.isEmpty() && cell.isDefeated) {
             animateRiseAndSplit(binding.lnrMain, cellView, cell.image())
@@ -403,25 +423,31 @@ class PlayFragment :
         } else if (cell.isEmpty()) {
             postEvent(OnPlaySfx(SfxTypes.DefeatEmpty))
             postEvent(OnVibrate(VibrateTypes.DefeatEmpty))
+
         } else if (cell.isBossSmall()) {
             postEvent(OnPlaySfx(SfxTypes.Boss1))
             postEvent(OnVibrate(VibrateTypes.Boss1))
             binding.healingOverlay.showHeal(1f)
+            binding.ivHeart.heartBeatAnimation()
 
         } else if (cell.isBossBig()) {
             postEvent(OnPlaySfx(SfxTypes.Boss2))
             postEvent(OnVibrate(VibrateTypes.Boss2))
             binding.healingOverlay.showHeal(1f)
+            binding.ivHeart.heartBeatAnimation()
+
 
         } else if (cell.isBossFinal()) {
             postEvent(OnPlaySfx(SfxTypes.Boss3))
             postEvent(OnVibrate(VibrateTypes.Boss3))
             binding.healingOverlay.showHeal(1f)
+            binding.ivHeart.heartBeatAnimation()
 
         } else {
             postEvent(OnPlaySfx(SfxTypes.DefeatEnemy))
             postEvent(OnVibrate(VibrateTypes.DefeatEnemy))
             binding.damageOverlay.showDamage(cell.damage)
+            binding.ivHeart.heartBeatAnimation()
 
         }
     }

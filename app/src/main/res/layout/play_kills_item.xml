@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/_39sdp"
-    android:layout_height="@dimen/_39sdp"
-    android:paddingHorizontal="@dimen/_5sdp"
+    android:layout_height="@dimen/_34sdp"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_play_kills_normal"
     android:id="@+id/lnrCell"
     android:gravity="center"
     android:layout_marginEnd="@dimen/_1sdp"
     android:layout_marginStart="@dimen/_1sdp"
+    android:layout_marginTop="@dimen/_1sdp"
     android:layout_gravity="center"
     android:orientation="vertical"
     android:alpha="1"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:id="@+id/ivCell"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,22 +38,8 @@
         android:visibility="visible"
         android:textColor="@color/redPrimary"
         android:textColorHint="@color/green"
-        android:textSize="@dimen/textNormal"/>
+        android:textSize="@dimen/_10sdp"/>
 
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/ivClose"
-        android:padding="@dimen/_5sdp"
-        android:contentDescription="@string/contentDescription"
-        android:src="@drawable/ic_close"
-        app:layout_constraintEnd_toEndOf="@id/ivCell"
-        app:layout_constraintStart_toStartOf="@id/ivCell"
-        app:layout_constraintTop_toTopOf="@id/ivCell"
-        app:layout_constraintBottom_toBottomOf="@id/ivCell"
-        android:alpha="0.2"
-        android:visibility="gone"
-        app:tint="@color/red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

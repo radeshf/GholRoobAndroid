@@ -7,6 +7,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.Animatable
 import android.os.Build
 import android.provider.Settings
@@ -46,6 +47,7 @@ import com.mrprojects.gholrob.model.rest.AddHintPost
 import com.mrprojects.gholrob.view.play.PlayFragment
 import ir.radesh.basemodule.baseViews.BaseFragment
 import ir.radesh.basemodule.commons.changeTo
+import ir.radesh.basemodule.commons.default_font
 import ir.radesh.basemodule.commons.disableAlphaByBoolean
 import ir.radesh.basemodule.commons.dpToPx
 import ir.radesh.basemodule.commons.showToast
@@ -445,4 +447,12 @@ fun TimerLayoutBinding.setTime(millis: Long){
     tvHours.text = String.format("%02d", hours)
     tvMinutes.text = String.format("%02d", minutes)
     tvSeconds.text = String.format("%02d", seconds)
+}
+
+fun TextView.changeFont() {
+    typeface = Typeface.createFromAsset(context.assets, context.getFontPath())
+}
+
+fun Context.getFontPath(): String {
+    return "font/${AppConfig.DEFAULT_FONT}.ttf"
 }
